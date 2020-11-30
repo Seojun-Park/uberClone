@@ -1,6 +1,13 @@
+import { Greeting } from "src/types/graph";
+
 const resolvers = {
   Query: {
-    sayBye: () => "Bye"
+    sayBye: (): Greeting => {
+      return {
+        text: "bye",
+        error: false
+      };
+    }
   }
 };
 
