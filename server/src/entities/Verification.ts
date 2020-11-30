@@ -12,7 +12,7 @@ import {
 class Verification extends BaseEntity {
   @PrimaryColumn() id: number;
 
-  @Column({ type: "text" })
+  @Column({ type: "text", enum: ["PHONE", "EMAIL"] })
   target: verificationTarget;
 
   @Column({ type: "text" })
