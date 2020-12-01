@@ -5,7 +5,7 @@
 ### Public Resolvers
 
 - [x] Sign In / Sign up with facebook
-- [ ] Sign In with Email
+- [x] Sign In with Email
 - [ ] Starts Phone Number Verification
 - [ ] Complele phone number verification
 - [ ] Sign Up with Email
