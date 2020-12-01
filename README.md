@@ -2,11 +2,17 @@
 
 ## Resolvers
 
-- [ ] Login / Sign up with facebook
-- [ ] Login with Email
+### Public Resolvers
+
+- [ ] Sign In / Sign up with facebook
+- [ ] Sign In with Email
 - [ ] Starts Phone Number Verification
 - [ ] Complele phone number verification
 - [ ] Sign Up with Email
+
+### Private Resolvers
+
+- [ ] Verify Email
 - [ ] Get My Profile
 - [ ] Update My Profile
 - [ ] Toggle Driving Mode
