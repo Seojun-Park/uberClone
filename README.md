@@ -4,7 +4,7 @@
 
 ### Public Resolvers
 
-- [ ] Sign In / Sign up with facebook
+- [x] Sign In / Sign up with facebook
 - [ ] Sign In with Email
 - [ ] Starts Phone Number Verification
 - [ ] Complele phone number verification
