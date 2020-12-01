@@ -56,12 +56,12 @@ type Mutation {
 
 type User {
   id: Int!
+  email: String
+  verifiedEmail: Boolean!
   firstName: String!
   lastName: String!
   age: Int
   password: String
-  email: String
-  verifiedEmail: Boolean!
   phoneNumber: String
   verifiedPhoneNumber: Boolean!
   profilePhoto: String
@@ -74,10 +74,10 @@ type User {
   lastOrientation: Float
   fbId: String
   chat: Chat
-  rideAsPassenger: [Ride]
-  rideAsDriver: [Ride]
-  message: [Message]
+  messages: [Message]
   verifications: [Verification]
+  ridesAsPassenger: [Ride]
+  ridesAsDriver: [Ride]
   createdAt: String!
   updatedAt: String
 }
