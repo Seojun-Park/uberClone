@@ -3,7 +3,7 @@ import {
   FacebookConnectMutationArgs,
   FacebookConnectResponse
 } from "../../../types/graph";
-import { Resolvers } from "src/types/resolvers";
+import { Resolvers } from "../../../types/resolvers";
 
 const resolvers: Resolvers = {
   Mutation: {
