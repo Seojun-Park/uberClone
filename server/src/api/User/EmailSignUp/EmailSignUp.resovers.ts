@@ -1,17 +1,17 @@
-import createJWT from "../../../utils/createJWT";
-import User from "./../../../entities/User";
+import User from "../../../entities/User";
 import {
-  EmailSignInMutationArgs,
-  EmailSignInResponse
-} from "./../../../types/graph.d";
-import { Resolvers } from "./../../../types/resolvers.d";
+  EmailSignUpMutationArgs,
+  EmailSignUpResponse
+} from "../../../types/graph";
+import { Resolvers } from "../../../types/resolvers";
+import createJWT from "../../../utils/createJWT";
 
 const resolvers: Resolvers = {
   Mutation: {
     EmailSignUp: async (
       _,
-      args: EmailSignInMutationArgs
-    ): Promise<EmailSignInResponse> => {
+      args: EmailSignUpMutationArgs
+    ): Promise<EmailSignUpResponse> => {
       const { email } = args;
       try {
         const existingUser = await User.findOne({ email });
@@ -33,7 +33,7 @@ const resolvers: Resolvers = {
       } catch (error) {
         return {
           ok: false,
-          error: error.Message,
+          error: error.message,
           token: null
         };
       }

@@ -18,7 +18,7 @@ const resolvers: Resolvers = {
         if (!user) {
           return {
             ok: false,
-            error: "No User fiybd with that email",
+            error: "No User found with that email",
             token: null
           };
         }

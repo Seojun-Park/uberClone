@@ -1,11 +1,11 @@
 import createJWT from "../../../utils/createJWT";
-import Verification from "./../../../entities/Verification";
+import Verification from "../../../entities/Verification";
 import User from "../../../entities/User";
 import {
   CompletePhoneVerificationMutationArgs,
   CompletePhoneVerificationResponse
-} from "./../../../types/graph.d";
-import { Resolvers } from "./../../../types/resolvers.d";
+} from "../../../types/graph";
+import { Resolvers } from "../../../types/resolvers";
 
 const resolvers: Resolvers = {
   Mutation: {
@@ -45,7 +45,7 @@ const resolvers: Resolvers = {
           return {
             ok: true,
             error: null,
-            token: token
+            token
           };
         } else {
           return {

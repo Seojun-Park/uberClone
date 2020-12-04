@@ -13,5 +13,5 @@ type Mutation {
     profilePhoto: String!
     age: Int!
     phoneNumber: String!
-  ): EmailSignUpResponse
+  ): EmailSignUpResponse!
 }
