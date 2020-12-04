@@ -1,6 +1,7 @@
-import { GraphQLServer, Options } from "graphql-yoga";
-import dotenv from "dotenv";
+// import "./env";
+import * as dotenv from "dotenv";
 dotenv.config();
+import { GraphQLServer, Options } from "graphql-yoga";
 import { createConnection } from "typeorm";
 import cors from "cors";
 import logger from "morgan";

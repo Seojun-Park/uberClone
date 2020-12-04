@@ -1,3 +1,4 @@
+import createJWT from "../../../utils/createJWT";
 import User from "./../../../entities/User";
 import {
   EmailSignInMutationArgs,
@@ -22,10 +23,11 @@ const resolvers: Resolvers = {
           };
         } else {
           const newUser = await User.create({ ...args }).save();
+          const token = createJWT(newUser.id);
           return {
             ok: true,
             error: null,
-            token: "tbu"
+            token
           };
         }
       } catch (error) {
