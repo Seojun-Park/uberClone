@@ -23,11 +23,12 @@ const resolvers: Resolvers = {
           };
         } else {
           const newUser = await User.create({ ...args }).save();
-          const token = createJWT(newUser.id);
+          console.log(newUser);
+          // const token = createJWT(newUser.id);
           return {
             ok: true,
             error: null,
-            token
+            token: "tbu"
           };
         }
       } catch (error) {
