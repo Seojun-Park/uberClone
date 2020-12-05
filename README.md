@@ -8,14 +8,14 @@
 
 - [x] Sign In / Sign up with facebook
 - [x] Sign In with Email
-- [ ] Starts Phone Number Verification
-- [ ] Complele phone number verification
-- [ ] Sign Up with Email
+- [x] Starts Phone Number Verification
+- [x] Complele phone number verification
+- [ ]  Sign Up with Email
 
 ### Private Resolvers
 
 - [ ] Verify Email
-- [ ] Get My Profile
+- [x] Get My Profile
 - [ ] Update My Profile
 - [ ] Toggle Driving Mode
 - [ ] Report Location / Orientation
