@@ -1,9 +1,9 @@
-import { Resolvers } from "../../../types/resolvers";
+import User from "../../../entities/User";
 import {
   EmailSignInMutationArgs,
   EmailSignInResponse
 } from "../../../types/graph";
-import User from "../../../entities/User";
+import { Resolvers } from "../../../types/resolvers";
 import createJWT from "../../../utils/createJWT";
 
 const resolvers: Resolvers = {
@@ -18,7 +18,7 @@ const resolvers: Resolvers = {
         if (!user) {
           return {
             ok: false,
-            error: "No User found with that email",
+            error: "No user found with that email",
             token: null
           };
         }
@@ -33,7 +33,7 @@ const resolvers: Resolvers = {
         } else {
           return {
             ok: false,
-            error: "Wrong Password",
+            error: "Wrong password",
             token: null
           };
         }
@@ -47,5 +47,4 @@ const resolvers: Resolvers = {
     }
   }
 };
-
 export default resolvers;

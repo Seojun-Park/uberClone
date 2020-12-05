@@ -1,11 +1,12 @@
-import createJWT from "../../../utils/createJWT";
-import Verification from "../../../entities/Verification";
+
 import User from "../../../entities/User";
+import Verification from "../../../entities/Verification";
 import {
   CompletePhoneVerificationMutationArgs,
   CompletePhoneVerificationResponse
 } from "../../../types/graph";
 import { Resolvers } from "../../../types/resolvers";
+import createJWT from "../../../utils/createJWT";
 
 const resolvers: Resolvers = {
   Mutation: {
@@ -22,7 +23,7 @@ const resolvers: Resolvers = {
         if (!verification) {
           return {
             ok: false,
-            error: "Verification token not valid",
+            error: "Verification key not valid",
             token: null
           };
         } else {
@@ -36,6 +37,7 @@ const resolvers: Resolvers = {
           token: null
         };
       }
+
       try {
         const user = await User.findOne({ phoneNumber });
         if (user) {

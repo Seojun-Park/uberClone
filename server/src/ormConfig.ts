@@ -6,10 +6,13 @@ const connectionOptions: ConnectionOptions = {
   synchronize: true,
   logging: true,
   entities: ["entities/**/*.*"],
-  host: process.env.DB_ENDPOINT,
   port: 5432,
+  host: process.env.DB_ENDPOINT,
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD
+  // host: "localhost",
+  // username: "jinchulpark",
+  // password: "park1070"
 };
 
 export default connectionOptions;
