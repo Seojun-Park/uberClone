@@ -27,7 +27,7 @@ const resolvers: Resolvers = {
           return {
             ok: true,
             error: null,
-            token: token
+            token
           };
         }
       } catch (error) {
