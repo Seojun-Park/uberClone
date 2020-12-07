@@ -1,7 +1,5 @@
 # uberClone
 
-
-
 ## Resolvers
 
 ### Public Resolvers
@@ -15,6 +13,8 @@
 ### Private Resolvers
 
 - [x] Get My Profile
+- [ ] Request Email Verification
+- [ ] Complete Email Verification
 - [ ] Verify Email
 - [ ] Update My Profile
 - [ ] Toggle Driving Mode

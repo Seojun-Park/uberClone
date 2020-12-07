@@ -57,7 +57,6 @@ const resolvers: Resolvers = {
       try {
         const existingUser = await User.findOne({ email });
         if (existingUser) {
-          console.log("c1 existing User: ", existingUser);
           return {
             ok: false,
             error: "You should log in instead",
@@ -70,19 +69,18 @@ const resolvers: Resolvers = {
           });
           if (phoneVerification) {
             const newUser = await User.create({ ...args }).save();
-            console.log("c2 newUser:",newUser);
+            console.log("newUser: ", newUser);
             if (newUser.email) {
               const emailVerification = await Verification.create({
                 payload: newUser.email,
                 target: "EMAIL"
-              });
+              }).save();
               await sendVerificationEmail(
                 newUser.fullName,
                 emailVerification.key
               );
             }
             const token = createJWT(newUser.id);
-            console.log("c3 token: ",token);
             return {
               ok: true,
               error: null,
@@ -97,7 +95,6 @@ const resolvers: Resolvers = {
           }
         }
       } catch (error) {
-        console.log("c4:", error.message)
         return {
           ok: false,
           error: error.message,
