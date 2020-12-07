@@ -6,6 +6,7 @@ type UpdateMyProfileResponse {
 type Mutation {
   UpdateMyProfile(
     firstName: String
+    password: String
     lastName: String
     profilePhoto: String
     email: String
