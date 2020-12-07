@@ -19,6 +19,7 @@ const resolvers: Resolvers = {
           if (place) {
             if (place.userId === user.id) {
               const notNull = cleanNullArgs(args);
+              console.log(notNull);
               await Place.update({ id: args.placeId }, { ...notNull });
               return {
                 ok: true,
@@ -36,15 +37,14 @@ const resolvers: Resolvers = {
               err: "Place not found"
             };
           }
-        } catch (err) {
+        } catch (error) {
           return {
             ok: false,
-            err: err.message
+            err: error.message
           };
         }
       }
     )
   }
 };
-
 export default resolvers;

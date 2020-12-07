@@ -18,11 +18,11 @@
 - [x] Verify Email
 - [x] Update My Profile
 - [x] Toggle Driving Mode
-- [ ] Report Location / Orientation
-- [ ] Add Place
-- [ ] Edit Place
-- [ ] Delete Place
-- [ ] Get Mu Places
+- [x] Report Location / Orientation
+- [x] Add Place
+- [x] Edit Place
+- [x] Delete Place
+- [ ] Get My Places
 - [ ] See Nearby Driver
 - [ ] Subscribe to Nearby Drivers
 - [ ] Request a Ride
