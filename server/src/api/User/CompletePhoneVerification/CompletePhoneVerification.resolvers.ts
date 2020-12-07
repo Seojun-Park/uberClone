@@ -1,5 +1,4 @@
-
-import User from "../../../entities/User";
+import Member from "../../../entities/Member";
 import Verification from "../../../entities/Verification";
 import {
   CompletePhoneVerificationMutationArgs,
@@ -39,11 +38,11 @@ const resolvers: Resolvers = {
       }
 
       try {
-        const user = await User.findOne({ phoneNumber });
-        if (user) {
-          user.verifiedPhoneNumber = true;
-          user.save();
-          const token = createJWT(user.id);
+        const member = await Member.findOne({ phoneNumber });
+        if (member) {
+          member.verifiedPhoneNumber = true;
+          member.save();
+          const token = createJWT(member.id);
           return {
             ok: true,
             error: null,

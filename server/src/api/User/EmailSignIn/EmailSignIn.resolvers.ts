@@ -1,4 +1,4 @@
-import User from "../../../entities/User";
+import Member from "../../../entities/Member";
 import {
   EmailSignInMutationArgs,
   EmailSignInResponse
@@ -14,17 +14,17 @@ const resolvers: Resolvers = {
     ): Promise<EmailSignInResponse> => {
       const { email, password } = args;
       try {
-        const user = await User.findOne({ email });
-        if (!user) {
+        const member = await Member.findOne({ email });
+        if (!member) {
           return {
             ok: false,
-            error: "No user found with that email",
+            error: "No Member found with that email",
             token: null
           };
         }
-        const checkPassword = await user.comparePassword(password);
+        const checkPassword = await member.comparePassword(password);
         if (checkPassword) {
-          const token = createJWT(user.id);
+          const token = createJWT(member.id);
           return {
             ok: true,
             error: null,

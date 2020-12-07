@@ -8,7 +8,7 @@ import {
   PrimaryColumn,
   UpdateDateColumn
 } from "typeorm";
-import User from "./User";
+import Member from "./Member";
 
 @Entity()
 class Ride extends BaseEntity {
@@ -47,11 +47,11 @@ class Ride extends BaseEntity {
   @Column({ type: "text" })
   duration: string;
 
-  @ManyToOne((type) => User, (user) => user.rideAsPassenger)
-  passenger: User;
+  @ManyToOne((type) => Member, (member) => member.ridesAsPassenger)
+  passenger: Member;
 
-  @ManyToOne((type) => User, (user) => user.rideAsDriver)
-  driver: User;
+  @ManyToOne((type) => Member, (member) => member.ridesAsDriver)
+  driver: Member;
 
   @CreateDateColumn()
   createdAt: string;

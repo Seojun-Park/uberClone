@@ -1,4 +1,3 @@
-
 import bcrypt from "bcrypt";
 import { IsEmail } from "class-validator";
 import {
@@ -20,7 +19,7 @@ import Ride from "./Ride";
 const BCRYPT_ROUNDS = 10;
 
 @Entity()
-class User extends BaseEntity {
+class Member extends BaseEntity {
   @PrimaryGeneratedColumn() id: number;
 
   @Column({ type: "text", nullable: true })
@@ -79,10 +78,10 @@ class User extends BaseEntity {
   messages: Message[];
 
   @OneToMany(type => Ride, ride => ride.passenger)
-  rideAsPassenger: Ride[];
+  ridesAsPassenger: Ride[];
 
   @OneToMany(type => Ride, ride => ride.driver)
-  rideAsDriver: Ride[];
+  ridesAsDriver: Ride[];
 
   @CreateDateColumn() createdAt: string;
 
@@ -110,4 +109,4 @@ class User extends BaseEntity {
   }
 }
 
-export default User;
+export default Member;

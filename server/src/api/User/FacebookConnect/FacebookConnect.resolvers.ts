@@ -1,4 +1,4 @@
-import User from "../../../entities/User";
+import Member from "../../../entities/Member";
 import {
   FacebookConnectMutationArgs,
   FacebookConnectResponse
@@ -14,9 +14,9 @@ const resolvers: Resolvers = {
     ): Promise<FacebookConnectResponse> => {
       const { fbId } = args;
       try {
-        const existingUser = await User.findOne({ fbId });
-        if (existingUser) {
-          const token = createJWT(existingUser.id);
+        const existingMember = await Member.findOne({ fbId });
+        if (existingMember) {
+          const token = createJWT(existingMember.id);
           return {
             ok: true,
             error: null,
@@ -31,11 +31,11 @@ const resolvers: Resolvers = {
         };
       }
       try {
-        const newUser = await User.create({
+        const newMember = await Member.create({
           ...args,
           profilePhoto: `http://graph.facebook.com/${fbId}/picture?type=square`
         }).save();
-        const token = createJWT(newUser.id);
+        const token = createJWT(newMember.id);
         return {
           ok: true,
           error: null,
