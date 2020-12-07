@@ -10,9 +10,6 @@ const connectionOptions: ConnectionOptions = {
   host: process.env.DB_ENDPOINT,
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD
-  // host: "localhost",
-  // username: "jinchulpark",
-  // password: "park1070"
 };
 
 export default connectionOptions;
