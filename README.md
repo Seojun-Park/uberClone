@@ -22,6 +22,7 @@
 - [ ] Add Place
 - [ ] Edit Place
 - [ ] Delete Place
+- [ ] Get Mu Places
 - [ ] See Nearby Driver
 - [ ] Subscribe to Nearby Drivers
 - [ ] Request a Ride
