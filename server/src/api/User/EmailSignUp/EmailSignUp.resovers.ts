@@ -15,6 +15,7 @@ const resolvers: Resolvers = {
       args: EmailSignUpMutationArgs
     ): Promise<EmailSignUpResponse> => {
       const { email } = args;
+      console.log("test");
       try {
         const existingUser = await User.findOne({ email });
         if (existingUser) {
