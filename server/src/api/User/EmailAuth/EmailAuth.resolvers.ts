@@ -54,10 +54,10 @@ const resolvers: Resolvers = {
       args: EmailSignUpMutationArgs
     ): Promise<EmailSignUpResponse> => {
       const { email } = args;
-      console.log("test");
       try {
         const existingUser = await User.findOne({ email });
         if (existingUser) {
+          console.log("c1 existing User: ", existingUser);
           return {
             ok: false,
             error: "You should log in instead",
@@ -70,6 +70,7 @@ const resolvers: Resolvers = {
           });
           if (phoneVerification) {
             const newUser = await User.create({ ...args }).save();
+            console.log("c2 newUser:",newUser);
             if (newUser.email) {
               const emailVerification = await Verification.create({
                 payload: newUser.email,
@@ -81,6 +82,7 @@ const resolvers: Resolvers = {
               );
             }
             const token = createJWT(newUser.id);
+            console.log("c3 token: ",token);
             return {
               ok: true,
               error: null,
@@ -95,6 +97,7 @@ const resolvers: Resolvers = {
           }
         }
       } catch (error) {
+        console.log("c4:", error.message)
         return {
           ok: false,
           error: error.message,
