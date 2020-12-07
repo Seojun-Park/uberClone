@@ -1,3 +1,4 @@
+
 type Ride {
   id: Int!
   status: String!
@@ -8,10 +9,10 @@ type Ride {
   dropOffLat: Float!
   dropOffLng: Float!
   price: Float!
-  passenger: User!
-  driver: User!
   distance: String!
   duration: String!
+  driver: User!
+  passenger: User!
   createdAt: String!
   updatedAt: String
 }

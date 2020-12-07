@@ -19,7 +19,7 @@ import Ride from "./Ride";
 const BCRYPT_ROUNDS = 10;
 
 @Entity()
-class Member extends BaseEntity {
+class User extends BaseEntity {
   @PrimaryGeneratedColumn() id: number;
 
   @Column({ type: "text", nullable: true })
@@ -109,4 +109,4 @@ class Member extends BaseEntity {
   }
 }
 
-export default Member;
+export default User;

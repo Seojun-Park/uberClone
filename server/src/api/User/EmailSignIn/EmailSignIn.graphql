@@ -1,4 +1,3 @@
-
 type EmailSignInResponse {
   ok: Boolean!
   error: String

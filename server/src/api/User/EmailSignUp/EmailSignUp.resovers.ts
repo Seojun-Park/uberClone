@@ -1,4 +1,4 @@
-import Member from "../../../entities/Member";
+import User from "../../../entities/User";
 import Verification from "../../../entities/Verification";
 import {
   EmailSignUpMutationArgs,
@@ -16,8 +16,8 @@ const resolvers: Resolvers = {
     ): Promise<EmailSignUpResponse> => {
       const { email } = args;
       try {
-        const existingMember = await Member.findOne({ email });
-        if (existingMember) {
+        const existingUser = await User.findOne({ email });
+        if (existingUser) {
           return {
             ok: false,
             error: "You should log in instead",
@@ -29,18 +29,18 @@ const resolvers: Resolvers = {
             verified: true
           });
           if (phoneVerification) {
-            const newMember = await Member.create({ ...args }).save();
-            if (newMember.email) {
+            const newUser = await User.create({ ...args }).save();
+            if (newUser.email) {
               const emailVerification = await Verification.create({
-                payload: newMember.email,
+                payload: newUser.email,
                 target: "EMAIL"
               });
               await sendVerificationEmail(
-                newMember.fullName,
+                newUser.fullName,
                 emailVerification.key
               );
             }
-            const token = createJWT(newMember.id);
+            const token = createJWT(newUser.id);
             return {
               ok: true,
               error: null,

@@ -4,27 +4,28 @@ import {
   CreateDateColumn,
   Entity,
   ManyToOne,
-  PrimaryColumn,
+  PrimaryGeneratedColumn,
   UpdateDateColumn
 } from "typeorm";
+
 import Chat from "./Chat";
-import Member from "./Member";
+import User from "./User";
 
 @Entity()
 class Message extends BaseEntity {
-  @PrimaryColumn() id: number;
+  @PrimaryGeneratedColumn() id: number;
 
-  @Column({ type: "text" }) text: string;
+  @Column({ type: "text" })
+  text: string;
 
-  @ManyToOne((type) => Chat, (chat) => chat.messages)
+  @ManyToOne(type => Chat, chat => chat.messages)
   chat: Chat;
 
-  @ManyToOne((type) => Member, (member) => member.messages)
-  user: Member;
+  @ManyToOne(type => User, user => user.messages)
+  user: User;
 
   @CreateDateColumn() createdAt: string;
 
   @UpdateDateColumn() updatedAt: string;
 }
-
 export default Message;
