@@ -10,12 +10,12 @@
 - [x] Sign In with Email
 - [x] Starts Phone Number Verification
 - [x] Complele phone number verification
-- [ ]  Sign Up with Email
+- [x] Sign Up with Email
 
 ### Private Resolvers
 
-- [ ] Verify Email
 - [x] Get My Profile
+- [ ] Verify Email
 - [ ] Update My Profile
 - [ ] Toggle Driving Mode
 - [ ] Report Location / Orientation
