@@ -22,7 +22,7 @@
 - [x] Add Place
 - [x] Edit Place
 - [x] Delete Place
-- [ ] Get My Places
+- [x] Get My Places
 - [ ] See Nearby Driver
 - [ ] Subscribe to Nearby Drivers
 - [ ] Request a Ride
