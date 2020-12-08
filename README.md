@@ -27,7 +27,8 @@
 - [x] Subscribe to Nearby Drivers
 - [x] Request a Ride
 - [x] Get Nearby Rides Request
-- [ ] Subscribe to nearby ride Request
+- [x] Subscribe to nearby ride Request
+- [ ] Update Ride Status
 - [ ] Subscribe Ride Status
 - [ ] Get Chat Room Messages
 - [ ] Subscribe to Chat Room messages
