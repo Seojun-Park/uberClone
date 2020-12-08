@@ -26,6 +26,8 @@ const resolvers: Resolvers = {
               });
               if (ride) {
                 ride.driver = user;
+                user.isTaken = true;
+                user.save();
               }
             } else {
               ride = await Ride.findOne({

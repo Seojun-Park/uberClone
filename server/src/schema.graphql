@@ -57,6 +57,7 @@ type GetMyPlaceResponse {
 type Query {
   GetMyPlace: GetMyPlaceResponse!
   GetNearbyRide: GetNearbyRideResponse!
+  GetRide(rideId: Int!): GetRideResponse!
   GetMyProfile: GetMyProfileResponse!
   GetNearbyDrivers: GetNearbyDriversResponse!
 }
@@ -75,6 +76,12 @@ type Place {
 }
 
 type GetNearbyRideResponse {
+  ok: Boolean!
+  err: String
+  ride: Ride
+}
+
+type GetRideResponse {
   ok: Boolean!
   err: String
   ride: Ride
@@ -104,7 +111,9 @@ type Ride {
   distance: String!
   duration: String!
   driver: User!
+  driverId: Int
   passenger: User!
+  passengerId: Int!
   createdAt: String!
   updatedAt: String
 }
