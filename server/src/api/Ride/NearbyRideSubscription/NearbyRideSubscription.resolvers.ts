@@ -11,6 +11,7 @@ const resolvers = {
           const {
             NearbyRideSubscription: { pickUpLat, pickUpLng }
           } = payload;
+        console.log(payload)
           const { lastLat: userLastLat, lastLng: userLastLng } = user;
           return (
             pickUpLat >= userLastLat - 0.05 &&
