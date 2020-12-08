@@ -45,4 +45,5 @@ const resolvers: Resolvers = {
     )
   }
 };
+
 export default resolvers;

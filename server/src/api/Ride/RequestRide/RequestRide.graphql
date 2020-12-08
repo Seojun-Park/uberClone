@@ -6,14 +6,14 @@ type RequestRideResponse {
 
 type Mutation {
   RequestRide(
-    duration: String!
-    distance: String!
-    price: Float!
-    dropOffLng: Float!
-    dropOffLat: Float!
-    dropOffAddress: String!
-    pickUpLng: Float!
-    pickUpLat: Float!
     pickUpAddress: String!
+    pickUpLat: Float!
+    pickUpLng: Float!
+    dropOffAddress: String!
+    dropOffLat: Float!
+    dropOffLng: Float!
+    price: Float!
+    distance: String!
+    duration: String!
   ): RequestRideResponse!
 }

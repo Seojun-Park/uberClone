@@ -6,8 +6,7 @@ const resolvers = {
     NearbyRideSubscription: {
       subscribe: withFilter(
         (_, __, { pubSub }) => pubSub.asyncIterator("rideRequest"),
-        async (payload, _, { context }) => {
-          // payload : driver | context: user
+        (payload, _, { context }) => {
           const user: User = context.currentUser;
           const {
             NearbyRideSubscription: { pickUpLat, pickUpLng }

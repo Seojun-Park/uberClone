@@ -21,7 +21,7 @@ const resolvers: Resolvers = {
             let ride: Ride | undefined;
             if (args.status === "ACCEPTED") {
               ride = await Ride.findOne({
-                id: args.rideID,
+                id: args.rideId,
                 status: "REQUESTING"
               });
               if (ride) {
@@ -31,7 +31,7 @@ const resolvers: Resolvers = {
               }
             } else {
               ride = await Ride.findOne({
-                id: args.rideID,
+                id: args.rideId,
                 driver: user
               });
             }
@@ -45,7 +45,7 @@ const resolvers: Resolvers = {
             } else {
               return {
                 ok: false,
-                err: "Can't update Ride"
+                err: "Cant update ride"
               };
             }
           } catch (err) {
@@ -57,7 +57,7 @@ const resolvers: Resolvers = {
         } else {
           return {
             ok: false,
-            err: "You are not Driving"
+            err: "You are not driving"
           };
         }
       }

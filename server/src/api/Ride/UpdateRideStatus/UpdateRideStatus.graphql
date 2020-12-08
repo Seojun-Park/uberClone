@@ -1,3 +1,4 @@
+
 type UpdateRideStatusResponse {
   ok: Boolean!
   err: String
@@ -13,7 +14,7 @@ enum StatusOptions {
 
 type Mutation {
   UpdateRideStatus(
-    rideID: Int!
+    rideId: Int!
     status: StatusOptions!
   ): UpdateRideStatusResponse!
 }
