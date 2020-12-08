@@ -23,8 +23,8 @@
 - [x] Edit Place
 - [x] Delete Place
 - [x] Get My Places
-- [ ] See Nearby Driver
-- [ ] Subscribe to Nearby Drivers
+- [x] See Nearby Driver
+- [x] Subscribe to Nearby Drivers
 - [ ] Request a Ride
 - [ ] Get Nearby Rides Request
 - [ ] Subscribe to nearby ride Request

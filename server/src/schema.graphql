@@ -24,6 +24,7 @@ type Mutation {
   AddPlace(name: String!, lat: Float!, lng: Float!, address: String!, isFav: Boolean!): AddPlaceResponse!
   DeletePlace(placeId: Int!): DeletePlaceResponse!
   EditPlace(placeId: Int!, name: String, isFav: Boolean): EditPlaceResponse!
+  RequestRide(duration: String!, distance: String!, price: Float!, dropOffLng: Float!, dropOffLat: Float!, dropOffAddress: String!, pickUpLng: Float!, pickUpLat: Float!, pickUpAddress: String!): RequestRideResponse!
   CompleteEmailVerification(key: String!): CompleteEmailVerificationResponse!
   CompletePhoneVerification(phoneNumber: String!, key: String!): CompletePhoneVerificationResponse!
   EmailSignIn(email: String!, password: String!): EmailSignInResponse!
@@ -54,6 +55,7 @@ type GetMyPlaceResponse {
 
 type Query {
   GetMyPlace: GetMyPlaceResponse!
+  GetNearbyRides: GetNearbyRidesResponse!
   GetMyProfile: GetMyProfileResponse!
   GetNearbyDrivers: GetNearbyDriversResponse!
 }
@@ -69,6 +71,18 @@ type Place {
   user: User!
   createdAt: String!
   updatedAt: String
+}
+
+type GetNearbyRidesResponse {
+  ok: Boolean!
+  err: String
+  rides: [Ride]
+}
+
+type RequestRideResponse {
+  ok: Boolean!
+  err: String
+  ride: Ride
 }
 
 type Ride {
