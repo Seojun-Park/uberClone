@@ -96,6 +96,7 @@ class User extends BaseEntity {
   }
 
   public comparePassword(password: string): Promise<boolean> {
+    console.log(this.hashPassword(password).then((res) => console.log(res)));
     return bcrypt.compare(password, this.password);
   }
 

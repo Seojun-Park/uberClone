@@ -18,6 +18,7 @@ const resolvers: Resolvers = {
               pickUpLat: Between(lastLat - 0.05, lastLat + 0.05),
               pickUpLng: Between(lastLng - 0.05, lastLng + 0.05)
             });
+            console.log(ride);
             if (ride) {
               return {
                 ok: true,

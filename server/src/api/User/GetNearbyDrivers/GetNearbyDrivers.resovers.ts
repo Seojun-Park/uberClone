@@ -1,7 +1,7 @@
 import { Between, getRepository } from "typeorm";
 import User from "../../../entities/User";
-import { Resolvers } from "../../../types/resolvers";
 import { GetNearbyDriversResponse } from "../../../types/graph";
+import { Resolvers } from "../../../types/resolvers";
 import authResolver from "../../../utils/authResolver";
 
 const resolvers: Resolvers = {
