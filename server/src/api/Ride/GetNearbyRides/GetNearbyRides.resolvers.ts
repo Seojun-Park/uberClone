@@ -10,22 +10,30 @@ const resolvers: Resolvers = {
     GetNearbyRides: authResolver(
       async (_, __, { req }): Promise<GetNearbyRidesResponse> => {
         const user: User = req.user;
-        const { lastLat, lastLng } = user;
-        try {
-          const rides = await getRepository(Ride).find({
-            status: "REQUESTING",
-            pickUpLat: Between(lastLat - 0.05, lastLat + 0.05),
-            pickUpLng: Between(lastLng - 0.05, lastLng + 0.05)
-          });
-          return {
-            ok: true,
-            err: null,
-            rides
-          };
-        } catch (err) {
+        if (user.isDriving) {
+          const { lastLat, lastLng } = user;
+          try {
+            const rides = await getRepository(Ride).find({
+              status: "REQUESTING",
+              pickUpLat: Between(lastLat - 0.05, lastLat + 0.05),
+              pickUpLng: Between(lastLng - 0.05, lastLng + 0.05)
+            });
+            return {
+              ok: true,
+              err: null,
+              rides
+            };
+          } catch (err) {
+            return {
+              ok: false,
+              err: err.message,
+              rides: null
+            };
+          }
+        } else {
           return {
             ok: false,
-            err: err.message,
+            err: "You are not a driver",
             rides: null
           };
         }
