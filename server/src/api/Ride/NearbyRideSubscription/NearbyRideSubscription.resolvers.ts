@@ -10,7 +10,7 @@ const resolvers = {
         (payload, _, { context }) => {
           const user: User = context.currentUser;
           const ride: Ride = payload.NearbyRideSubscription;
-          console.log(payload, user)
+          console.log(payload, user);
           if (!user.isDriving) {
             return false;
           }
