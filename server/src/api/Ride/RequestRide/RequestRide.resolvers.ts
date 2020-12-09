@@ -20,6 +20,8 @@ const resolvers: Resolvers = {
           try {
             const ride = await Ride.create({ ...args, passenger: user }).save();
             pubSub.publish("rideRequest", { NearbyRideSubscription: ride });
+            user.isRiding = true;
+            user.save();
             console.log("Request ride:", ride);
             return {
               ok: true,
@@ -34,6 +36,8 @@ const resolvers: Resolvers = {
             };
           }
         } else {
+          // user.isRiding = false;
+          // user.save();
           return {
             ok: false,
             err: "You can request two rides",
