@@ -1,9 +1,9 @@
 import { Between, getRepository } from "typeorm";
-import User from "../../../entities/User";
-import { Resolvers } from "../../../types/resolvers";
-import { GetNearbyRideResponse } from "../../../types/graph";
-import authResolver from "../../../utils/authResolver";
 import Ride from "../../../entities/Ride";
+import User from "../../../entities/User";
+import { GetNearbyRideResponse } from "../../../types/graph";
+import { Resolvers } from "../../../types/resolvers";
+import authResolver from "../../../utils/authResolver";
 
 const resolvers: Resolvers = {
   Query: {

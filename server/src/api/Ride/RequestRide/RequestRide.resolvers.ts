@@ -16,28 +16,17 @@ const resolvers: Resolvers = {
         { req, pubSub }
       ): Promise<RequestRideResponse> => {
         const user: User = req.user;
-        if (!user.isRiding && !user.isDriving) {
-          try {
-            const ride = await Ride.create({ ...args, passenger: user }).save();
-            pubSub.publish("rideRequest", { NearbyRideSubscription: ride });
-            user.isRiding = true;
-            user.save();
-            return {
-              ok: true,
-              err: null,
-              ride
-            };
-          } catch (err) {
-            return {
-              ok: false,
-              err: err.message,
-              ride: null
-            };
-          }
-        } else {
+        try {
+          const ride = await Ride.create({ ...args, passenger: user }).save();
+          return {
+            ok: true,
+            err: null,
+            ride
+          };
+        } catch (err) {
           return {
             ok: false,
-            err: "You can't request two rides or drive and request",
+            err: err.message,
             ride: null
           };
         }
