@@ -10,7 +10,7 @@ import authResolver from "../../../utils/authResolver";
 
 const resolvers: Resolvers = {
   Mutation: {
-    SendChatMessage: authResolver(
+    SendMessage: authResolver(
       async (
         _,
         args: SendMessageMutationArgs,
