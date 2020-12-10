@@ -13,14 +13,14 @@ type Query {
   GetNearbyDrivers: GetNearbyDriversResponse!
 }
 
-type SendChatMessageResponse {
+type SendMessageResponse {
   ok: Boolean!
   err: String
   message: Message
 }
 
 type Mutation {
-  SendChatMessage(text: String!, chatId: Int!): SendChatMessageResponse!
+  SendMessage(text: String!, chatId: Int!): SendMessageResponse!
   AddPlace(name: String!, lat: Float!, lng: Float!, address: String!, isFav: Boolean!): AddPlaceResponse!
   DeletePlace(placeId: Int!): DeletePlaceResponse!
   EditPlace(placeId: Int!, name: String, isFav: Boolean): EditPlaceResponse!

@@ -9,9 +9,6 @@ const resolvers: Resolvers = {
     GetChat: authResolver(
       async (_, args: GetChatQueryArgs, { req }): Promise<GetChatResponse> => {
         const user: User = req.user;
-        // await Ride.delete({});
-        // user.isTaken = false;
-        // user.save();
         try {
           const chat = await Chat.findOne(
             {
