@@ -21,11 +21,11 @@ class Chat extends BaseEntity {
   @OneToMany((type) => Message, (message) => message.chat)
   messages: Message[];
 
-  @OneToOne((type) => Ride, (ride) => ride.chat)
-  ride: Ride;
-
   @Column({ nullable: true })
   rideId: number;
+
+  @OneToOne((type) => Ride, (ride) => ride.chat)
+  ride: Ride;
 
   @Column({ nullable: true })
   passengerId: number;
