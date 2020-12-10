@@ -13,9 +13,12 @@ const resolvers: Resolvers = {
         // user.isTaken = false;
         // user.save();
         try {
-          const chat = await Chat.findOne({
-            id: args.chatId
-          });
+          const chat = await Chat.findOne(
+            {
+              id: args.chatId
+            },
+            { relations: ["passenger", "driver", "messages"] }
+          );
           if (chat) {
             if (chat.passengerId === user.id || chat.driverId === user.id) {
               return {

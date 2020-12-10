@@ -32,9 +32,9 @@
 - [x] Get Ride
 - [x] Subscribe Ride Status
 - [x] Create Chat Room
-- [ ] Get Chat Room Messages
-- [ ] Subscribe to Chat Room messages
+- [x] Get Chat Room Messages
 - [ ] Send a Chat Messages
+- [ ] Subscribe to Chat Room messages
 
 - [ ] Get Ride History
 - [ ] See Ride Detail
