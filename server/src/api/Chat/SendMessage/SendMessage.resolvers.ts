@@ -14,7 +14,7 @@ const resolvers: Resolvers = {
       async (
         _,
         args: SendMessageMutationArgs,
-        { req }
+        { req, pubSub }
       ): Promise<SendMessageResponse> => {
         const user: User = req.user;
         console.log(user);
@@ -28,6 +28,9 @@ const resolvers: Resolvers = {
                 chat,
                 user
               }).save();
+              pubSub.publish("newChatMessage", {
+                MessageSubscription: message
+              });
               console.log(message);
               return {
                 ok: true,
