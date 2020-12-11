@@ -7,25 +7,33 @@ import {
   split,
   Operation,
   gql,
-  concat
+  concat,
+  makeVar
 } from "@apollo/client";
 import { WebSocketLink } from "@apollo/client/link/ws";
 import { onError } from "@apollo/client/link/error";
 import { SubscriptionClient } from "subscriptions-transport-ws";
 import { getMainDefinition } from "@apollo/client/utilities";
 
-const cache: InMemoryCache = new InMemoryCache({});
-
-const IS_LOGGED_IN = gql`
-  query isUserLoggedIn {
-    isLoggedIn @client
+const typeDefs = gql`
+  extend type Query {
+    isLoggedIn: Boolean!
   }
 `;
 
-cache.writeQuery({
-  query: IS_LOGGED_IN,
-  data: {
-    isLoggedIn: localStorage.getItem("X-JWT")
+export const isLoggedInVar = makeVar<boolean>(!!localStorage.getItem("X-JWT"));
+
+const cache: InMemoryCache = new InMemoryCache({
+  typePolicies: {
+    Query: {
+      fields: {
+        isLoggedIn: {
+          read() {
+            return isLoggedInVar();
+          }
+        }
+      }
+    }
   }
 });
 
@@ -73,6 +81,36 @@ const client: ApolloClient<NormalizedCacheObject> = new ApolloClient({
   link: ApolloLink.from([errLink, concat(authMiddle, linkComb)]),
   headers: {
     authorization: localStorage.getItem("X-JWT") || ""
+  },
+  typeDefs,
+  resolvers: {
+    Mutation: {
+      userLogIn: (_: any, { token }: any, { cache: appCache }: any) => {
+        console.log(token, "test");
+        localStorage.setItem("X-JWT", token);
+        appCache.writeData({
+          data: {
+            auth: {
+              __typename: "Auth",
+              isLoggedIn: true
+            }
+          }
+        });
+        return null;
+      },
+      userLogOut: (_: any, __: any, { cache: appCache }: any) => {
+        localStorage.removeItem("X-JWT");
+        appCache.writeData({
+          data: {
+            auth: {
+              __typename: "Auth",
+              isLoggedIn: false
+            }
+          }
+        });
+        return null;
+      }
+    }
   }
 });
 
