@@ -1,4 +1,4 @@
-import { Route, Switch, Redirect } from "react-router-dom";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import AddPlace from "../Routes/AddPlace";
 import EditAccount from "../Routes/EditAccount";
 import Home from "../Routes/Home";
@@ -36,7 +36,23 @@ const LoggedOutRoutes = () => (
 
 const AppRouter = ({ isLoggedIn }: any) => {
   console.log(isLoggedIn);
-  return isLoggedIn ? <LoggedInRoutes /> : <LoggedOutRoutes />;
+  return (
+    <BrowserRouter>
+      {isLoggedIn ? <LoggedInRoutes /> : <LoggedOutRoutes />}
+    </BrowserRouter>
+  )
 };
+
+// interface IProps {
+//   isLoggedIn: boolean;
+// }
+
+// const AppRouter: React.FC<IProps> = ({ isLoggedIn }) => {
+//   return (
+//     <BrowserRouter>
+//       {isLoggedIn ? <LoggedInRoutes /> : <LoggedOutRoutes />}
+//     </BrowserRouter>
+//   )
+// }
 
 export default AppRouter;
