@@ -1,49 +1,32 @@
-import React from 'react';
+import React, { createContext } from 'react';
 import { gql, useMutation, useQuery } from '@apollo/client'
-import { isLoggedInVar } from './apollo/apollo'
-import { useApolloClient } from '@apollo/client'
-
+import { userLogIn, userLogOut } from './apollo/authResolvers'
 
 const IS_LOGGED_IN = gql`
 query isLoggedIn{
   isLoggedIn @client
-}
-`
+}`
 
-const LOG_USER_IN = gql`
-mutation logUserIn{
-  logUserIn @client
-}
-`
+const AppContext = createContext(null);
 
 
 const App = (): any => {
-  const client = useApolloClient();
-  const { data } = useQuery(IS_LOGGED_IN)
-  const [logUserInMutation] = useMutation(LOG_USER_IN, {
-    onCompleted({ login }) {
-      localStorage.setItem("X-JWT", "token")
-      isLoggedInVar(true)
-    }
-  })
+  const { data: { isLoggedIn } } = useQuery(IS_LOGGED_IN)
   return (
-    data.isLoggedIn ?
-      <>
-        logged in
-        <button onClick={() => {
-          client.cache.evict({ fieldName: 'me' });
-          client.cache.gc();
-          localStorage.removeItem('X-JWT')
-          isLoggedInVar(false);
-        }}>
-          logout
+    <AppContext.Provider value={isLoggedIn}>
+      {isLoggedIn ?
+        <>
+          logged in
+          <button onClick={() => userLogOut()}>
+            logout
       </button>
-      </> : <>
-        not logged in
-        <button onClick={() => logUserInMutation()}>
-          login
+        </> : <>
+          not logged in
+          <button onClick={() => userLogIn("token")}>
+            login
           </button>
-      </>
+        </>}
+    </AppContext.Provider>
   )
 }
 

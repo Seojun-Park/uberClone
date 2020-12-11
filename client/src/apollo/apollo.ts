@@ -82,36 +82,7 @@ const client: ApolloClient<NormalizedCacheObject> = new ApolloClient({
   headers: {
     authorization: localStorage.getItem("X-JWT") || ""
   },
-  typeDefs,
-  resolvers: {
-    Mutation: {
-      userLogIn: (_: any, { token }: any, { cache: appCache }: any) => {
-        console.log(token, "test");
-        localStorage.setItem("X-JWT", token);
-        appCache.writeData({
-          data: {
-            auth: {
-              __typename: "Auth",
-              isLoggedIn: true
-            }
-          }
-        });
-        return null;
-      },
-      userLogOut: (_: any, __: any, { cache: appCache }: any) => {
-        localStorage.removeItem("X-JWT");
-        appCache.writeData({
-          data: {
-            auth: {
-              __typename: "Auth",
-              isLoggedIn: false
-            }
-          }
-        });
-        return null;
-      }
-    }
-  }
+  typeDefs
 });
 
 export default client;
