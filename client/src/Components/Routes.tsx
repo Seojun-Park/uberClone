@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import AddPlace from "../Routes/AddPlace";
 import EditAccount from "../Routes/EditAccount";
 import Home from "../Routes/Home";
-import OutHome from "../Routes/OutHome";
+import AuthHome from "../Routes/AuthHome";
 import PhoneLogin from "../Routes/PhoneLogin";
 import Places from "../Routes/Places";
 import Ride from "../Routes/Ride";
@@ -26,7 +26,7 @@ const LoggedInRoutes = () => (
 
 const LoggedOutRoutes = () => (
   <Switch>
-    <Route exact path="/" component={OutHome} />
+    <Route exact path="/" component={AuthHome} />
     <Route path="/phoneLogin" component={PhoneLogin} />
     <Route path="/verifyPhone/:number" component={VerifyPhone} />
     <Route path="/socialLogin" component={SocialLogin} />
