@@ -38,3 +38,25 @@
 
 - [ ] Get Ride History
 - [ ] See Ride Detail
+
+# Client
+
+
+## Screens:
+
+### LoggedOut:
+
+    - [ ] Home
+    - [ ] Phone Login
+    - [ ] Verify Phone Login
+    - [ ] Social Login
+
+### LoggedIn :
+
+    - [ ] Home
+    - [ ] Ride
+    - [ ] Edit Account
+    - [ ] Settings
+    - [ ] Saved Places
+    - [ ] Add Place
+    - [ ] Trip History
