@@ -9,6 +9,7 @@ import Ride from "../Routes/Ride";
 import Settings from "../Routes/Settings";
 import VerifyPhone from "../Routes/VerifyPhone";
 import SocialLogin from "../Routes/SocialLogin";
+import FindAddress from '../Routes/FindAddress'
 
 const LoggedInRoutes = () => (
   <Switch>
@@ -18,6 +19,7 @@ const LoggedInRoutes = () => (
     <Route path="/ride" component={Ride} />
     <Route path="/settings" component={Settings} />
     <Route path="/editAccount" component={EditAccount} />
+    <Route path="/FindAddress" component={FindAddress} />
     <Redirect from="*" to="/" />
   </Switch>
 );
@@ -26,7 +28,7 @@ const LoggedOutRoutes = () => (
   <Switch>
     <Route exact path="/" component={OutHome} />
     <Route path="/phoneLogin" component={PhoneLogin} />
-    <Route path="/verifyPhone" component={VerifyPhone} />
+    <Route path="/verifyPhone/:number" component={VerifyPhone} />
     <Route path="/socialLogin" component={SocialLogin} />
     <Redirect from="*" to="/" />
   </Switch>
