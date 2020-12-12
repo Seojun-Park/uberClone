@@ -7,13 +7,13 @@ import * as S from './PhoneLoginStyles'
 type PhoneProps = {
     phoneNumber: string,
     countryCode: string,
-    onInputChange: (
+    setPhoneNumber: (
         e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void,
-    onSelectChange: (
+    setCountryCode: (
         e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void,
 }
 
-const PhoneLoginPresenter: FC<PhoneProps> = ({ phoneNumber, countryCode, onInputChange, onSelectChange }): ReactElement => {
+const PhoneLoginPresenter: FC<PhoneProps> = ({ phoneNumber, countryCode, setPhoneNumber, setCountryCode }): ReactElement => {
     return (
         <S.Container>
             <Helmet><title>Phone Login</title></Helmet>
@@ -32,7 +32,7 @@ const PhoneLoginPresenter: FC<PhoneProps> = ({ phoneNumber, countryCode, onInput
                     value={phoneNumber}
                     type="text"
                     name="phoneNumber"
-                    onChange={onInputChange}
+                    onChange={setPhoneNumber}
                     autoFocus={true}
                 />
                 <S.Button>

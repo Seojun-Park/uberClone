@@ -1,25 +1,3 @@
-// import React, { FC, ReactElement, useState } from 'react';
-
-
-// type HookProps = {
-//     defaultVlaue: string,
-//     event: React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
-// }
-
-// const useInput: FC<HookProps> = (defaultValue, event) => {
-//     const [value, setValue] = useState(defaultValue)
-//     const onChange = (e: any) => {
-//         console.log(e)
-//         const { target: { value } } = e;
-//         console.log(value)
-//         setValue(value)
-//     }
-//     console.log(defaultValue)
-//     console.log(event)
-//     return null;
-// }
-
-// export default useInput
 import { ReactEventHandler, useState } from 'react';
 
 const useInput = (
@@ -31,26 +9,23 @@ const useInput = (
         React.Dispatch<React.SetStateAction<string>>
     ] => {
     const [value, setValue] = useState(initialValue);
-
     const onChange: ReactEventHandler = (
         event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
     ) => {
-        console.log(event)
         const {
-            target: { value: inputValue }
+            target: { value }
         } = event;
-
+        console.log(event.target.value)
         let isValidValue: boolean = true;
         if (regex) {
-            console.log(typeof regex)
             if (typeof regex === "function") {
-                isValidValue = regex(inputValue);
+                isValidValue = regex(value);
             } else {
-                isValidValue = regex.test(inputValue);
+                isValidValue = regex.test(value);
             }
         }
         if (isValidValue) {
-            setValue(inputValue);
+            setValue(value);
         }
     };
     return [value, onChange, setValue];

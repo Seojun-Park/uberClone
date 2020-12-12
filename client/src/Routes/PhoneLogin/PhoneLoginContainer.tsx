@@ -5,14 +5,14 @@ import PhoneLoginPresenter from './PhoneLoginPresenter'
 
 
 const PhoneLoginContainer: React.FC<RouteComponentProps> = ({ history }) => {
-    const [phoneNumber, onInputChange] = useInput("", /^\+(?:[0-9]●?){6,14}[0-9]$/)
-    const [countryCode, onSelctChange] = useInput("+33");
+    const [phoneNumber, setPhoneNumber] = useInput("", /^\+(?:[0-9]●?){6,14}[0-9]$/)
+    const [countryCode, setCountryCode] = useInput("+33");
     // const phoneWithCode = `${countryCode}${phoneNumber}`;
     return <PhoneLoginPresenter
         phoneNumber={phoneNumber}
         countryCode={countryCode}
-        onInputChange={onInputChange}
-        onSelectChange={onSelctChange}
+        setPhoneNumber={setPhoneNumber}
+        setCountryCode={setCountryCode}
     />
 }
 
