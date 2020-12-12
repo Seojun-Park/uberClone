@@ -1,2 +1,2 @@
-import PhoneLoginPresenter from "./PhoneLoginPresenter";
-export default PhoneLoginPresenter;
+import PhoneLoginContainer from "./PhoneLoginContainer";
+export default PhoneLoginContainer;

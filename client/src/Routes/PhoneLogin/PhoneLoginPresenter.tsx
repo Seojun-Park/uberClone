@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { FC } from 'react';
 import Helmet from 'react-helmet'
 import Input from '../../Hooks/Input'
 import { countries } from '../../Asset/countries'
 import * as S from './PhoneLoginStyles'
 
-const PhoneLoginPresenter = () => {
+const PhoneLoginPresenter: FC = () => {
     return (
         <S.Container>
             <Helmet><title>Phone Login</title></Helmet>
@@ -18,7 +18,7 @@ const PhoneLoginPresenter = () => {
                 ))}
             </S.CountrySelect>
             <S.Form>
-                <Input placeholder={"Phone number"}></Input>
+                <Input placeholder="Phone number" type="text" required={true} value="test"></Input>
                 <S.Button>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"

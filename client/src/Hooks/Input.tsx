@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC, ReactElement } from 'react';
 import styled from 'styled-components'
 
 const Container = styled.input`
@@ -22,6 +22,18 @@ const Container = styled.input`
   }
 `;
 
-const Input = ({ placeholder }: any) => <Container placeholder={placeholder} />;
+type InputProps = {
+  placeholder: string,
+  type: string,
+  required: boolean,
+  value: any
+}
+
+const Input: FC<InputProps> = ({ placeholder, type, required, value }): ReactElement => <Container
+  placeholder={placeholder}
+  type={type}
+  required={required}
+  value={value}
+/>;
 
 export default Input

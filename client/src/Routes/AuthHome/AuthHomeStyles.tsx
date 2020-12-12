@@ -9,7 +9,7 @@ export const Header = styled.header`
   height: 70%;
   background: linear-gradient(rgba(0, 153, 196, 0.5), rgba(0, 153, 196, 0.4)),
     url(${bg});
-    background-size: contain;
+    background-size: cover;
   display: flex;
   align-items: center;
   justify-content: center;
