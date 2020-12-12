@@ -1,7 +1,7 @@
 import React, { FC, ReactElement } from 'react';
 import Helmet from 'react-helmet'
 import Input from '../../Hooks/Input'
-import SelectHook from '../../Hooks/SelectHook'
+import Select from '../../Hooks/Select'
 import * as S from './PhoneLoginStyles'
 
 type PhoneProps = {
@@ -20,7 +20,7 @@ const PhoneLoginPresenter: FC<PhoneProps> = ({ phoneNumber, countryCode, setPhon
             <S.BackArrowExtended backTo={"/"} />
             <S.Title>Enter your phone number</S.Title>
             <S.Form>
-                <SelectHook action="countryselect" onSelect={setCountryCode} />
+                <Select action="countryselect" onSelect={setCountryCode} />
                 <Input
                     placeholder="Phone number here"
                     value={phoneNumber}
