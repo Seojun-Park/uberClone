@@ -22,13 +22,13 @@ type SelectProps = {
     action: string
 }
 
-const Select: FC<SelectProps> = ({ onSelect, action }): ReactElement | null => {
+const SelectHook: FC<SelectProps> = ({ onSelect, action }): ReactElement | null => {
     if (action === "countryselect") {
         return (
             <SelectContainer
-                onSelect={onSelect}>
+                onChange={onSelect}>
                 {countries.map((country: any, i: number) => (
-                    <Option key={i} value={country.dial_code}>
+                    <Option key={i} value={country.dial_code} >
                         {country.flag} {country.name} ({country.dial_code})
                     </Option>
                 ))}
@@ -39,4 +39,4 @@ const Select: FC<SelectProps> = ({ onSelect, action }): ReactElement | null => {
     }
 }
 
-export default Select
+export default SelectHook
