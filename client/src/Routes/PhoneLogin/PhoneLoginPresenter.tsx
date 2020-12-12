@@ -1,10 +1,19 @@
-import React, { FC } from 'react';
+import React, { FC, ReactElement } from 'react';
 import Helmet from 'react-helmet'
 import Input from '../../Hooks/Input'
 import { countries } from '../../Asset/countries'
 import * as S from './PhoneLoginStyles'
 
-const PhoneLoginPresenter: FC = () => {
+type PhoneProps = {
+    phoneNumber: string,
+    countryCode: string,
+    onInputChange: (
+        e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void,
+    onSelectChange: (
+        e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void,
+}
+
+const PhoneLoginPresenter: FC<PhoneProps> = ({ phoneNumber, countryCode, onInputChange, onSelectChange }): ReactElement => {
     return (
         <S.Container>
             <Helmet><title>Phone Login</title></Helmet>
@@ -18,7 +27,14 @@ const PhoneLoginPresenter: FC = () => {
                 ))}
             </S.CountrySelect>
             <S.Form>
-                <Input placeholder="Phone number" type="text" required={true} value="test"></Input>
+                <Input
+                    placeholder="Phone number here"
+                    value={phoneNumber}
+                    type="text"
+                    name="phoneNumber"
+                    onChange={onInputChange}
+                    autoFocus={true}
+                />
                 <S.Button>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"

@@ -24,16 +24,21 @@ const Container = styled.input`
 
 type InputProps = {
   placeholder: string,
-  type: string,
-  required: boolean,
-  value: any
+  type?: string,
+  required?: boolean,
+  value: string,
+  onChange: any,
+  name?: string
+  autoFocus?: boolean
 }
 
-const Input: FC<InputProps> = ({ placeholder, type, required, value }): ReactElement => <Container
+const Input: FC<InputProps> = ({ placeholder, type = "text", required = true, name, onChange, autoFocus }): ReactElement => <Container
   placeholder={placeholder}
   type={type}
   required={required}
-  value={value}
+  name={name}
+  onChange={onChange}
+  autoFocus={autoFocus}
 />;
 
 export default Input
