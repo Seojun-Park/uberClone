@@ -1,7 +1,7 @@
 import React, { FC, ReactElement } from 'react';
 import Helmet from 'react-helmet'
 import Input from '../../Hooks/Input'
-import { countries } from '../../Asset/countries'
+import Select from '../../Hooks/Select'
 import * as S from './PhoneLoginStyles'
 
 type PhoneProps = {
@@ -19,13 +19,13 @@ const PhoneLoginPresenter: FC<PhoneProps> = ({ phoneNumber, countryCode, setPhon
             <Helmet><title>Phone Login</title></Helmet>
             <S.BackArrowExtended backTo={"/"} />
             <S.Title>Enter your phone number</S.Title>
-            <S.CountrySelect>
-                {countries.map((country: any, i: number) => (
+            <Select action="countryselect" onSelect={setCountryCode} />
+            {/* {countries.map((country: any, i: number) => (
                     <S.CountryOption key={i} value={country.dial_code}>
                         {country.flag} {country.name} ({country.dial_code})
                     </S.CountryOption>
                 ))}
-            </S.CountrySelect>
+            </Select> */}
             <S.Form>
                 <Input
                     placeholder="Phone number here"
