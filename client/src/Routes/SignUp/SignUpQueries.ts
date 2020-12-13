@@ -23,3 +23,12 @@ export const EMAIL_SIGNUP = gql`
     }
   }
 `;
+
+export const REQUEST_EMAIL_VERYFICATION = gql`
+  mutation requestEmailVerification {
+    RequestEmailVerification {
+      ok
+      error
+    }
+  }
+`;

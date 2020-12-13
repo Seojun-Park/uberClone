@@ -34,6 +34,7 @@ type Mutation {
   RequestRide(pickUpAddress: String!, pickUpLat: Float!, pickUpLng: Float!, dropOffAddress: String!, dropOffLat: Float!, dropOffLng: Float!, price: Float!, distance: String!, duration: String!): RequestRideResponse!
   UpdateRideStatus(rideId: Int!, status: StatusOptions!): UpdateRideStatusResponse!
   CompleteEmailVerification(key: String!): CompleteEmailVerificationResponse!
+  ValidateEmail(key: String!): ValidateEmailResponse!
   CompletePhoneVerification(phoneNumber: String!, key: String!): CompletePhoneVerificationResponse!
   EmailSignIn(email: String!, password: String!): EmailSignInResponse!
   EmailSignUp(firstName: String!, lastName: String!, email: String!, password: String!, phoneNumber: String!, profilePhoto: String): EmailSignUpResponse!
@@ -156,6 +157,11 @@ enum StatusOptions {
 }
 
 type CompleteEmailVerificationResponse {
+  ok: Boolean!
+  error: String
+}
+
+type ValidateEmailResponse {
   ok: Boolean!
   error: String
 }

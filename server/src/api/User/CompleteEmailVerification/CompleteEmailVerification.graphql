@@ -3,6 +3,12 @@ type CompleteEmailVerificationResponse {
   error: String
 }
 
+type ValidateEmailResponse {
+  ok: Boolean!
+  error: String
+}
+
 type Mutation {
   CompleteEmailVerification(key: String!): CompleteEmailVerificationResponse!
+  ValidateEmail(key: String!): ValidateEmailResponse!
 }

@@ -11,6 +11,7 @@ import VerifyPhone from "../Routes/VerifyPhone";
 import SignUp from '../Routes/SignUp'
 import SocialLogin from "../Routes/SocialLogin";
 import FindAddress from '../Routes/FindAddress'
+import VerifyEmail from '../Routes/VerifyEmail'
 
 const LoggedInRoutes = () => (
   <Switch>
@@ -30,6 +31,7 @@ const LoggedOutRoutes = () => (
     <Route exact path="/" component={AuthHome} />
     <Route path="/phoneLogin" component={PhoneLogin} />
     <Route path="/verifyPhone" component={VerifyPhone} />
+    <Route path="/verifyEmail" component={VerifyEmail} />
     <Route path="/signup" component={SignUp} />
     <Route path="/socialLogin" component={SocialLogin} />
     <Redirect from="*" to="/" />

@@ -38,7 +38,7 @@ const SignUpPresenter: FC<SignUpProps> = ({
         <S.Container>
             <Helmet>Sign Up</Helmet>
             <Header title="Sign Up" />
-            <S.ExtendedForm submitFn={onSubmit}>
+            <S.ExtendedForm>
                 <S.ExtendedInput
                     value={firstName}
                     placeholder={"First Name"}
@@ -71,7 +71,7 @@ const SignUpPresenter: FC<SignUpProps> = ({
                     onChange={null}
                     name="phonNumber"
                 />
-                <Button value={loading ? "Signing Up..." : "Submit"} onClick={null} disabled={loading} />
+                <Button value={loading ? "Signing Up..." : "Submit"} onClick={onSubmit} disabled={loading} />
             </S.ExtendedForm>
         </S.Container>
     )

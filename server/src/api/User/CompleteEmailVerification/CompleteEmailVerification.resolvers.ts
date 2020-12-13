@@ -2,10 +2,13 @@ import User from "../../../entities/User";
 import Verification from "../../../entities/Verification";
 import {
   CompleteEmailVerificationMutationArgs,
-  CompleteEmailVerificationResponse
+  CompleteEmailVerificationResponse,
+  ValidateEmailMutationArgs,
+  ValidateEmailResponse
 } from "../../../types/graph";
 import { Resolvers } from "../../../types/resolvers";
 import authResolver from "../../../utils/authResolver";
+import { sendVerificationEmail } from "../../../utils/sendEmail";
 
 const resolvers: Resolvers = {
   Mutation: {
@@ -31,9 +34,20 @@ const resolvers: Resolvers = {
                 error: null
               };
             } else {
+              const newVerification = await Verification.create({
+                payload: user.email,
+                target: "EMAIL"
+              });
+              await sendVerificationEmail(
+                newVerification.payload,
+                newVerification.key
+              );
+              user.email = newVerification.payload;
+              user.verifiedEmail = false;
+              user.save();
               return {
-                ok: false,
-                error: "Can't verify your email"
+                ok: true,
+                error: null
               };
             }
           } catch (error) {
@@ -48,6 +62,48 @@ const resolvers: Resolvers = {
             error: "No Email to verify"
           };
         }
+      }
+    ),
+    ValidateEmail: authResolver(
+      async (
+        _,
+        args: ValidateEmailMutationArgs,
+        { req }
+      ): Promise<ValidateEmailResponse> => {
+        const { key } = args;
+        const user: User = req.user;
+        if (user.email) {
+          try {
+            const requested = await Verification.findOne({
+              payload: user.email,
+              key
+            });
+            if (requested) {
+              requested.verified = true;
+              requested.save();
+              user.verifiedEmail = true;
+              user.save();
+              return {
+                ok: true,
+                error: null
+              };
+            } else {
+              return {
+                ok: false,
+                error: "Verification can't valid"
+              };
+            }
+          } catch (err) {
+            return {
+              ok: false,
+              error: err.message
+            };
+          }
+        }
+        return {
+          ok: false,
+          error: "user doesn't have an email for validating"
+        };
       }
     )
   }

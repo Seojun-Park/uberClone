@@ -40,6 +40,54 @@ export interface StartPhoneVerificationVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: emailSignUp
+// ====================================================
+
+export interface emailSignUp_EmailSignUp {
+  __typename: "EmailSignUpResponse";
+  ok: boolean;
+  error: string | null;
+  token: string | null;
+}
+
+export interface emailSignUp {
+  EmailSignUp: emailSignUp_EmailSignUp;
+}
+
+export interface emailSignUpVariables {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  phoneNumber: string;
+  profilePhoto?: string | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: requestEmailVerification
+// ====================================================
+
+export interface requestEmailVerification_RequestEmailVerification {
+  __typename: "RequestEmailVerificationResponse";
+  ok: boolean;
+  error: string | null;
+}
+
+export interface requestEmailVerification {
+  RequestEmailVerification: requestEmailVerification_RequestEmailVerification;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: facebookConnect
 // ====================================================
 
