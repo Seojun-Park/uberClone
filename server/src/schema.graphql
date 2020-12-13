@@ -11,6 +11,7 @@ type Query {
   GetRide(rideId: Int!): GetRideResponse!
   GetMyProfile: GetMyProfileResponse!
   GetNearbyDrivers: GetNearbyDriversResponse!
+  Me: MeResponse!
 }
 
 type Subscription {
@@ -200,6 +201,12 @@ type GetNearbyDriversResponse {
   ok: Boolean!
   err: String
   drivers: [User]
+}
+
+type MeResponse {
+  ok: Boolean!
+  err: String
+  user: User
 }
 
 type ReportMovementResponse {

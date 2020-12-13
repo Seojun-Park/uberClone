@@ -17,6 +17,37 @@ export interface isLoggedIn {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: me
+// ====================================================
+
+export interface me_Me_user {
+  __typename: "User";
+  id: number;
+  email: string | null;
+  verifiedEmail: boolean;
+  firstName: string;
+  lastName: string;
+  phoneNumber: string | null;
+  profilePhoto: string | null;
+}
+
+export interface me_Me {
+  __typename: "MeResponse";
+  ok: boolean;
+  err: string | null;
+  user: me_Me_user | null;
+}
+
+export interface me {
+  Me: me_Me;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: StartPhoneVerification
 // ====================================================
 
@@ -107,6 +138,29 @@ export interface facebookConnectVariables {
   lastName: string;
   email?: string | null;
   fbId: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: verifyEmain
+// ====================================================
+
+export interface verifyEmain_ValidateEmail {
+  __typename: "ValidateEmailResponse";
+  ok: boolean;
+  error: string | null;
+}
+
+export interface verifyEmain {
+  ValidateEmail: verifyEmain_ValidateEmail;
+}
+
+export interface verifyEmainVariables {
+  key: string;
 }
 
 /* tslint:disable */
