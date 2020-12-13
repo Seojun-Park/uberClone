@@ -26,7 +26,7 @@ const VerifyPhonePresenter: FC<VerifyProps> = ({ number, setCode, onSubmit, load
                     onChange={setCode}
                     name="code"
                 />
-                <Button value={loading ? "Verifying" : "Submit"} onClick={null} disabled={loading} />
+                <Button value={loading ? "Verifying..." : "Submit"} onClick={null} disabled={loading} />
             </Form>
         </S.Container>
     )

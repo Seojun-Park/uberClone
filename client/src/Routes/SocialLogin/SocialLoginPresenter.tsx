@@ -8,7 +8,7 @@ type SocialProps = {
     setLastName: any,
     setEmail?: any,
     setFbId: any
-    onSubmit: any;
+    fbMutation: any;
 }
 
 
@@ -17,14 +17,14 @@ const SocialLoginPresenter: FC<SocialProps> = ({
     setLastName,
     setEmail,
     setFbId,
-    onSubmit
+    fbMutation
 }): ReactElement => {
     const responseFacebook = ({ name, email, userID }: any) => {
         setFirstName(name.split(" ")[0])
         setLastName(name.split(" ")[name.split(" ").length - 1])
         setEmail(email)
         setFbId(userID)
-        onSubmit();
+        fbMutation();
     }
 
     return (
@@ -38,7 +38,6 @@ const SocialLoginPresenter: FC<SocialProps> = ({
                 fields="name,email,picture"
                 callback={responseFacebook}
             />
-
         </S.Container>
     )
 }

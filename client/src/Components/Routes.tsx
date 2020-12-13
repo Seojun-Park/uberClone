@@ -8,6 +8,7 @@ import Places from "../Routes/Places";
 import Ride from "../Routes/Ride";
 import Settings from "../Routes/Settings";
 import VerifyPhone from "../Routes/VerifyPhone";
+import SignUp from '../Routes/SignUp'
 import SocialLogin from "../Routes/SocialLogin";
 import FindAddress from '../Routes/FindAddress'
 
@@ -29,6 +30,7 @@ const LoggedOutRoutes = () => (
     <Route exact path="/" component={AuthHome} />
     <Route path="/phoneLogin" component={PhoneLogin} />
     <Route path="/verifyPhone" component={VerifyPhone} />
+    <Route path="/signup" component={SignUp} />
     <Route path="/socialLogin" component={SocialLogin} />
     <Redirect from="*" to="/" />
   </Switch>

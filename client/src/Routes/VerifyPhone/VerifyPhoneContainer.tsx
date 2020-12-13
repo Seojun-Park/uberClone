@@ -24,8 +24,16 @@ const VerifyPhoneContainer: React.FC<RouteComponentProps> = ({ history }) => {
                 if (ok) {
                     if (token) {
                         userLogIn(token)
+                        toast.success("Verified, now you are logged in")
+                    } else {
+                        toast.info("Phone number is verified. Sign up now")
+                        setTimeout(() => {
+                            history.push({
+                                pathname: "/signup",
+                                state: { phoneNumber: phone }
+                            })
+                        }, 1000)
                     }
-                    toast.success("Verified, now you are logged in")
                 } else {
                     toast.error(error);
                 }
