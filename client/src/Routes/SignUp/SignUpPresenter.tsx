@@ -11,13 +11,11 @@ type SignUpProps = {
     password: any,
     profilePhoto: any,
     phoneNumber: any,
-    age: any,
     setFirstName: any,
     setLastName: any,
     setEmail: any,
     setPassword: any,
     setProfilePhoto: any,
-    setAge: any,
     loading: boolean,
     onSubmit: any
 }
@@ -29,13 +27,11 @@ const SignUpPresenter: FC<SignUpProps> = ({
     password,
     profilePhoto,
     phoneNumber,
-    age,
     setFirstName,
     setLastName,
     setEmail,
     setPassword,
     setProfilePhoto,
-    setAge,
     loading,
     onSubmit }): ReactElement => {
     return (

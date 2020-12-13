@@ -8,7 +8,6 @@ export const EMAIL_SIGNUP = gql`
     $password: String!
     $phoneNumber: String!
     $profilePhoto: String!
-    $age: Int!
   ) {
     EmailSignUp(
       firstName: $firstName
@@ -17,7 +16,6 @@ export const EMAIL_SIGNUP = gql`
       password: $password
       phoneNumber: $phoneNumber
       profilePhoto: $profilePhoto
-      age: $age
     ) {
       ok
       error

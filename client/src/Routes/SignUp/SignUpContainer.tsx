@@ -13,7 +13,6 @@ const SignUpContainer: React.FC<RouteComponentProps> = ({ history: { location } 
     const [email, setEmail] = useInput("")
     const [password, setPassword] = useInput("")
     const [profilePhoto, setProfilePhoto] = useInput("")
-    const [age, setAge] = useInput("")
     const [emailSignUpMutation, { loading }] = useMutation(EMAIL_SIGNUP, {
         variables: {
             firstName,
@@ -22,7 +21,6 @@ const SignUpContainer: React.FC<RouteComponentProps> = ({ history: { location } 
             password,
             phoneNumber,
             profilePhoto,
-            age
         }
     })
 
@@ -40,14 +38,12 @@ const SignUpContainer: React.FC<RouteComponentProps> = ({ history: { location } 
             email={email}
             password={password}
             profilePhoto={profilePhoto}
-            age={age}
             setFirstName={setFirstName}
             setLastName={setLastName}
             setEmail={setEmail}
             setPassword={setPassword}
             setProfilePhoto={setProfilePhoto}
             phoneNumber={phoneNumber}
-            setAge={setAge}
             loading={loading}
             onSubmit={onSubmit} />
     )
