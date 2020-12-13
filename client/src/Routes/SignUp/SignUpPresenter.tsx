@@ -11,11 +11,11 @@ type SignUpProps = {
     password: any,
     profilePhoto: any,
     phoneNumber: any,
-    setFirstName: any,
-    setLastName: any,
-    setEmail: any,
-    setPassword: any,
-    setProfilePhoto: any,
+    fNameChange: any,
+    lNameChange: any,
+    emailChange: any,
+    passwordChange: any,
+    profilePhotoChange: any,
     loading: boolean,
     onSubmit: any
 }
@@ -27,11 +27,11 @@ const SignUpPresenter: FC<SignUpProps> = ({
     password,
     profilePhoto,
     phoneNumber,
-    setFirstName,
-    setLastName,
-    setEmail,
-    setPassword,
-    setProfilePhoto,
+    fNameChange,
+    lNameChange,
+    emailChange,
+    passwordChange,
+    profilePhotoChange,
     loading,
     onSubmit }): ReactElement => {
     return (
@@ -42,26 +42,26 @@ const SignUpPresenter: FC<SignUpProps> = ({
                 <S.ExtendedInput
                     value={firstName}
                     placeholder={"First Name"}
-                    onChange={setFirstName}
+                    onChange={fNameChange}
                     name="firstName"
                 />
                 <S.ExtendedInput
                     value={lastName}
                     placeholder={"Last Name"}
-                    onChange={setLastName}
+                    onChange={lNameChange}
                     name="lastName"
                 />
                 <S.ExtendedInput
                     value={email}
                     placeholder={"Email Address"}
-                    onChange={setEmail}
+                    onChange={emailChange}
                     type="email"
                     name="email"
                 />
                 <S.ExtendedInput
                     value={password}
                     placeholder={"Password"}
-                    onChange={setPassword}
+                    onChange={passwordChange}
                     type="password"
                     name="password"
                 />

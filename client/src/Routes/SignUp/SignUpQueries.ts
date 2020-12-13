@@ -7,7 +7,7 @@ export const EMAIL_SIGNUP = gql`
     $email: String!
     $password: String!
     $phoneNumber: String!
-    $profilePhoto: String!
+    $profilePhoto: String
   ) {
     EmailSignUp(
       firstName: $firstName

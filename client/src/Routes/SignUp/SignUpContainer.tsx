@@ -1,5 +1,5 @@
 import { useMutation } from '@apollo/client';
-import React, { ReactEventHandler, useState } from 'react';
+import React, { ReactEventHandler } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import useInput from '../../Hooks/useInput';
 import SignUpPresenter from './SignUpPresenter'
@@ -8,11 +8,11 @@ import { EMAIL_SIGNUP } from './SignUpQueries';
 
 const SignUpContainer: React.FC<RouteComponentProps> = ({ history: { location } }) => {
     const { phoneNumber }: any = location.state
-    const [firstName, setFirstName] = useInput("")
-    const [lastName, setLastName] = useInput("")
-    const [email, setEmail] = useInput("")
-    const [password, setPassword] = useInput("")
-    const [profilePhoto, setProfilePhoto] = useInput("")
+    const [firstName, fNameChange] = useInput("")
+    const [lastName, lNameChange] = useInput("")
+    const [email, emailChange] = useInput("")
+    const [password, passwordChange] = useInput("")
+    const [profilePhoto, profilePhotoChange] = useInput("")
     const [emailSignUpMutation, { loading }] = useMutation(EMAIL_SIGNUP, {
         variables: {
             firstName,
@@ -38,11 +38,11 @@ const SignUpContainer: React.FC<RouteComponentProps> = ({ history: { location } 
             email={email}
             password={password}
             profilePhoto={profilePhoto}
-            setFirstName={setFirstName}
-            setLastName={setLastName}
-            setEmail={setEmail}
-            setPassword={setPassword}
-            setProfilePhoto={setProfilePhoto}
+            fNameChange={fNameChange}
+            lNameChange={lNameChange}
+            emailChange={emailChange}
+            passwordChange={passwordChange}
+            profilePhotoChange={profilePhotoChange}
             phoneNumber={phoneNumber}
             loading={loading}
             onSubmit={onSubmit} />

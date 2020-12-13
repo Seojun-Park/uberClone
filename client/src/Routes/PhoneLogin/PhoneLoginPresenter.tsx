@@ -8,26 +8,26 @@ type PhoneProps = {
     phoneNumber: string,
     countryCode: string,
     onSubmit: (event: React.FormEvent<HTMLFormElement>) => void,
-    setPhoneNumber: (
+    inputchange: (
         e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void,
-    setCountryCode: (
+    selectChange: (
         e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void,
 }
 
-const PhoneLoginPresenter: FC<PhoneProps> = ({ phoneNumber, countryCode, setPhoneNumber, setCountryCode, onSubmit }): ReactElement => {
+const PhoneLoginPresenter: FC<PhoneProps> = ({ phoneNumber, countryCode, inputchange, selectChange, onSubmit }): ReactElement => {
     return (
         <S.Container>
             <Helmet><title>Phone Login</title></Helmet>
             <S.BackArrowExtended backTo={"/"} />
             <S.Title>Enter your phone number</S.Title>
             <S.Form onSubmit={onSubmit}>
-                <Select action="countryselect" onSelect={setCountryCode} />
+                <Select action="countryselect" onSelect={selectChange} />
                 <Input
                     placeholder="Phone number here"
                     value={phoneNumber}
                     type="text"
                     name="phoneNumber"
-                    onChange={setPhoneNumber}
+                    onChange={inputchange}
                     autoFocus={true}
                 />
                 <S.Button>

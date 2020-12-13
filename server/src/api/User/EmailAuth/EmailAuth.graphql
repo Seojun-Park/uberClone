@@ -18,6 +18,6 @@ type Mutation {
     email: String!
     password: String!
     phoneNumber: String!
-    profilePhoto: String!
+    profilePhoto: String
   ): EmailSignUpResponse!
 }

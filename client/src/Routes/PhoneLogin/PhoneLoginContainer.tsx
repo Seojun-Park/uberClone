@@ -9,8 +9,8 @@ import { PHONE_SIGN_IN } from './PhoneQueries'
 
 
 const PhoneLoginContainer: React.FC<RouteComponentProps> = ({ history }) => {
-    const [phoneNumber, setPhoneNumber] = useInput("", /^[0-9]*$/)
-    const [countryCode, setCountryCode] = useInput("+33");
+    const [phoneNumber, inputChange] = useInput("", /^[0-9]*$/)
+    const [countryCode, selectChange] = useInput("+33");
     const phoneWithCode = `${countryCode}${phoneNumber}`;
     const [StartPhoneVerificationMutation] = useMutation<StartPhoneVerification, StartPhoneVerificationVariables>(
         PHONE_SIGN_IN, {
@@ -44,8 +44,8 @@ const PhoneLoginContainer: React.FC<RouteComponentProps> = ({ history }) => {
     return <PhoneLoginPresenter
         phoneNumber={phoneNumber}
         countryCode={countryCode}
-        setPhoneNumber={setPhoneNumber}
-        setCountryCode={setCountryCode}
+        inputchange={inputChange}
+        selectChange={selectChange}
         onSubmit={onSubmit}
     />
 }

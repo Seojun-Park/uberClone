@@ -44,8 +44,12 @@ class User extends BaseEntity {
   @Column({ type: "boolean", default: false })
   verifiedPhoneNumber: boolean;
 
-  @Column({ type: "text" })
-  profilePhoto: string;
+  @Column({
+    type: "text",
+    default:
+      "https://moonvillageassociation.org/wp-content/uploads/2018/06/default-profile-picture1.jpg"
+  })
+  profilePhoto: string | null;
 
   @Column({ type: "boolean", default: false })
   isDriving: boolean;
