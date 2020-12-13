@@ -15,7 +15,6 @@ const useInput = (
         const {
             target: { value }
         } = event;
-        console.log(event.target.value)
         let isValidValue: boolean = true;
         if (regex) {
             if (typeof regex === "function") {

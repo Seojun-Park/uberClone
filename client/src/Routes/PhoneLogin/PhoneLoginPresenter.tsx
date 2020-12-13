@@ -7,19 +7,20 @@ import * as S from './PhoneLoginStyles'
 type PhoneProps = {
     phoneNumber: string,
     countryCode: string,
+    onSubmit: (event: React.FormEvent<HTMLFormElement>) => void,
     setPhoneNumber: (
         e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void,
     setCountryCode: (
         e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void,
 }
 
-const PhoneLoginPresenter: FC<PhoneProps> = ({ phoneNumber, countryCode, setPhoneNumber, setCountryCode }): ReactElement => {
+const PhoneLoginPresenter: FC<PhoneProps> = ({ phoneNumber, countryCode, setPhoneNumber, setCountryCode, onSubmit }): ReactElement => {
     return (
         <S.Container>
             <Helmet><title>Phone Login</title></Helmet>
             <S.BackArrowExtended backTo={"/"} />
             <S.Title>Enter your phone number</S.Title>
-            <S.Form>
+            <S.Form onSubmit={onSubmit}>
                 <Select action="countryselect" onSelect={setCountryCode} />
                 <Input
                     placeholder="Phone number here"

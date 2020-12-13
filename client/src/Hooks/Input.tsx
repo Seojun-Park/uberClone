@@ -28,11 +28,12 @@ type InputProps = {
   required?: boolean,
   value: string,
   onChange: any,
+  setValue?: any,
   name?: string
   autoFocus?: boolean
 }
 
-const Input: FC<InputProps> = ({ placeholder, type = "text", required = true, name, onChange, autoFocus }): ReactElement => <Container
+const Input: FC<InputProps> = ({ placeholder, type = "text", required = true, name, onChange, autoFocus, setValue }): ReactElement => <Container
   placeholder={placeholder}
   type={type}
   required={required}
