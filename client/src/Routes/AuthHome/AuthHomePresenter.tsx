@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 import * as S from './AuthHomeStyles'
 
 const AuthHomePresenter = ({ match }: any) => {
-    console.log(match)
     return (
         <S.Container>
             <Helmet>

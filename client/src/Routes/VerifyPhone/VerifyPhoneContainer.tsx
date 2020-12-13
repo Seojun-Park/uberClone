@@ -25,7 +25,7 @@ const VerifyPhoneContainer: React.FC<RouteComponentProps> = ({ history }) => {
                     if (token) {
                         userLogIn(token)
                     }
-                    toast.success("Verified, now Log in")
+                    toast.success("Verified, now you are logged in")
                 } else {
                     toast.error(error);
                 }

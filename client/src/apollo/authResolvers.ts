@@ -19,8 +19,6 @@ export const userLogIn = (token: string) => {
 };
 
 export const userLogOut = () => {
-  //   client.cache.evict({ fieldName: "X-JWT" });
-  //   client.cache.gc();
   client.cache.writeQuery({
     query,
     data: {
