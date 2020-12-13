@@ -6,6 +6,7 @@ import GlobalStyles from '../Styles/GlobalStyles'
 import Routes from './Routes'
 import theme from '../Styles/Theme'
 import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 
 const IS_LOGGED_IN = gql`
 query isLoggedIn{

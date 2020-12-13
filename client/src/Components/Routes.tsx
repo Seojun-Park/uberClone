@@ -28,7 +28,7 @@ const LoggedOutRoutes = () => (
   <Switch>
     <Route exact path="/" component={AuthHome} />
     <Route path="/phoneLogin" component={PhoneLogin} />
-    <Route path="/verifyPhone/:number" component={VerifyPhone} />
+    <Route path="/verifyPhone" component={VerifyPhone} />
     <Route path="/socialLogin" component={SocialLogin} />
     <Redirect from="*" to="/" />
   </Switch>
