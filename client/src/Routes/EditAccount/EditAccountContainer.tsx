@@ -10,14 +10,14 @@ const EditAccountContainer = () => {
     const firstName = useInput("")
     const lastName = useInput("")
     const profilePhoto = useInput("")
-    const [updateProfileMutation] = useMutation<updateProfile, updateProfileVariables>(UPDATE_PROFILE, {
-        variables: {
-            email,
-            firstName,
-            lastName,
-            profilePhoto
-        }
-    })
+    // const [updateProfileMutation] = useMutation<updateProfile, updateProfileVariables>(UPDATE_PROFILE, {
+    //     variables: {
+    //         email,
+    //         firstName,
+    //         lastName,
+    //         profilePhoto
+    //     }
+    // })
 
     return (
         <EditAccountPresenter

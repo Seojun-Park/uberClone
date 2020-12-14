@@ -1,13 +1,6 @@
 import styled from "styled-components";
-import Form from "../../Components/Form";
 
-export const Container = styled.div``;
-
-export const ExtendedForm = styled(Form)`
-  padding: 0px 40px;
-`;
-
-export const Input = styled.input`
+export const Container = styled.input`
   border: none;
   border-bottom: 2px solid ${(props) => props.theme.greyColor};
   font-size: 20px;
@@ -26,5 +19,4 @@ export const Input = styled.input`
     color: ${(props) => props.theme.greyColor};
     font-weight: 300;
   }
-  margin-bottom: 30px;
 `;

@@ -8,6 +8,7 @@ const HomeContainer: FC<RouteComponentProps> = ({ history }): any => {
     const [user, setUser] = useState(null)
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const { loading } = useQuery(ME, {
+        fetchPolicy: "cache-and-network",
         onCompleted: v => {
             if (v.Me.ok) {
                 setUser(v.Me.user)

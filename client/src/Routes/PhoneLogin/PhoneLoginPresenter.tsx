@@ -1,6 +1,6 @@
 import React, { FC, ReactElement } from 'react';
 import Helmet from 'react-helmet'
-import Input from '../../Components/Input/Input'
+import Input from '../../Components/Input'
 import Select from '../../Hooks/Select'
 import * as S from './PhoneLoginStyles'
 
