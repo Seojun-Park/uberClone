@@ -6,12 +6,10 @@ import { useDropzone } from 'react-dropzone'
 import ProgressBarContainer from '../../Components/ProgressBar';
 
 type EditProps = {
-    email: string
     firstName: string
     lastName: string
     imageUrl: string
     progress: number
-    setEmail: any
     setFirstName: any
     setLastName: any
     handleUpload: any
@@ -20,12 +18,10 @@ type EditProps = {
 }
 
 const EditAccountPresenter: FC<EditProps> = ({
-    email,
     firstName,
     lastName,
     imageUrl,
     progress,
-    setEmail,
     setFirstName,
     setLastName,
     handleUpload,
@@ -52,8 +48,7 @@ const EditAccountPresenter: FC<EditProps> = ({
             <S.ExtendedForm>
                 <S.Input placeholder="First name" value={firstName} onChange={setFirstName} name="firstName" />
                 <S.Input placeholder="Last name" value={lastName} onChange={setLastName} name="lastName" />
-                <S.Input placeholder="Email" value={email} onChange={setEmail} name="email" type="email" />
-                <S.Button type="submit" value="Update" onClick={() => onSubmit()} />
+                <S.Button type="submit" value="Update" onClick={onSubmit} />
             </S.ExtendedForm>
         </S.Container>
     )

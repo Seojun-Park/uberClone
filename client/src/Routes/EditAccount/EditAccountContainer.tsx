@@ -5,30 +5,25 @@ import EditAccountPresenter from './EditAccountPresenter'
 import { UPDATE_PROFILE } from './EditAccountQueries'
 import { storage } from '../../Firebase'
 import { updateProfile, updateProfileVariables } from '../../types/api'
-import { RouteComponentProps, useLocation } from 'react-router-dom';
+import { RouteComponentProps } from 'react-router-dom';
+import { forceHistory } from '../../Hooks/forceHistory'
 import { toast } from 'react-toastify';
 
-interface stateType {
-    from: { pathname: string }
-    user: any
-}
 
 interface HTMLInputEvent extends Event {
     target: HTMLInputElement & EventTarget
 }
 
-const EditAccountContainer: FC<RouteComponentProps> = ({ history }): ReactElement => {
-    const { state: { user } } = useLocation<stateType>();
+const EditAccountContainer: FC<RouteComponentProps> = (): ReactElement => {
+    const email = window.location.href.split("/")[4].replace("#", "");
     const [progress, setProgess] = useState(1)
     const [profilePhoto, setProfilePhoto]: any = useState()
     const [flag, setFlag] = useState(false)
     const [imageUrl, setImageUrl] = useState('')
-    const [email, setEmail] = useInput("");
     const [firstName, setFirstName] = useInput("")
     const [lastName, setLastName] = useInput("")
     const [updateProfileMutation] = useMutation<updateProfile, updateProfileVariables>(UPDATE_PROFILE, {
         variables: {
-            email,
             firstName,
             lastName,
             profilePhoto: imageUrl
@@ -48,19 +43,20 @@ const EditAccountContainer: FC<RouteComponentProps> = ({ history }): ReactElemen
         }
     }
 
-    const onSubmit = async () => {
-        const { data: updateMyProfile } = await updateProfileMutation();
-        if (updateMyProfile) {
+    const onSubmit = () => {
+        const data = updateProfileMutation();
+        if (data) {
             toast.success("Your profile is updated :D")
+            forceHistory.push("/")
         } else {
             toast.error("Couldn't update your profile")
-            window.location.href = "/"
+            forceHistory.push("/")
         }
     }
 
     useEffect(() => {
         let uploadTask = storage
-            .ref(`/${user.email}/profilePhoto`)
+            .ref(`/${email}/profilePhoto`)
             .put(profilePhoto);
         uploadTask.on(
             "state_changed",
@@ -70,7 +66,7 @@ const EditAccountContainer: FC<RouteComponentProps> = ({ history }): ReactElemen
             },
             (err) => { console.log(err) },
             () => {
-                storage.ref(`/${user.email}/`)
+                storage.ref(`/${email}/`)
                     .child('profilePhoto')
                     .getDownloadURL()
                     .then((url) => {
@@ -78,15 +74,13 @@ const EditAccountContainer: FC<RouteComponentProps> = ({ history }): ReactElemen
                     })
             }
         )
-    }, [user.email, profilePhoto])
+    }, [email, profilePhoto])
 
 
     return (
         <EditAccountPresenter
-            email={email}
             firstName={firstName}
             lastName={lastName}
-            setEmail={setEmail}
             setFirstName={setFirstName}
             setLastName={setLastName}
             handleUpload={handleUpload}

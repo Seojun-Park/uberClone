@@ -15,10 +15,7 @@ const MenuPresenter: FC<MenuProps> = ({ user, toggleDriving, isDriving }) => {
         <S.Container >
             <S.Header>
                 <S.Grid>
-                    <Link to={{
-                        pathname: "/editAccount",
-                        state: { user }
-                    }} >
+                    <Link to={`/editAccount/${user.email}`}>
                         <S.Image src={user.profilePhoto ? user.profilePhoto : "https://moonvillageassociation.org/wp-content/uploads/2018/06/default-profile-picture1.jpg"} />
                     </Link>
                     <S.Text>
