@@ -27,6 +27,7 @@ export const Image = styled.img`
   background-color: grey;
   border-radius: 40px;
   overflow: hidden;
+  object-fit: cover;
 `;
 
 export const Name = styled.h2`

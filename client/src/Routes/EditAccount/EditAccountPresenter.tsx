@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import Helmet from 'react-helmet'
-import Button from '../../Components/Button';
 import Header from '../../Components/Header';
 import * as S from './EditAccountStyles'
 import { useDropzone } from 'react-dropzone'
@@ -41,20 +40,20 @@ const EditAccountPresenter: FC<EditProps> = ({
         <S.Container>
             <Helmet>Edit Account</Helmet>
             <Header title={"Edit Account"} backTo={"/"} />
-            <S.ExtendedForm submitFn={onSubmit}>
+            <S.UploadDiv {...getRootProps()}>
+                <S.PreviewBox>
+                    {flag ?
+                        progress !== 100 ? <ProgressBarContainer progress={progress.toString()} /> : preview(imageUrl)
+                        : "Upload your Profile Photo"}
+                </S.PreviewBox>
+                <input {...getInputProps()} onChange={handleUpload} />
+                <S.UploadButton bgColor={flag}>{!flag ? "Upload" : "Change"}</S.UploadButton>
+            </S.UploadDiv>
+            <S.ExtendedForm>
                 <S.Input placeholder="First name" value={firstName} onChange={setFirstName} name="firstName" />
                 <S.Input placeholder="Last name" value={lastName} onChange={setLastName} name="lastName" />
                 <S.Input placeholder="Email" value={email} onChange={setEmail} name="email" type="email" />
-                <S.UploadDiv {...getRootProps()}>
-                    <input {...getInputProps()} onChange={handleUpload} />
-                    <S.UploadButton bgColor={flag}>{!flag ? "Upload" : "Change"}</S.UploadButton>
-                </S.UploadDiv>
-                <S.PreviewBox>
-                    {flag ?
-                        progress !== 100 ? <ProgressBarContainer progress={progress} /> : preview(imageUrl)
-                        : "Preview"}
-                </S.PreviewBox>
-                <Button value="Update" onClick={null} />
+                <S.Button type="submit" value="Update" onClick={() => onSubmit()} />
             </S.ExtendedForm>
         </S.Container>
     )

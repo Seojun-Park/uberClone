@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
 type FormProp = {
-    submitFn: any;
+    submitFn?: any;
     className?: string
 }
 

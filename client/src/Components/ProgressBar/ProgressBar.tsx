@@ -3,11 +3,11 @@ import styled from 'styled-components'
 
 type ProgressProp = {
     bgColor?: string,
-    progress: number
+    progress: string
 }
 
 type StyleProps = {
-    width: number;
+    width: string;
 }
 
 const Container = styled.div`

@@ -6,6 +6,7 @@ import { UPDATE_PROFILE } from './EditAccountQueries'
 import { storage } from '../../Firebase'
 import { updateProfile, updateProfileVariables } from '../../types/api'
 import { RouteComponentProps, useLocation } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 interface stateType {
     from: { pathname: string }
@@ -16,7 +17,7 @@ interface HTMLInputEvent extends Event {
     target: HTMLInputElement & EventTarget
 }
 
-const EditAccountContainer: FC<RouteComponentProps> = (): ReactElement => {
+const EditAccountContainer: FC<RouteComponentProps> = ({ history }): ReactElement => {
     const { state: { user } } = useLocation<stateType>();
     const [progress, setProgess] = useState(1)
     const [profilePhoto, setProfilePhoto]: any = useState()
@@ -47,8 +48,15 @@ const EditAccountContainer: FC<RouteComponentProps> = (): ReactElement => {
         }
     }
 
-    const onSubmit = () => {
-        console.log(email, firstName, lastName, imageUrl)
+    const onSubmit = async () => {
+        const { data: updateMyProfile } = await updateProfileMutation();
+        if (updateMyProfile) {
+            toast.success("Your profile is updated :D")
+            window.location.href = "/"
+        } else {
+            toast.error("Couldn't update your profile")
+            window.location.href = "/"
+        }
     }
 
     useEffect(() => {
