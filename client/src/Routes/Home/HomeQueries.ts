@@ -11,8 +11,16 @@ export const ME = gql`
         verifiedEmail
         firstName
         lastName
+        fullName
         phoneNumber
         profilePhoto
+        isDriving
+        isRiding
+        isTaken
+        lastLng
+        lastLat
+        lastOrientation
+        fbId
       }
     }
   }

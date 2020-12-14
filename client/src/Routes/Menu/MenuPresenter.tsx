@@ -1,27 +1,36 @@
-import React from 'react';
+import React, { FC } from 'react';
 import * as S from './MenuStyles'
 import { Link } from 'react-router-dom'
+import Button from '../../Components/Button';
+import { userLogOut } from '../../apollo/authResolvers';
 
-const MenuPresenter = () => {
+type MenuProps = {
+    user: any
+    isDriving: boolean
+    toggleDriving: any
+}
+
+const MenuPresenter: FC<MenuProps> = ({ user, toggleDriving, isDriving }) => {
     return (
-        <S.Container>
+        <S.Container >
             <S.Header>
                 <S.Grid>
                     <Link to="/editAccount">
-                        <S.Image src="https://moonvillageassociation.org/wp-content/uploads/2018/06/default-profile-picture1.jpg" />
+                        <S.Image src={user.profilePhoto ? user.profilePhoto : "https://moonvillageassociation.org/wp-content/uploads/2018/06/default-profile-picture1.jpg"} />
                     </Link>
                     <S.Text>
-                        <S.Name>Name</S.Name>
+                        <S.Name>{user.fullName}</S.Name>
                         <S.Rating>4.5</S.Rating>
                     </S.Text>
                 </S.Grid>
             </S.Header>
             <S.SLink to="/trips">Your Trips</S.SLink>
             <S.SLink to="/settings">Settins</S.SLink>
-            <S.ToggleDriving isDriving={true}>
-                {true ? "Stop driving" : "Start drinvg"}
+            <S.ToggleDriving onClick={toggleDriving} isDriving={isDriving}>
+                {isDriving ? "Stop driving" : "Start drinvg"}
             </S.ToggleDriving>
-        </S.Container>
+            <Button value="LOG OUT" onClick={() => userLogOut()} />
+        </S.Container >
     )
 }
 

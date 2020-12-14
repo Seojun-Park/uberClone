@@ -29,6 +29,13 @@ export interface me_Me_user {
   lastName: string;
   phoneNumber: string | null;
   profilePhoto: string | null;
+  isDriving: boolean;
+  isRiding: boolean;
+  isTaken: boolean;
+  lastLng: number | null;
+  lastLat: number | null;
+  lastOrientation: number | null;
+  fbId: string | null;
 }
 
 export interface me_Me {
@@ -40,6 +47,25 @@ export interface me_Me {
 
 export interface me {
   Me: me_Me;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: toggleDrivingMode
+// ====================================================
+
+export interface toggleDrivingMode_ToggleDrivingMode {
+  __typename: "ToggleDrivingModeResponse";
+  ok: boolean;
+  err: string | null;
+}
+
+export interface toggleDrivingMode {
+  ToggleDrivingMode: toggleDrivingMode_ToggleDrivingMode;
 }
 
 /* tslint:disable */

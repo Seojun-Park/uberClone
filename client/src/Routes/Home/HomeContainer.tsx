@@ -20,12 +20,11 @@ const HomeContainer: FC<RouteComponentProps> = ({ history }): any => {
 
     const toggleMenu = (): any => !isMenuOpen ? setIsMenuOpen(true) : setIsMenuOpen(false)
 
-    console.log(user)
     if (loading) {
         return <>loading...</>
     } else {
         return (
-            <HomePresenter isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
+            <HomePresenter isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} user={user} />
         )
     }
 }
