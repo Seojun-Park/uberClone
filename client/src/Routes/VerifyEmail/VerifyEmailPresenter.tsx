@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from '@apollo/client';
-import React, { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { VERIFY_EMAIL, GET_VALIDATION } from './VerifyEmailQueris'
 import { ME } from '../Home/HomeQueries'
@@ -9,12 +9,7 @@ const VerifyEmailPresenter: FC<RouteComponentProps> = ({ history }) => {
     const [key, setKey] = useState(null)
     const [flag, setFlag] = useState(false)
     const [verifyEmailMutation] = useMutation(VERIFY_EMAIL, {
-        variables: { key },
-        onCompleted: v => {
-            if (v.GetValidation.ok) {
-                setFlag(true)
-            }
-        }
+        variables: { key }
     })
     const { loading } = useQuery(ME, {
         onCompleted: v => {
@@ -34,17 +29,27 @@ const VerifyEmailPresenter: FC<RouteComponentProps> = ({ history }) => {
     })
 
     useEffect(() => {
+        const abortController = new AbortController();
+        const mutationEffect = async () => {
+            await verifyEmailMutation();
+        };
         if (flag === true) {
+            mutationEffect();
             history.push("/")
+            window.location.reload()
         }
-    }, [flag, history])
+        return () => {
+            abortController.abort();
+        }
+    }, [verifyEmailMutation, flag, history])
+
     if (loading || email === null || key === null) {
-        return <>loading...</>
+        return <>verifying your email...</>
     }
     return (
         <>
-            verifying your email...
-            {/* {setTimeout(() => verifyEmailMutation(), 2000)} */}
+            loading
+            {setTimeout(() => { setFlag(true) }, 2000)}
         </>
     )
 }
