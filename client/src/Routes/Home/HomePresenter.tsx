@@ -1,5 +1,4 @@
 import React, { FC } from 'react'
-import { userLogOut } from '../../apollo/authResolvers'
 import Menu from '../Menu'
 import Sidebar from 'react-sidebar'
 import * as S from './HomeStyles'
@@ -30,7 +29,6 @@ const HomePresenter: FC<HomeProps> = ({ isMenuOpen, toggleMenu, user }) => {
                     >
                         <button onClick={() => toggleMenu()}>open</button>
                     </Sidebar>
-                    <button onClick={() => userLogOut()}>logout</button>
             Home
         </S.Container > : "loading..."}
         </>
