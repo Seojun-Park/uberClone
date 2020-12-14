@@ -16,9 +16,13 @@ export const Header = styled.div`
 export const SLink = styled(Link)`
   font-size: 22px;
   display: block;
-  margin-left: 15px;
-  margin-bottom: 25px;
+  padding: 13px 0;
+  padding-left: 15px;
   font-weight: 400;
+  &:hover {
+    background-color: ${(props) => props.theme.greyColor};
+    transition: 0.2s linear;
+  }
 `;
 
 export const Image = styled.img`
@@ -66,10 +70,14 @@ export const ToggleDriving = styled.button<IToggleProps>`
   -webkit-appearance: none;
   background-color: ${(props) =>
     props.isDriving ? props.theme.yellowColor : props.theme.greenColor};
+  text-transform: uppercase;
   width: 100%;
   color: white;
-  font-size: 18px;
+  font-size: 16px;
+  font-weight: 500;
   border: 0;
   padding: 15px 0px;
+  margin-top: 30px;
+  margin-bottom: 10px;
   cursor: pointer;
 `;
