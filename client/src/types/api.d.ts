@@ -17,6 +17,32 @@ export interface isLoggedIn {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: updateProfile
+// ====================================================
+
+export interface updateProfile_UpdateMyProfile {
+  __typename: "UpdateMyProfileResponse";
+  ok: boolean;
+  error: string | null;
+}
+
+export interface updateProfile {
+  UpdateMyProfile: updateProfile_UpdateMyProfile;
+}
+
+export interface updateProfileVariables {
+  firstName?: string | null;
+  lastName?: string | null;
+  profilePhoto?: string | null;
+  email?: string | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: me
 // ====================================================
 
@@ -27,6 +53,7 @@ export interface me_Me_user {
   verifiedEmail: boolean;
   firstName: string;
   lastName: string;
+  fullName: string | null;
   phoneNumber: string | null;
   profilePhoto: string | null;
   isDriving: boolean;
