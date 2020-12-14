@@ -1,0 +1,9 @@
+type GetValidationResponse {
+  ok: Boolean!
+  error: String
+  verification: Verification
+}
+
+type Query {
+  GetValidation(email: String!): GetValidationResponse!
+}

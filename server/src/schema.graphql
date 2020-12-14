@@ -12,6 +12,7 @@ type Query {
   GetMyProfile: GetMyProfileResponse!
   GetNearbyDrivers: GetNearbyDriversResponse!
   Me: MeResponse!
+  GetValidation(email: String!): GetValidationResponse!
 }
 
 type Subscription {
@@ -260,6 +261,12 @@ type ToggleDrivingModeResponse {
 type UpdateMyProfileResponse {
   ok: Boolean!
   error: String
+}
+
+type GetValidationResponse {
+  ok: Boolean!
+  error: String
+  verification: Verification
 }
 
 type Verification {

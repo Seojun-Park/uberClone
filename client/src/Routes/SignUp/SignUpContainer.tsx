@@ -1,5 +1,5 @@
 import { useMutation } from '@apollo/client';
-import React, { ReactEventHandler } from 'react';
+import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import useInput from '../../Hooks/useInput';
 import SignUpPresenter from './SignUpPresenter'
@@ -32,7 +32,6 @@ const SignUpContainer: React.FC<RouteComponentProps> = ({ history: { location } 
                 if (token) {
                     toast.success(`Welcome ${firstName}!`)
                     await userLogIn(token);
-                    await requestEmailVerification();
                 } else {
                     toast.error("Something wrong")
                 }
@@ -45,6 +44,7 @@ const SignUpContainer: React.FC<RouteComponentProps> = ({ history: { location } 
 
     const onSubmit: React.FormEventHandler = async (event) => {
         event.preventDefault()
+        await requestEmailVerification();
         await emailSignUpMutation()
     }
 

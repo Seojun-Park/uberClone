@@ -146,21 +146,52 @@ export interface facebookConnectVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL mutation operation: verifyEmain
+// GraphQL mutation operation: verifyEmail
 // ====================================================
 
-export interface verifyEmain_ValidateEmail {
+export interface verifyEmail_ValidateEmail {
   __typename: "ValidateEmailResponse";
   ok: boolean;
   error: string | null;
 }
 
-export interface verifyEmain {
-  ValidateEmail: verifyEmain_ValidateEmail;
+export interface verifyEmail {
+  ValidateEmail: verifyEmail_ValidateEmail;
 }
 
-export interface verifyEmainVariables {
+export interface verifyEmailVariables {
   key: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: getValidation
+// ====================================================
+
+export interface getValidation_GetValidation_verification {
+  __typename: "Verification";
+  payload: string;
+  key: string;
+  verified: boolean;
+}
+
+export interface getValidation_GetValidation {
+  __typename: "GetValidationResponse";
+  ok: boolean;
+  error: string | null;
+  verification: getValidation_GetValidation_verification | null;
+}
+
+export interface getValidation {
+  GetValidation: getValidation_GetValidation;
+}
+
+export interface getValidationVariables {
+  email: string;
 }
 
 /* tslint:disable */

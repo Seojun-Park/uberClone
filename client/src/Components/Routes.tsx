@@ -16,6 +16,7 @@ import VerifyEmail from '../Routes/VerifyEmail'
 const LoggedInRoutes = () => (
   <Switch>
     <Route exact path="/" component={Home} />
+    <Route path="/verifyEmail" component={VerifyEmail} />
     <Route path="/addPlace" component={AddPlace} />
     <Route path="/places" component={Places} />
     <Route path="/ride" component={Ride} />
@@ -31,7 +32,6 @@ const LoggedOutRoutes = () => (
     <Route exact path="/" component={AuthHome} />
     <Route path="/phoneLogin" component={PhoneLogin} />
     <Route path="/verifyPhone" component={VerifyPhone} />
-    <Route path="/verifyEmail" component={VerifyEmail} />
     <Route path="/signup" component={SignUp} />
     <Route path="/socialLogin" component={SocialLogin} />
     <Redirect from="*" to="/" />
