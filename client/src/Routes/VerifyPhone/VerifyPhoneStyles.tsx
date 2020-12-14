@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import Input from '../../Hooks/Input'
+import Input from '../../Components/Input'
 
 export const Container = styled.div``;
 

@@ -1,10 +1,9 @@
 import { useMutation } from '@apollo/client';
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC, useState } from 'react'
 import MenuPresenter from './MenuPresenter'
 import { TOGGLE_DRIVING } from './MenuQueries';
 import { toggleDrivingMode } from '../../types/api'
 import { ME } from '../Home/HomeQueries';
-import { toast } from 'react-toastify';
 
 type MenuProps = {
     user: any

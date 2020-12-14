@@ -25,7 +25,7 @@ const MenuPresenter: FC<MenuProps> = ({ user, toggleDriving, isDriving }) => {
                 </S.Grid>
             </S.Header>
             <S.SLink to="/trips">Your Trips</S.SLink>
-            <S.SLink to="/settings">Settins</S.SLink>
+            <S.SLink to="/settings">Settings</S.SLink>
             <S.ToggleDriving onClick={toggleDriving} isDriving={isDriving}>
                 {isDriving ? "Stop driving" : "Start drinvg"}
             </S.ToggleDriving>
