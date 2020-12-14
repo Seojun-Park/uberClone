@@ -52,7 +52,6 @@ const EditAccountContainer: FC<RouteComponentProps> = ({ history }): ReactElemen
         const { data: updateMyProfile } = await updateProfileMutation();
         if (updateMyProfile) {
             toast.success("Your profile is updated :D")
-            window.location.href = "/"
         } else {
             toast.error("Couldn't update your profile")
             window.location.href = "/"
