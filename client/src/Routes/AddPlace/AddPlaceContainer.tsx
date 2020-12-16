@@ -9,7 +9,6 @@ import { ADD_PLACE } from './AddPlaceQuery';
 const AddPlaceContainer = () => {
     const [address, setAddress] = useInput("")
     const [name, setName] = useInput("")
-    const [isFav, setIsFav] = useState(false)
     const [lat, setLat] = useState(0)
     const [lng, setLng] = useState(0)
     const [loading, setLoading] = useState(true)
@@ -17,9 +16,9 @@ const AddPlaceContainer = () => {
         variables: {
             name,
             address,
-            isFav,
-            lat,
-            lng
+            isFav: false,
+            lat: 213.12,
+            lng: 321.23
         }, onCompleted: v => {
             if (v.AddPlace && v.AddPlace.ok) {
                 toast.success("Place added!")
@@ -36,8 +35,12 @@ const AddPlaceContainer = () => {
             setAddress={setAddress}
             name={name}
             setName={setName}
+            setLat={setLat}
+            setLng={setLng}
             loading={loading}
             onSubmit={addPlaceMutation}
+            lng={lng}
+            lat={lat}
         />
     )
 }

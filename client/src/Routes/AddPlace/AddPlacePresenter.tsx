@@ -11,6 +11,10 @@ type AddPlaceProps = {
     setName: any
     loading: boolean
     onSubmit: any
+    setLat: any
+    setLng: any
+    lng: number
+    lat: number
 }
 
 const AddPlacePresenter: FC<AddPlaceProps> = ({
@@ -19,12 +23,16 @@ const AddPlacePresenter: FC<AddPlaceProps> = ({
     setAddress,
     setName,
     loading,
-    onSubmit
+    onSubmit,
+    setLat,
+    setLng,
+    lng,
+    lat
 }) => {
     return (
         <>
             <Helmet>Add Place</Helmet>
-            <Header title="Add Place" backTo={"/places"} />
+            <Header title="Add Place" backTo={"/"} />
             <S.Container>
                 <S.Input placeholder="Name" value={name} onChange={setName} />
                 <S.Input placeholder="Address" value={address} onChange={setAddress} />
