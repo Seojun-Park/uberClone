@@ -1,5 +1,4 @@
 import { gql } from "@apollo/client";
-
 export const ME = gql`
   query me {
     Me {
@@ -21,6 +20,25 @@ export const ME = gql`
         lastLat
         lastOrientation
         fbId
+      }
+    }
+  }
+`;
+
+export const GET_PLACES = gql`
+  query getPlaces {
+    GetMyPlace {
+      ok
+      err
+      places {
+        id
+        name
+        lat
+        lng
+        address
+        isFav
+        createdAt
+        updatedAt
       }
     }
   }

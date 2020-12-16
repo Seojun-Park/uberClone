@@ -2,7 +2,7 @@ import { useMutation, useQuery } from '@apollo/client';
 import { FC, useEffect, useState } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { VERIFY_EMAIL, GET_VALIDATION } from './VerifyEmailQueris'
-import { ME } from '../Home/HomeQueries'
+import { ME } from '../../sharedQueries'
 
 const VerifyEmailPresenter: FC<RouteComponentProps> = ({ history }) => {
     const [email, setEmail] = useState(null)

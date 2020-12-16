@@ -34,46 +34,6 @@ export interface updateProfileVariables {
   firstName?: string | null;
   lastName?: string | null;
   profilePhoto?: string | null;
-  email?: string | null;
-}
-
-/* tslint:disable */
-/* eslint-disable */
-// @generated
-// This file was automatically generated and should not be edited.
-
-// ====================================================
-// GraphQL query operation: me
-// ====================================================
-
-export interface me_Me_user {
-  __typename: "User";
-  id: number;
-  email: string | null;
-  verifiedEmail: boolean;
-  firstName: string;
-  lastName: string;
-  fullName: string | null;
-  phoneNumber: string | null;
-  profilePhoto: string | null;
-  isDriving: boolean;
-  isRiding: boolean;
-  isTaken: boolean;
-  lastLng: number | null;
-  lastLat: number | null;
-  lastOrientation: number | null;
-  fbId: string | null;
-}
-
-export interface me_Me {
-  __typename: "MeResponse";
-  ok: boolean;
-  err: string | null;
-  user: me_Me_user | null;
-}
-
-export interface me {
-  Me: me_Me;
 }
 
 /* tslint:disable */
@@ -270,6 +230,77 @@ export interface verifyPhone {
 export interface verifyPhoneVariables {
   key: string;
   phoneNumber: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: me
+// ====================================================
+
+export interface me_Me_user {
+  __typename: "User";
+  id: number;
+  email: string | null;
+  verifiedEmail: boolean;
+  firstName: string;
+  lastName: string;
+  fullName: string | null;
+  phoneNumber: string | null;
+  profilePhoto: string | null;
+  isDriving: boolean;
+  isRiding: boolean;
+  isTaken: boolean;
+  lastLng: number | null;
+  lastLat: number | null;
+  lastOrientation: number | null;
+  fbId: string | null;
+}
+
+export interface me_Me {
+  __typename: "MeResponse";
+  ok: boolean;
+  err: string | null;
+  user: me_Me_user | null;
+}
+
+export interface me {
+  Me: me_Me;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: getPlaces
+// ====================================================
+
+export interface getPlaces_GetMyPlace_places {
+  __typename: "Place";
+  id: number;
+  name: string;
+  lat: number;
+  lng: number;
+  address: string;
+  isFav: boolean;
+  createdAt: string;
+  updatedAt: string | null;
+}
+
+export interface getPlaces_GetMyPlace {
+  __typename: "GetMyPlaceResponse";
+  ok: boolean;
+  err: string | null;
+  places: (getPlaces_GetMyPlace_places | null)[] | null;
+}
+
+export interface getPlaces {
+  GetMyPlace: getPlaces_GetMyPlace;
 }
 
 /* tslint:disable */

@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/client'
 import React, { FC, useState } from 'react'
 import { RouteComponentProps } from 'react-router-dom'
 import HomePresenter from './HomePresenter'
-import { ME } from './HomeQueries'
+import { ME } from '../../sharedQueries'
 
 const HomeContainer: FC<RouteComponentProps> = ({ history }): any => {
     const [user, setUser] = useState(null)

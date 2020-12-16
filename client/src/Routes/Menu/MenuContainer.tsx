@@ -3,7 +3,7 @@ import React, { FC, useState } from 'react'
 import MenuPresenter from './MenuPresenter'
 import { TOGGLE_DRIVING } from './MenuQueries';
 import { toggleDrivingMode } from '../../types/api'
-import { ME } from '../Home/HomeQueries';
+import { ME } from '../../sharedQueries';
 
 type MenuProps = {
     user: any

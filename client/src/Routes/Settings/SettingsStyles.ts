@@ -1,12 +1,15 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-export const Container = styled.div``;
+export const Container = styled.div`
+  padding: 0 40px;
+`;
 
 export const Image = styled.img`
   height: 60px;
   width: 60px;
   border-radius: 50%;
+  object-fit: cover;
 `;
 
 export const GridLink = styled(Link)`
