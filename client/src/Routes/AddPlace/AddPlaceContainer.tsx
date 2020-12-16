@@ -41,6 +41,7 @@ const AddPlaceContainer = () => {
             onSubmit={addPlaceMutation}
             lng={lng}
             lat={lat}
+            pickedAddress={lat !== 0 && lng !== 0}
         />
     )
 }

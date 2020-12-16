@@ -15,6 +15,7 @@ type AddPlaceProps = {
     setLng: any
     lng: number
     lat: number
+    pickedAddress: boolean
 }
 
 const AddPlacePresenter: FC<AddPlaceProps> = ({
@@ -27,7 +28,8 @@ const AddPlacePresenter: FC<AddPlaceProps> = ({
     setLat,
     setLng,
     lng,
-    lat
+    lat,
+    pickedAddress
 }) => {
     return (
         <>
@@ -36,7 +38,7 @@ const AddPlacePresenter: FC<AddPlaceProps> = ({
             <S.Container>
                 <S.Input placeholder="Name" value={name} onChange={setName} />
                 <S.Input placeholder="Address" value={address} onChange={setAddress} />
-                <Button onClick={() => onSubmit()} value={loading ? "Adding Place" : "Add Place"} />
+                {pickedAddress && <Button onClick={() => onSubmit()} value={loading ? "Adding Place" : "Add Place"} />}
             </S.Container>
         </>
     )
