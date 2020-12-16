@@ -23,7 +23,7 @@ const SettingsPresenter: FC<SettingProps> = ({ user, loading, places }) => {
                         <S.GridLink to={`/editAccount/${user.email}`}>
                             <S.Image src={user.profilePhoto} alt="profile Photo" />
                             <S.Keys>
-                                <S.Key>{user.fullName}</S.Key>
+                                <S.KeyName>{user.fullName}</S.KeyName>
                                 <S.Key>{user.email}</S.Key>
                             </S.Keys>
                         </S.GridLink>

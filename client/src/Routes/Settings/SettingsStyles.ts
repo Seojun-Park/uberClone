@@ -17,9 +17,17 @@ export const GridLink = styled(Link)`
   grid-template-columns: 1fr 4fr;
   grid-gap: 10px;
   margin-bottom: 10px;
+  align-items: center;
 `;
 
 export const Keys = styled.div``;
+
+export const KeyName = styled.span`
+  display: block;
+  margin-bottom: 5px;
+  font-size: 16px;
+  font-weight: 500;
+`;
 
 export const Key = styled.span`
   display: block;

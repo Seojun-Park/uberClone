@@ -13,6 +13,13 @@ const Place = styled.div`
 
 const Container = styled.div`
   margin-left: 10px;
+  width: 100%;
+  padding:10px;
+  cursor: pointer;
+  &:hover{
+      background-color: #ecf0f1;
+      transition: 0.2s linear
+  }
 `;
 
 const Button = styled.button`

@@ -17,8 +17,8 @@ const AddPlaceContainer = () => {
             name,
             address,
             isFav: false,
-            lat: 213.12,
-            lng: 321.23
+            lat,
+            lng
         }, onCompleted: v => {
             if (v.AddPlace && v.AddPlace.ok) {
                 toast.success("Place added!")
