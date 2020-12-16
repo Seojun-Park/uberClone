@@ -1,5 +1,6 @@
 import { useMutation } from '@apollo/client';
 import React, { useState } from 'react';
+import { toast } from 'react-toastify';
 import useInput from '../../Hooks/useInput';
 import { addPlace, addPlaceVariables } from '../../types/api';
 import AddPlacePresenter from './AddPlacePresenter'
@@ -19,15 +20,15 @@ const AddPlaceContainer = () => {
             isFav,
             lat,
             lng
+        }, onCompleted: v => {
+            if (v.AddPlace && v.AddPlace.ok) {
+                toast.success("Place added!")
+                setLoading(false)
+            } else {
+                toast.error(v.AddPlace.err)
+            }
         }
     })
-
-    const onSubmit = async () => {
-        const { data } = await addPlaceMutation()
-        if (data) {
-            setLoading(false)
-        }
-    }
 
     return (
         <AddPlacePresenter
@@ -36,7 +37,7 @@ const AddPlaceContainer = () => {
             name={name}
             setName={setName}
             loading={loading}
-            onSubmit={onSubmit}
+            onSubmit={addPlaceMutation}
         />
     )
 }

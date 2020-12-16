@@ -28,8 +28,8 @@ const AddPlacePresenter: FC<AddPlaceProps> = ({
             <S.Container>
                 <S.Input placeholder="Name" value={name} onChange={setName} />
                 <S.Input placeholder="Address" value={address} onChange={setAddress} />
+                <Button onClick={() => onSubmit()} value={loading ? "Adding Place" : "Add Place"} />
             </S.Container>
-            <Button onClick={() => onSubmit()} value={loading ? "Adding Place" : "Add Place"} />
         </>
     )
 }
