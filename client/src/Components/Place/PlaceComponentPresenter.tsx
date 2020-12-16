@@ -15,6 +15,12 @@ const Container = styled.div`
   margin-left: 10px;
 `;
 
+const Button = styled.button`
+border: none;
+background-color: white;
+`
+
+
 const Name = styled.span`
   display: block;
 `;
@@ -29,15 +35,19 @@ const Address = styled.span`
 `;
 
 type Props = {
-    fav: boolean;
+    fav: boolean
+    isFav: boolean
     name: string
-    address: string;
+    address: string
+    mutation: any
 }
 
-const PlaceComponentPresenter: FC<Props> = ({ fav, name, address }) => {
+const PlaceComponentPresenter: FC<Props> = ({ fav, name, address, isFav, mutation }) => {
     return (
         <Place>
-            <Icon>{fav ? "★" : "✩"}</Icon>
+            <Button onClick={() => mutation()}>
+                <Icon>{isFav ? "★" : "✩"}</Icon>
+            </Button>
             <Container>
                 <Name>{name}</Name>
                 <Address>{address}</Address>

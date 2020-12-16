@@ -17,6 +17,54 @@ export interface isLoggedIn {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: toggleFav
+// ====================================================
+
+export interface toggleFav_EditPlace {
+  __typename: "EditPlaceResponse";
+  ok: boolean;
+  err: string | null;
+}
+
+export interface toggleFav {
+  EditPlace: toggleFav_EditPlace;
+}
+
+export interface toggleFavVariables {
+  placeId: number;
+  isFav?: boolean | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: editPlaceName
+// ====================================================
+
+export interface editPlaceName_EditPlace {
+  __typename: "EditPlaceResponse";
+  ok: boolean;
+  err: string | null;
+}
+
+export interface editPlaceName {
+  EditPlace: editPlaceName_EditPlace;
+}
+
+export interface editPlaceNameVariables {
+  placeId: number;
+  name?: string | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: addPlace
 // ====================================================
 

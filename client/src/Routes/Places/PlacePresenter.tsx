@@ -21,7 +21,7 @@ const PlacePresenter: FC<PlaceProps> = ({
             <S.Container>
                 {!loading && places && places.length === 0 && <S.SLink to="/addPlace">Add some places here!</S.SLink>}
                 {!loading && places && places.map((p: any, i: number) => (
-                    <PlaceComponent key={i} id={p.id} fav={p.isFab} name={p.name} address={p.address} />
+                    <PlaceComponent key={i} id={p.id} fav={p.isFav} name={p.name} address={p.address} />
                 ))}
                 <Button value="ADD PLACE" onClick={() => window.location.href = "/addPlace"} />
             </S.Container>
