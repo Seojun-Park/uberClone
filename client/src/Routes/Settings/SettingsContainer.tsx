@@ -9,6 +9,7 @@ const SettingsContainer = () => {
     const [loading, setLoading] = useState(true)
     useQuery(ME, { onCompleted: v => setUser(v.Me.user) })
     useQuery(GET_PLACES, {
+        fetchPolicy: "network-only",
         onCompleted: v => setPlaces(v.GetMyPlace.places)
     })
 
@@ -23,7 +24,6 @@ const SettingsContainer = () => {
             loading...
         </>
     }
-    console.log(loading)
     return (
         <SettingsPresenter user={user} places={places} loading={loading} />
     )

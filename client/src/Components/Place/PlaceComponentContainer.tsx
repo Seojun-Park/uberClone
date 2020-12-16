@@ -1,6 +1,6 @@
 import { useMutation } from '@apollo/client';
 import { toggleFav, toggleFavVariables } from '../../types/api'
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useState } from 'react';
 import PlaceComponentPresenter from './PlaceComponentPresenter'
 import { TOGGLE_PLACE } from './PlaceComponentQueries';
 import { GET_PLACES } from '../../sharedQueries';
@@ -17,28 +17,19 @@ const PlaceComponentContainer: FC<Props> = ({ fav, name, address, id }) => {
   const [toggleFavMutation] = useMutation<toggleFav, toggleFavVariables>(TOGGLE_PLACE, {
     variables: {
       placeId: id,
-      isFav
+      isFav: fav ? false : true
     }, refetchQueries: [{ query: GET_PLACES }]
   })
 
   const toggleIsFav: EventListener = async (e) => {
     e.preventDefault();
-    await toggleFavMutation()
     if (isFav === true) {
       setIsFav(false)
     } else {
       setIsFav(true)
     }
+    await toggleFavMutation()
   }
-
-  useEffect(() => {
-    if (isFav) {
-      console.log("true")
-    } else {
-      console.log("false")
-    }
-  }, [isFav])
-
 
   return (
     <PlaceComponentPresenter fav={fav} name={name} address={address} isFav={isFav} mutation={toggleIsFav} />

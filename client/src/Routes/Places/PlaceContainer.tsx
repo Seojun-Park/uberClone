@@ -6,7 +6,7 @@ import PlacePresenter from './PlacePresenter'
 const PlaceContainer = () => {
     const [places, setPlaces] = useState()
     const [loading, setLoading] = useState(true)
-    useQuery(GET_PLACES, { onCompleted: v => setPlaces(v.GetMyPlace.places) })
+    useQuery(GET_PLACES, { fetchPolicy: "network-only", onCompleted: v => setPlaces(v.GetMyPlace.places) })
     useEffect(() => {
         if (places) {
             setLoading(false)
