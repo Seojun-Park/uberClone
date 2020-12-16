@@ -1,9 +1,35 @@
-import React from 'react'
+import React, { FC } from 'react'
+import { Helmet } from 'react-helmet'
+import Button from '../../Components/Button'
+import Header from '../../Components/Header'
+import * as S from './AddPlaceStyles'
 
-const AddPlacePresenter = () => {
+type AddPlaceProps = {
+    address: string
+    name: string
+    setAddress: any
+    setName: any
+    loading: boolean
+    onSubmit: any
+}
+
+const AddPlacePresenter: FC<AddPlaceProps> = ({
+    address,
+    name,
+    setAddress,
+    setName,
+    loading,
+    onSubmit
+}) => {
     return (
         <>
-            AddPlace
+            <Helmet>Add Place</Helmet>
+            <Header title="Add Place" backTo={"/places"} />
+            <S.Container>
+                <S.Input placeholder="Name" value={name} onChange={setName} />
+                <S.Input placeholder="Address" value={address} onChange={setAddress} />
+            </S.Container>
+            <Button onClick={() => onSubmit()} value={loading ? "Adding Place" : "Add Place"} />
         </>
     )
 }

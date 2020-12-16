@@ -55,26 +55,28 @@ const EditAccountContainer: FC<RouteComponentProps> = (): ReactElement => {
     }
 
     useEffect(() => {
-        let uploadTask = storage
-            .ref(`/${email}/profilePhoto`)
-            .put(profilePhoto);
-        uploadTask.on(
-            "state_changed",
-            (snapshot) => {
-                const percentUploaded = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100)
-                setProgess(percentUploaded)
-            },
-            (err) => { console.log(err) },
-            () => {
-                storage.ref(`/${email}/`)
-                    .child('profilePhoto')
-                    .getDownloadURL()
-                    .then((url) => {
-                        setImageUrl(url)
-                    })
-            }
-        )
-    }, [email, profilePhoto])
+        if (flag) {
+            let uploadTask = storage
+                .ref(`/${email}/profilePhoto`)
+                .put(profilePhoto);
+            uploadTask.on(
+                "state_changed",
+                (snapshot) => {
+                    const percentUploaded = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100)
+                    setProgess(percentUploaded)
+                },
+                (err) => { console.log(err) },
+                () => {
+                    storage.ref(`/${email}/`)
+                        .child('profilePhoto')
+                        .getDownloadURL()
+                        .then((url) => {
+                            setImageUrl(url)
+                        })
+                }
+            )
+        }
+    }, [flag, email, profilePhoto])
 
 
     return (

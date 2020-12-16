@@ -28,18 +28,18 @@ const Address = styled.span`
 `;
 
 type Props = {
-    fav: boolean;
-    name: string
-    address: string;
+  fav: boolean;
+  name: string
+  address: string;
 }
 
-const PlacePresenter: FC<Props> = ({ fav, name, address }) => (
-    <Place>
-        <Icon>{fav ? "✩" : "★"}</Icon>
-        <Container>
-            <Name>{name}</Name>
-            <Address>{address}</Address>
-        </Container>
-    </Place>
+const PlaceComponent: FC<Props> = ({ fav, name, address }) => (
+  <Place>
+    <Icon>{fav ? "✩" : "★"}</Icon>
+    <Container>
+      <Name>{name}</Name>
+      <Address>{address}</Address>
+    </Container>
+  </Place>
 )
-export default PlacePresenter
+export default PlaceComponent

@@ -33,8 +33,8 @@ const SettingsPresenter: FC<SettingProps> = ({ user, loading, places }) => {
                     places.map((place: any, i: number) =>
                         <PlacePresenter key={i} fav={place.isFav} name={place.name} address={place.address} />)
                     :
-                    "Not found my places"}
-                <S.SLink to="/place">Go to Places</S.SLink>
+                    "You don't have any saved places. Add place"}
+                <S.SLink to="/places">Go to Places</S.SLink>
                 <Button value="LOG OUT" onClick={() => userLogOut()} />
             </S.Container>
         </>
