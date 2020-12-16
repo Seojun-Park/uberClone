@@ -45,7 +45,7 @@ type Props = {
 const PlaceComponentPresenter: FC<Props> = ({ fav, name, address, isFav, mutation }) => {
     return (
         <Place>
-            <Button onClick={() => mutation()}>
+            <Button onClick={mutation}>
                 <Icon>{isFav ? "★" : "✩"}</Icon>
             </Button>
             <Container>
