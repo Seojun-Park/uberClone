@@ -3,6 +3,7 @@ import React, { FC, useState } from 'react'
 import { RouteComponentProps } from 'react-router-dom'
 import HomePresenter from './HomePresenter'
 import { ME } from '../../sharedQueries'
+import * as S from './HomeStyles'
 
 const HomeContainer: FC<RouteComponentProps> = ({ history }): any => {
     const [user, setUser] = useState(null)
@@ -21,8 +22,14 @@ const HomeContainer: FC<RouteComponentProps> = ({ history }): any => {
 
     const toggleMenu = (): any => !isMenuOpen ? setIsMenuOpen(true) : setIsMenuOpen(false)
 
+
     if (loading) {
-        return <>loading...</>
+        return (
+            <S.LoadingContainer>
+                <div>loading...</div>
+                <S.ReloadButton onClick={() => window.location.reload()}>Reload</S.ReloadButton>
+            </S.LoadingContainer>
+        )
     } else {
         return (
             <HomePresenter isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} user={user} />

@@ -1,10 +1,21 @@
-import React from 'react'
+import React, { FC } from 'react'
+import { Helmet } from 'react-helmet'
+import * as S from './FindAddressStyles'
 
-const FindAddressPresenter = () => {
+type Types = {
+    mapRef: any
+}
+
+const FindAddressPresenter: FC<Types> = ({
+    mapRef
+}) => {
     return (
-        <>
-            AddPlace
-        </>
+        <div>
+            <Helmet>FindPlace</Helmet>
+            <S.Map ref={mapRef} />
+        </div>
     )
 }
+
+
 export default FindAddressPresenter

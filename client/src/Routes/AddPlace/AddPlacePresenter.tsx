@@ -34,10 +34,11 @@ const AddPlacePresenter: FC<AddPlaceProps> = ({
     return (
         <>
             <Helmet>Add Place</Helmet>
-            <Header title="Add Place" backTo={"/"} />
+            <Header title="Add Place" backTo={"/places"} />
             <S.Container>
                 <S.Input placeholder="Name" value={name} onChange={setName} />
                 <S.Input placeholder="Address" value={address} onChange={setAddress} />
+                <S.ExtendedLink to={"/findAddress"}>Pick place from map</S.ExtendedLink>
                 {pickedAddress && <Button onClick={() => onSubmit()} value={loading ? "Adding Place" : "Add Place"} />}
             </S.Container>
         </>
