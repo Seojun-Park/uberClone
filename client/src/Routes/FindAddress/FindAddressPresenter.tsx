@@ -1,18 +1,17 @@
-import React, { FC } from 'react'
+import React from 'react'
 import { Helmet } from 'react-helmet'
+import Map from '../../Components/Map'
 import * as S from './FindAddressStyles'
 
-type Types = {
-    mapRef: any
-}
+const FindAddressPresenter = () => {
 
-const FindAddressPresenter: FC<Types> = ({
-    mapRef
-}) => {
     return (
-        <div>
-            <Helmet>FindPlace</Helmet>
-            <S.Map ref={mapRef} />
+        <div className="map-container">
+            <Helmet>Find place</Helmet>
+            <Map
+                mapType={google.maps.MapTypeId.ROADMAP}
+                mapTypeControl={true}
+            />
         </div>
     )
 }
