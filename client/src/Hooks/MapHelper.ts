@@ -44,6 +44,20 @@ export const getAddress = async (coords: ICoords) => {
   }
 };
 
+export const getGeoCode = async (address: string) => {
+  const encodedAddress = address.replace(" ", "+");
+  const url = `https://maps.googleapis.com/maps/api/js?key=${mapAPI}&callback=initMap`;
+  const { status, data } = await axios.get(url);
+  if (status) {
+    const { results } = data;
+    const place = results[0];
+    const { location } = place.geometry;
+    return location;
+  } else {
+    toast.error(data.error_message);
+  }
+};
+
 export const generateMarker = (
   map: google.maps.Map,
   coords: ICoords,
