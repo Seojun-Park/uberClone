@@ -7,20 +7,21 @@ import { mapAPI } from '../../key';
 
 
 const FindAddressContainer = () => {
-    // const [scriptLoaded, setScriptLoaded] = useState(false)
+    const [scriptLoaded, setScriptLoaded] = useState(false)
 
-    // useEffect(() => {
-    //     const googleMapScript = loadMapApi();
-    //     googleMapScript.addEventListener('load', function () {
-    //         setScriptLoaded(true);
-    //     })
-    // }, [])
+    useEffect(() => {
+        const googleMapScript = loadMapApi();
+        googleMapScript.addEventListener('load', function () {
+            setScriptLoaded(true);
+        })
+    }, [])
 
     return (
         <div>
-            {/* {scriptLoaded &&
-                <FindAddressPresenter />
-            } */}
+
+            {scriptLoaded ?
+                <FindAddressPresenter /> : "map isn't loaded"
+            }
         </div>
     )
 }

@@ -27,6 +27,7 @@ const HomeContainer: FC<RouteComponentProps> = ({ history }): any => {
         return (
             <S.LoadingContainer>
                 <div>loading...</div>
+                <div>If the loading too long, please refresh</div>
                 <S.ReloadButton onClick={() => window.location.reload()}>Reload</S.ReloadButton>
             </S.LoadingContainer>
         )
