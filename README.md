@@ -33,8 +33,8 @@
 - [x] Subscribe Ride Status
 - [x] Create Chat Room
 - [x] Get Chat Room Messages
-- [ ] Send a Chat Messages
-- [ ] Subscribe to Chat Room messages
+- [x] Send a Chat Messages
+- [x] Subscribe to Chat Room messages
 
 - [ ] Get Ride History
 - [ ] See Ride Detail
@@ -47,16 +47,16 @@
 ### LoggedOut:
 
     - [ ] Home
-    - [ ] Phone Login
-    - [ ] Verify Phone Login
-    - [ ] Social Login
+    - [x] Phone Login
+    - [x] Verify Phone Login
+    - [x] Social Login
 
 ### LoggedIn :
 
-    - [ ] Home
+    - [x] Home
     - [ ] Ride
-    - [ ] Edit Account
-    - [ ] Settings
+    - [x] Edit Account
+    - [x] Settings
     - [ ] Saved Places
-    - [ ] Add Place
+    - [x] Add Place
     - [ ] Trip History
