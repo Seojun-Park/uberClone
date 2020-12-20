@@ -30,7 +30,7 @@ const FindAddressPresenter: React.FC<IProps> = ({ mapRef,
                 />
             </S.Form>
             <S.Center>📍</S.Center>
-            <S.Button onClick={onPickPlace}>Pick this place</S.Button>
+            <S.Button onClick={() => onPickPlace()}>Pick this place</S.Button>
             <S.Map ref={mapRef} />
         </div>
     )

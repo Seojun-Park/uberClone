@@ -22,9 +22,9 @@ export const getAddress = async (coords: ICoords) => {
     mapAPI.apiKey || ""
   }`;
   const { status, data } = await axios.get(url);
+  console.log(status, data);
   if (status) {
     const { results } = data;
-    console.log(results);
     const place = results[0];
     const address = place.formatted_address;
     return address;
