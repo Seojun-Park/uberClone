@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import Button from "../../Components/Button";
 
 export const Map = styled.div`
   position: absolute;
@@ -8,6 +7,13 @@ export const Map = styled.div`
   height: 100%;
   width: 100%;
   z-index: 1;
+`;
+
+export const Form = styled.form`
+  width: 100%;
+  height: 50px;
+  position: absolute;
+  z-index: 3;
 `;
 
 export const Center = styled.div`
@@ -23,7 +29,24 @@ export const Center = styled.div`
   bottom: 0;
 `;
 
-export const ExtendedButton = styled(Button)`
+export const Button = styled.button`
+  width: 100%;
+  background-color: black;
+  color: white;
+  text-transform: uppercase;
+  padding: 15px 0;
+  font-size: 16px;
+  border: 0;
+  cursor: pointer;
+  font-weight: 500;
+  text-align: center;
+  &:active,
+  &:focus {
+    outline: none;
+  }
+  &:disabled {
+    opacity: 0.8;
+  }
   position: absolute;
   bottom: 50px;
   left: 0;

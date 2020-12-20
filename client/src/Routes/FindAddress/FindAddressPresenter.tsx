@@ -1,7 +1,7 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
 import AddressBar from '../../Components/AddressBar'
-import Form from '../../Components/Form'
+// import Form from '../../Components/Form'
 import * as S from './FindAddressStyles'
 
 interface IProps {
@@ -9,29 +9,28 @@ interface IProps {
     address: string;
     onPickPlace: () => void;
     submitFn: () => void;
-    onInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+    onInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const FindAddressPresenter: React.FC<IProps> = ({
-    mapRef,
+const FindAddressPresenter: React.FC<IProps> = ({ mapRef,
     address,
+    onInputChange,
     onPickPlace,
-    submitFn,
-    onInputChange
-}) => {
-
+    submitFn }) => {
     return (
-        <div className="map-container">
+
+        <div>
             <Helmet>Find place</Helmet>
-            <Form submitFn={submitFn}>
+            <S.Form onSubmit={() => submitFn()}>
                 <AddressBar
                     onBlur={submitFn}
                     onChange={onInputChange}
-                    name={"address"}
+                    name="address"
                     value={address}
                 />
-            </Form>
-            <S.ExtendedButton value={"Puck thisPlace"} onClick={onPickPlace} />
+            </S.Form>
+            <S.Center>📍</S.Center>
+            <S.Button onClick={onPickPlace}>Pick this place</S.Button>
             <S.Map ref={mapRef} />
         </div>
     )

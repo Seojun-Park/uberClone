@@ -1,41 +1,30 @@
-import { mapAPI } from "../key";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { mapAPI } from "../key";
 
 export interface ICoords {
   lat: number;
   lng: number;
 }
 
-export const loadMapApi = () => {
-  const mapURL = `https://maps.googleapis.com/maps/api/js?key=${mapAPI.apiKey}&callback=initMap`;
-  const scripts = document.getElementsByTagName("script");
-  for (let i = 0; i < scripts.length; i++) {
-    if (scripts[i].src.indexOf(mapURL) === 0) {
-      return scripts[i];
-    }
-  }
-  const googleMapScript = document.createElement("script");
-  googleMapScript.src = mapURL;
-  googleMapScript.async = true;
-  googleMapScript.defer = true;
-  window.document.body.appendChild(googleMapScript);
-  return googleMapScript;
-};
-
-export const loadGoogleMapApi = (onloadSuccess: () => any) => {
-  const script = document.createElement("script");
-  script.src = `https://maps.googleapis.com/maps/api/js?key=${mapAPI.apiKey}&callback=initMap`;
+export const loadGoogleMapApi = (onLoadSuccess: () => any) => {
+  const script = document.createElement(`script`);
+  script.src = `https://maps.googleapis.com/maps/api/js?key=${
+    mapAPI.apiKey || ""
+  }&libraries=places`;
   document.head.append(script);
-  script.addEventListener("load", onloadSuccess);
+  script.addEventListener("load", onLoadSuccess);
 };
 
 export const getAddress = async (coords: ICoords) => {
   const { lat, lng } = coords;
-  const url = `https://maps.googleapis.com/maps/api/js?latlng=${lat},${lng}key=${mapAPI.apiKey}&callback=initMap`;
+  const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${
+    mapAPI.apiKey || ""
+  }`;
   const { status, data } = await axios.get(url);
   if (status) {
     const { results } = data;
+    console.log(results);
     const place = results[0];
     const address = place.formatted_address;
     return address;
@@ -46,12 +35,17 @@ export const getAddress = async (coords: ICoords) => {
 
 export const getGeoCode = async (address: string) => {
   const encodedAddress = address.replace(" ", "+");
-  const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodedAddress}&key=${mapAPI.apiKey}`;
+  console.log(encodedAddress);
+  const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodedAddress}&key=${
+    mapAPI.apiKey || ""
+  }`;
   const { status, data } = await axios.get(url);
+  console.log(status, data);
   if (status) {
     const { results } = data;
     const place = results[0];
     const { location } = place.geometry;
+
     return location;
   } else {
     toast.error(data.error_message);
@@ -89,7 +83,7 @@ export const renderPath = (
 ) => {
   const renderOption: google.maps.DirectionsRendererOptions = {
     polylineOptions: {
-      strokeColor: "#000"
+      strokeColor: "#000" // black
     },
     suppressMarkers: true
   };
