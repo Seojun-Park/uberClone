@@ -8,7 +8,7 @@ export interface ICoords {
 }
 
 export const loadMapApi = () => {
-  const mapURL = `https://maps.googleapis.com/maps/api/js?key=${mapAPI}&callback=initMap`;
+  const mapURL = `https://maps.googleapis.com/maps/api/js?key=${mapAPI.apiKey}&callback=initMap`;
   const scripts = document.getElementsByTagName("script");
   for (let i = 0; i < scripts.length; i++) {
     if (scripts[i].src.indexOf(mapURL) === 0) {
@@ -25,14 +25,14 @@ export const loadMapApi = () => {
 
 export const loadGoogleMapApi = (onloadSuccess: () => any) => {
   const script = document.createElement("script");
-  script.src = `https://maps.googleapis.com/maps/api/js?key=${mapAPI}&callback=initMap`;
+  script.src = `https://maps.googleapis.com/maps/api/js?key=${mapAPI.apiKey}&callback=initMap`;
   document.head.append(script);
   script.addEventListener("load", onloadSuccess);
 };
 
 export const getAddress = async (coords: ICoords) => {
   const { lat, lng } = coords;
-  const url = `https://maps.googleapis.com/maps/api/js?key=${mapAPI}&callback=initMap`;
+  const url = `https://maps.googleapis.com/maps/api/js?latlng=${lat},${lng}key=${mapAPI.apiKey}&callback=initMap`;
   const { status, data } = await axios.get(url);
   if (status) {
     const { results } = data;
@@ -46,7 +46,7 @@ export const getAddress = async (coords: ICoords) => {
 
 export const getGeoCode = async (address: string) => {
   const encodedAddress = address.replace(" ", "+");
-  const url = `https://maps.googleapis.com/maps/api/js?key=${mapAPI}&callback=initMap`;
+  const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodedAddress}&key=${mapAPI.apiKey}`;
   const { status, data } = await axios.get(url);
   if (status) {
     const { results } = data;
