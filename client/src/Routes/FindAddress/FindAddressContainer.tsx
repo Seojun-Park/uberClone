@@ -17,14 +17,26 @@ interface IProps extends RouteComponentProps<any> {
 
 const FindAddressContainer: React.FC<IProps> = ({ history }) => {
     const mapRef = useRef()
+    const [position, setPosition] = useState<ICoords>({ lat: 0, lng: 0 })
+    const [coords, setCoords] = useState<ICoords>({
+        lat: 0,
+        lng: 0
+    });
     const [address, onChangeAddress, setAddress] = useInput("")
-    const [coords, setCoords] = useState<ICoords>({ lat: 0, lng: 0 });
     const [map, setMap] = useState<google.maps.Map>()
 
     useEffect(() => {
         const getCurrentLocation = () => {
             navigator.geolocation.getCurrentPosition(pos => {
                 const { coords: { latitude, longitude } } = pos;
+                setPosition({
+                    lat: latitude,
+                    lng: longitude
+                })
+                setCoords({
+                    lat: latitude,
+                    lng: longitude 
+                })
                 loadMap(latitude, longitude);
                 if (map !== undefined) {
                     map.panTo({ lat: latitude + 0.001, lng: longitude + 0.001 })
@@ -56,12 +68,6 @@ const FindAddressContainer: React.FC<IProps> = ({ history }) => {
         }
     }, [map])
 
-    useEffect(() => {
-        if (address) {
-            console.log(address)
-        }
-    }, [address])
-
     const loadMap = (lat: number, lng: number) => {
         const mapNode = ReactDOM.findDOMNode(mapRef.current);
         const mapConfig: google.maps.MapOptions = {
@@ -74,11 +80,15 @@ const FindAddressContainer: React.FC<IProps> = ({ history }) => {
     }
 
     const onPickHandler = async () => {
-        const result = await getAddress(coords);
+        let result;
+        if (coords.lat === 0 || coords.lng === 0) {
+            result = await getAddress(position);
+        } else {
+            result = await getAddress(coords)
+        }
         if (result) {
             setAddress(result)
         }
-
     }
 
     const submitFn = async () => {
@@ -96,9 +106,11 @@ const FindAddressContainer: React.FC<IProps> = ({ history }) => {
         history.push({
             pathname: "/addPlace",
             state: {
-                address: address,
-                lat: coords.lat,
-                lng: coords.lng
+                data: {
+                    address: address,
+                    lat: coords.lat,
+                    lng: coords.lng
+                }
             }
         })
     }

@@ -16,6 +16,7 @@ type AddPlaceProps = {
     lng: number
     lat: number
     pickedAddress: boolean
+    addAddress: string
 }
 
 const AddPlacePresenter: FC<AddPlaceProps> = ({
@@ -29,7 +30,8 @@ const AddPlacePresenter: FC<AddPlaceProps> = ({
     setLng,
     lng,
     lat,
-    pickedAddress
+    pickedAddress,
+    addAddress
 }) => {
     return (
         <>
@@ -37,7 +39,10 @@ const AddPlacePresenter: FC<AddPlaceProps> = ({
             <Header title="Add Place" backTo={"/places"} />
             <S.Container>
                 <S.Input placeholder="Name" value={name} onChange={setName} />
-                <S.Input placeholder="Address" value={address} onChange={setAddress} />
+                {addAddress === undefined ?
+                    <S.Input placeholder="Address" value={address} onChange={setAddress} /> :
+                    <S.Input placeholder="Address" value={addAddress} onChange={() => console.log("picked")} />
+                }
                 <S.ExtendedLink to={"/findAddress"}>Pick place from map</S.ExtendedLink>
                 {pickedAddress && <Button onClick={() => onSubmit()} value={loading ? "Adding Place" : "Add Place"} />}
             </S.Container>

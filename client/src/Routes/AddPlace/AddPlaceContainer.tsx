@@ -3,6 +3,7 @@ import React, { FC, useEffect, useState } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import useInput from '../../Hooks/useInput';
+import { GET_PLACES } from '../../sharedQueries';
 import { addPlace, addPlaceVariables } from '../../types/api';
 import AddPlacePresenter from './AddPlacePresenter'
 import { ADD_PLACE } from './AddPlaceQuery';
@@ -12,18 +13,18 @@ interface IProps extends RouteComponentProps<any> {
 }
 
 const AddPlaceContainer: FC<IProps> = ({ history }) => {
-    const { location: { state = {} } = {} } = history
+    const { location: { state = {} } = {} }: any = history
     const [address, setAddress] = useInput("")
     const [name, setName] = useInput("")
     const [lat, setLat] = useState(0)
     const [lng, setLng] = useState(0)
     const [loading, setLoading] = useState(true)
-    const [pickedAddress, setPickedAddress] = useState<any>({})
+    const [addAddress, setAddAddress] = useState<any>()
 
     const [addPlaceMutation] = useMutation<addPlace, addPlaceVariables>(ADD_PLACE, {
         variables: {
             name,
-            address,
+            address: `${addAddress === undefined ? address : addAddress}`,
             isFav: false,
             lat,
             lng
@@ -31,14 +32,24 @@ const AddPlaceContainer: FC<IProps> = ({ history }) => {
             if (v.AddPlace && v.AddPlace.ok) {
                 toast.success("Place added!")
                 setLoading(false)
+                history.push("/places")
             } else {
                 toast.error(v.AddPlace.err)
             }
-        }
+        },
+        refetchQueries: [{ query: GET_PLACES }]
     })
-    if (state !== undefined) {
-        console.log(state)
-    }
+    useEffect(() => {
+        if (state.data && state.data.address) {
+            setLat(state.data.lat)
+            setLng(state.data.lng)
+            setAddAddress(state.data.address)
+        }
+    }, [state])
+
+    console.log(state)
+    console.log("picked", addAddress)
+    console.log(lat, lng)
 
     return (
         <AddPlacePresenter
@@ -53,6 +64,7 @@ const AddPlaceContainer: FC<IProps> = ({ history }) => {
             lng={lng}
             lat={lat}
             pickedAddress={lat !== 0 && lng !== 0}
+            addAddress={addAddress}
         />
     )
 }

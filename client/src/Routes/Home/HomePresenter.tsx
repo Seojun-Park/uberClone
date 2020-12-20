@@ -21,13 +21,13 @@ const HomePresenter: FC<HomeProps> = ({ isMenuOpen, toggleMenu, user }) => {
                         onSetOpen={toggleMenu}
                         styles={{
                             sidebar: {
-                                width: "80%",
                                 backgroundColor: "white",
+                                width: "80%",
                                 zIndex: "10"
                             }
                         }}
                     >
-                        <button onClick={() => toggleMenu()}>open</button>
+                        <S.Button onClick={() => toggleMenu()}>|||</S.Button>
                     </Sidebar>
             Home
         </S.Container > : "loading..."}

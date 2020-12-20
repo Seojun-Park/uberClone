@@ -5,7 +5,11 @@ import HomePresenter from './HomePresenter'
 import { ME } from '../../sharedQueries'
 import * as S from './HomeStyles'
 
-const HomeContainer: FC<RouteComponentProps> = ({ history }): any => {
+interface IProps extends RouteComponentProps<any> {
+    google: any
+}
+
+const HomeContainer: FC<IProps> = ({ history }): any => {
     const [user, setUser] = useState(null)
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const { loading } = useQuery(ME, {
@@ -22,7 +26,6 @@ const HomeContainer: FC<RouteComponentProps> = ({ history }): any => {
 
     const toggleMenu = (): any => !isMenuOpen ? setIsMenuOpen(true) : setIsMenuOpen(false)
 
-
     if (loading) {
         return (
             <S.LoadingContainer>
@@ -33,7 +36,11 @@ const HomeContainer: FC<RouteComponentProps> = ({ history }): any => {
         )
     } else {
         return (
-            <HomePresenter isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} user={user} />
+            <HomePresenter
+                isMenuOpen={isMenuOpen}
+                toggleMenu={toggleMenu}
+                user={user}
+            />
         )
     }
 }
