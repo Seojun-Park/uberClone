@@ -10,13 +10,16 @@ interface IProps {
     onPickPlace: () => void;
     submitFn: () => void;
     onInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    onSubmit: any
 }
 
 const FindAddressPresenter: React.FC<IProps> = ({ mapRef,
     address,
     onInputChange,
     onPickPlace,
-    submitFn }) => {
+    submitFn,
+    onSubmit
+}) => {
     return (
 
         <div>

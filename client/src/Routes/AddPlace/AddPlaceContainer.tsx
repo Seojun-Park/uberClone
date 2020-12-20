@@ -1,17 +1,25 @@
 import { useMutation } from '@apollo/client';
-import React, { useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
+import { RouteComponentProps } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import useInput from '../../Hooks/useInput';
 import { addPlace, addPlaceVariables } from '../../types/api';
 import AddPlacePresenter from './AddPlacePresenter'
 import { ADD_PLACE } from './AddPlaceQuery';
 
-const AddPlaceContainer = () => {
+interface IProps extends RouteComponentProps<any> {
+    state: any
+}
+
+const AddPlaceContainer: FC<IProps> = ({ history }) => {
+    const { location: { state = {} } = {} } = history
     const [address, setAddress] = useInput("")
     const [name, setName] = useInput("")
     const [lat, setLat] = useState(0)
     const [lng, setLng] = useState(0)
     const [loading, setLoading] = useState(true)
+    const [pickedAddress, setPickedAddress] = useState<any>({})
+
     const [addPlaceMutation] = useMutation<addPlace, addPlaceVariables>(ADD_PLACE, {
         variables: {
             name,
@@ -28,6 +36,9 @@ const AddPlaceContainer = () => {
             }
         }
     })
+    if (state !== undefined) {
+        console.log(state)
+    }
 
     return (
         <AddPlacePresenter

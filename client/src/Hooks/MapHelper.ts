@@ -22,7 +22,6 @@ export const getAddress = async (coords: ICoords) => {
     mapAPI.apiKey || ""
   }`;
   const { status, data } = await axios.get(url);
-  console.log(status, data);
   if (status) {
     const { results } = data;
     const place = results[0];
@@ -35,17 +34,14 @@ export const getAddress = async (coords: ICoords) => {
 
 export const getGeoCode = async (address: string) => {
   const encodedAddress = address.replace(" ", "+");
-  console.log(encodedAddress);
   const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodedAddress}&key=${
     mapAPI.apiKey || ""
   }`;
   const { status, data } = await axios.get(url);
-  console.log(status, data);
   if (status) {
     const { results } = data;
     const place = results[0];
     const { location } = place.geometry;
-
     return location;
   } else {
     toast.error(data.error_message);
