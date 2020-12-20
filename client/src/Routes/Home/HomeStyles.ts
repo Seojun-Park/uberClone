@@ -1,6 +1,11 @@
 import styled from "styled-components";
 
-export const Container = styled.div``;
+export const Container = styled.div`
+  /* position: absolute;
+  z-index: 2;
+  height: 100vh;
+  width: 100vh; */
+`;
 
 export const LoadingContainer = styled.div``;
 
@@ -20,4 +25,13 @@ export const Button = styled.button`
   transform: rotate(90deg);
   z-index: 2;
   background-color: transparent;
+`;
+
+export const Map = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
 `;

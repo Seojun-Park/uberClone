@@ -4,12 +4,13 @@ import Sidebar from 'react-sidebar'
 import * as S from './HomeStyles'
 
 type HomeProps = {
+    mapRef: any;
     isMenuOpen: boolean
     toggleMenu: any
     user: any
 }
 
-const HomePresenter: FC<HomeProps> = ({ isMenuOpen, toggleMenu, user }) => {
+const HomePresenter: FC<HomeProps> = ({ isMenuOpen, toggleMenu, user, mapRef }) => {
 
     return (
         <>
@@ -22,15 +23,15 @@ const HomePresenter: FC<HomeProps> = ({ isMenuOpen, toggleMenu, user }) => {
                         styles={{
                             sidebar: {
                                 backgroundColor: "white",
-                                width: "80%",
+                                width: "70%",
                                 zIndex: "10"
                             }
                         }}
                     >
                         <S.Button onClick={() => toggleMenu()}>|||</S.Button>
                     </Sidebar>
-            Home
-        </S.Container > : "loading..."}
+                </S.Container > : "loading..."}
+            <S.Map ref={mapRef} />
         </>
     )
 }
