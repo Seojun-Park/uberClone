@@ -78,14 +78,7 @@ const FindAddressContainer: React.FC<IProps> = ({ history }) => {
         if (result) {
             setAddress(result)
         }
-        history.push({
-            pathname: "/addPlace",
-            state: {
-                address: address,
-                lat: coords.lat,
-                lng: coords.lng
-            }
-        })
+
     }
 
     const submitFn = async () => {
