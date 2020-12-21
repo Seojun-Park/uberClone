@@ -19,7 +19,7 @@ const LoggedInRoutes = () => (
     <Route path="/verifyEmail" component={VerifyEmail} />
     <Route path="/addPlace" component={AddPlace} />
     <Route path="/places" component={Places} />
-    <Route path="/ride" component={Ride} />
+    <Route path="/ride/:number" component={Ride} />
     <Route path="/settings" component={Settings} />
     <Route path="/editAccount/:email" component={EditAccount} />
     <Route path="/FindAddress" component={FindAddress} />

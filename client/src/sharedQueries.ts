@@ -43,3 +43,12 @@ export const GET_PLACES = gql`
     }
   }
 `;
+
+export const UPDATE_RIDE_STATUS = gql`
+  mutation UpdateRideStatus($rideId: Int!, $status: StatusOptions!) {
+    UpdateRideStatus(rideId: $rideId, status: $status) {
+      ok
+      err
+    }
+  }
+`;

@@ -2,16 +2,27 @@ import React, { FC } from 'react'
 import Menu from '../Menu'
 import Sidebar from 'react-sidebar'
 import * as S from './HomeStyles'
+import { ICoords } from '../../Hooks/MapHelper'
 
 type HomeProps = {
-    mapRef: any;
+    map?: google.maps.Map<Element>;
+    userMarker?: google.maps.Marker
+    coords: ICoords;
+    user?: any;
     isMenuOpen: boolean
     toggleMenu: any
-    user: any
+    setMap: React.Dispatch<React.SetStateAction<google.maps.Map<Element> | undefined>>
 }
 
-const HomePresenter: FC<HomeProps> = ({ isMenuOpen, toggleMenu, user, mapRef }) => {
-
+const HomePresenter: FC<HomeProps> = ({
+    isMenuOpen,
+    toggleMenu,
+    user,
+    map,
+    userMarker,
+    setMap
+}) => {
+    console.log(user)
     return (
         <>
             {user ?
@@ -30,8 +41,10 @@ const HomePresenter: FC<HomeProps> = ({ isMenuOpen, toggleMenu, user, mapRef }) 
                     >
                         <S.Button onClick={() => toggleMenu()}>|||</S.Button>
                     </Sidebar>
+                    {user!.isDriving ? (
+                        "drivier"
+                    ) : "passenger"}
                 </S.Container > : "loading..."}
-            <S.Map ref={mapRef} />
         </>
     )
 }

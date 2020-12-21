@@ -17,6 +17,102 @@ export interface isLoggedIn {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: RequestRide
+// ====================================================
+
+export interface RequestRide_RequestRide_ride {
+  __typename: "Ride";
+  id: number;
+}
+
+export interface RequestRide_RequestRide {
+  __typename: "RequestRideResponse";
+  ok: boolean;
+  err: string | null;
+  ride: RequestRide_RequestRide_ride | null;
+}
+
+export interface RequestRide {
+  RequestRide: RequestRide_RequestRide;
+}
+
+export interface RequestRideVariables {
+  pickUpAddress: string;
+  pickUpLat: number;
+  pickUpLng: number;
+  dropOffAddress: string;
+  dropOffLat: number;
+  dropOffLng: number;
+  price: number;
+  distance: string;
+  duration: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: GetNearbyDrivers
+// ====================================================
+
+export interface GetNearbyDrivers_GetNearbyDrivers_drivers {
+  __typename: "User";
+  id: number;
+  fullName: string | null;
+  profilePhoto: string | null;
+  lastLat: number | null;
+  lastLng: number | null;
+}
+
+export interface GetNearbyDrivers_GetNearbyDrivers {
+  __typename: "GetNearbyDriversResponse";
+  ok: boolean;
+  err: string | null;
+  drivers: (GetNearbyDrivers_GetNearbyDrivers_drivers | null)[] | null;
+}
+
+export interface GetNearbyDrivers {
+  GetNearbyDrivers: GetNearbyDrivers_GetNearbyDrivers;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: GetRide
+// ====================================================
+
+export interface GetRide_GetRide_ride {
+  __typename: "Ride";
+  id: number;
+  status: string;
+}
+
+export interface GetRide_GetRide {
+  __typename: "GetRideResponse";
+  ok: boolean;
+  err: string | null;
+  ride: GetRide_GetRide_ride | null;
+}
+
+export interface GetRide {
+  GetRide: GetRide_GetRide;
+}
+
+export interface GetRideVariables {
+  rideId: number;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: toggleFav
 // ====================================================
 
@@ -383,9 +479,41 @@ export interface getPlaces {
 // @generated
 // This file was automatically generated and should not be edited.
 
+// ====================================================
+// GraphQL mutation operation: UpdateRideStatus
+// ====================================================
+
+export interface UpdateRideStatus_UpdateRideStatus {
+  __typename: "UpdateRideStatusResponse";
+  ok: boolean;
+  err: string | null;
+}
+
+export interface UpdateRideStatus {
+  UpdateRideStatus: UpdateRideStatus_UpdateRideStatus;
+}
+
+export interface UpdateRideStatusVariables {
+  rideId: number;
+  status: StatusOptions;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
 //==============================================================
 // START Enums and Input Objects
 //==============================================================
+
+export enum StatusOptions {
+  ACCEPTED = "ACCEPTED",
+  CANCELED = "CANCELED",
+  FINISHED = "FINISHED",
+  ONROUTE = "ONROUTE",
+  REQUESTING = "REQUESTING",
+}
 
 //==============================================================
 // END Enums and Input Objects
