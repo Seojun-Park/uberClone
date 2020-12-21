@@ -22,6 +22,8 @@ type User {
   ridesAsDriver: [Ride]
   chatsAsPassenger: [Chat]
   chatsAsDriver: [Chat]
+  currentRide: Ride
+  currentRideId: Int
   createdAt: String!
   updatedAt: String
 }

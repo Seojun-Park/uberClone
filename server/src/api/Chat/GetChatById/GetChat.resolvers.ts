@@ -1,13 +1,20 @@
 import { Resolvers } from "../../../types/resolvers";
-import { GetChatQueryArgs, GetChatResponse } from "../../../types/graph";
+import {
+  GetChatByIdQueryArgs,
+  GetChatByIdResponse
+} from "../../../types/graph";
 import authResolver from "../../../utils/authResolver";
 import User from "../../../entities/User";
 import Chat from "../../../entities/Chat";
 
 const resolvers: Resolvers = {
   Query: {
-    GetChat: authResolver(
-      async (_, args: GetChatQueryArgs, { req }): Promise<GetChatResponse> => {
+    GetChatById: authResolver(
+      async (
+        _,
+        args: GetChatByIdQueryArgs,
+        { req }
+      ): Promise<GetChatByIdResponse> => {
         const user: User = req.user;
         try {
           const chat = await Chat.findOne(

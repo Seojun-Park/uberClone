@@ -1,11 +1,11 @@
-type GetChatResponse {
+type GetChatByIdResponse {
   ok: Boolean!
   err: String
   chat: Chat
 }
 
 type Query {
-  GetChat(chatId: Int!): GetChatResponse!
+  GetChatById(chatId: Int!): GetChatByIdResponse!
   GetMyPlace: GetMyPlaceResponse!
   GetNearbyRide: GetNearbyRideResponse!
   GetRide(rideId: Int!): GetRideResponse!
@@ -33,7 +33,7 @@ type Mutation {
   AddPlace(name: String!, lat: Float!, lng: Float!, address: String!, isFav: Boolean!): AddPlaceResponse!
   DeletePlace(placeId: Int!): DeletePlaceResponse!
   EditPlace(placeId: Int!, name: String, isFav: Boolean): EditPlaceResponse!
-  RequestRide(pickUpAddress: String!, pickUpLat: Float!, pickUpLng: Float!, dropOffAddress: String!, dropOffLat: Float!, dropOffLng: Float!, price: Float!, distance: String!, duration: String!): RequestRideResponse!
+  RequestRide(pickUpAddress: String!, pickUpLat: Float!, pickUpLng: Float!, dropOffAddress: String!, dropOffLat: Float!, dropOffLng: Float!, duration: String!, distance: String!, price: Float!, rideImage: String!): RequestRideResponse!
   UpdateRideStatus(rideId: Int!, status: StatusOptions!): UpdateRideStatusResponse!
   CompleteEmailVerification(key: String!): CompleteEmailVerificationResponse!
   ValidateEmail(key: String!): ValidateEmailResponse!
@@ -51,11 +51,11 @@ type Mutation {
 type Chat {
   id: Int!
   messages: [Message]
-  passengerId: Int!
-  passenger: User!
-  driverId: Int!
-  driver: User!
-  ride: Ride!
+  passengerId: Int
+  passenger: User
+  driverId: Int
+  driver: User
+  ride: Ride
   rideId: Int
   createdAt: String!
   updatedAt: String
@@ -132,15 +132,17 @@ type Ride {
   dropOffAddress: String!
   dropOffLat: Float!
   dropOffLng: Float!
-  price: Float!
-  distance: String!
-  duration: String!
+  price: Float
+  distance: String
+  duration: String
   driverId: Int
-  driver: User!
-  passengerId: Int!
-  passenger: User!
+  driver: User
+  passengerId: Int
+  passenger: User
   chat: Chat
   chatId: Int
+  rideImage: String
+  currentUsers: [User]
   createdAt: String!
   updatedAt: String
 }
@@ -244,6 +246,8 @@ type User {
   ridesAsDriver: [Ride]
   chatsAsPassenger: [Chat]
   chatsAsDriver: [Chat]
+  currentRide: Ride
+  currentRideId: Int
   createdAt: String!
   updatedAt: String
 }

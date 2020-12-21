@@ -1,0 +1,9 @@
+type GetChatByIdResponse {
+  ok: Boolean!
+  err: String
+  chat: Chat
+}
+
+type Query {
+  GetChatById(chatId: Int!): GetChatByIdResponse!
+}

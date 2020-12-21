@@ -7,6 +7,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn
@@ -89,6 +90,12 @@ class User extends BaseEntity {
 
   @OneToMany((type) => Place, (place) => place.user)
   places: Place[];
+
+  @ManyToOne((type) => Ride, ride=>ride.currentUsers)
+  currentRide:Ride
+
+  @Column({nullable: true})
+  currentRideId: number;
 
   @CreateDateColumn() createdAt: string;
 

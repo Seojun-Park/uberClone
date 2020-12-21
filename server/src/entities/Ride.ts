@@ -5,6 +5,7 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn
@@ -51,6 +52,12 @@ class Ride extends BaseEntity {
   @Column({ type: "text" })
   duration: string;
 
+  @Column({
+    type: "text",
+    default: "https://image.flaticon.com/icons/png/512/89/89131.png"
+  })
+  rideImage: string;
+
   @Column({ nullable: true })
   passengerId: number;
 
@@ -63,12 +70,15 @@ class Ride extends BaseEntity {
   @ManyToOne((type) => User, (user) => user.ridesAsDriver, { nullable: true })
   driver: User;
 
-  @Column({ nullable: true })
-  chatId: number;
+  @OneToMany((type) => User, (user) => user.currentRide)
+  currentUsers: User[];
 
   @OneToOne((type) => Chat, (chat) => chat.ride, { nullable: true })
   @JoinColumn()
   chat: Chat;
+
+  @Column({ nullable: true })
+  chatId: number;
 
   @CreateDateColumn() createdAt: string;
 

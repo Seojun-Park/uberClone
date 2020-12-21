@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import styled from 'styled-components'
 
 
-const StyledMap = styled.div<IProps>`
+const StyledMap = styled.div<IStyle>`
 	position: ${props => (props.isHome ? "absolute" : "fixed")};
 	top: 0;
 	left: 0;
@@ -14,6 +14,10 @@ const StyledMap = styled.div<IProps>`
 interface IProps {
     mapRef: any;
     isHome: boolean;
+}
+
+interface IStyle {
+    isHome: boolean
 }
 
 const MapPresenter: FC<IProps> = ({ mapRef, isHome }) => {

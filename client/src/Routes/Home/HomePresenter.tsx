@@ -44,6 +44,7 @@ const HomePresenter: FC<HomeProps> = ({
                     {user!.isDriving ? (
                         "drivier"
                     ) : "passenger"}
+                    
                 </S.Container > : "loading..."}
         </>
     )

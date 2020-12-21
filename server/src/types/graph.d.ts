@@ -1,8 +1,8 @@
-export const typeDefs = ["type GetChatResponse {\n  ok: Boolean!\n  err: String\n  chat: Chat\n}\n\ntype Query {\n  GetChat(chatId: Int!): GetChatResponse!\n  GetMyPlace: GetMyPlaceResponse!\n  GetNearbyRide: GetNearbyRideResponse!\n  GetRide(rideId: Int!): GetRideResponse!\n  GetMyProfile: GetMyProfileResponse!\n  GetNearbyDrivers: GetNearbyDriversResponse!\n  Me: MeResponse!\n  GetValidation(email: String!): GetValidationResponse!\n}\n\ntype Subscription {\n  MessageSubscription: Message\n  NearbyRideSubscription: Ride\n  RideStatusSubscription: Ride\n  DriversSubscription: User\n}\n\ntype SendMessageResponse {\n  ok: Boolean!\n  err: String\n  message: Message\n}\n\ntype Mutation {\n  SendMessage(text: String!, chatId: Int!): SendMessageResponse!\n  AddPlace(name: String!, lat: Float!, lng: Float!, address: String!, isFav: Boolean!): AddPlaceResponse!\n  DeletePlace(placeId: Int!): DeletePlaceResponse!\n  EditPlace(placeId: Int!, name: String, isFav: Boolean): EditPlaceResponse!\n  RequestRide(pickUpAddress: String!, pickUpLat: Float!, pickUpLng: Float!, dropOffAddress: String!, dropOffLat: Float!, dropOffLng: Float!, price: Float!, distance: String!, duration: String!): RequestRideResponse!\n  UpdateRideStatus(rideId: Int!, status: StatusOptions!): UpdateRideStatusResponse!\n  CompleteEmailVerification(key: String!): CompleteEmailVerificationResponse!\n  ValidateEmail(key: String!): ValidateEmailResponse!\n  CompletePhoneVerification(phoneNumber: String!, key: String!): CompletePhoneVerificationResponse!\n  EmailSignIn(email: String!, password: String!): EmailSignInResponse!\n  EmailSignUp(firstName: String!, lastName: String!, email: String!, password: String!, phoneNumber: String!, profilePhoto: String): EmailSignUpResponse!\n  FacebookConnect(firstName: String!, lastName: String!, email: String, fbId: String!): FacebookConnectResponse!\n  ReportMovement(lastOrientation: Float, lastLat: Float, lastLng: Float): ReportMovementResponse!\n  RequestEmailVerification: RequestEmailVerificationResponse!\n  StartPhoneVerification(phoneNumber: String!): StartPhoneVerificationResponse!\n  ToggleDrivingMode: ToggleDrivingModeResponse!\n  UpdateMyProfile(firstName: String, password: String, lastName: String, profilePhoto: String, email: String): UpdateMyProfileResponse!\n}\n\ntype Chat {\n  id: Int!\n  messages: [Message]\n  passengerId: Int!\n  passenger: User!\n  driverId: Int!\n  driver: User!\n  ride: Ride!\n  rideId: Int\n  createdAt: String!\n  updatedAt: String\n}\n\ntype Message {\n  id: Int!\n  text: String!\n  chat: Chat!\n  chatId: Int\n  user: User!\n  createdAt: String!\n  updatedAt: String\n}\n\ntype AddPlaceResponse {\n  ok: Boolean!\n  err: String\n}\n\ntype DeletePlaceResponse {\n  ok: Boolean!\n  err: String\n}\n\ntype EditPlaceResponse {\n  ok: Boolean!\n  err: String\n}\n\ntype GetMyPlaceResponse {\n  ok: Boolean!\n  err: String\n  places: [Place]\n}\n\ntype Place {\n  id: Int!\n  name: String!\n  lat: Float!\n  lng: Float!\n  address: String!\n  isFav: Boolean!\n  userId: Int!\n  user: User!\n  createdAt: String!\n  updatedAt: String\n}\n\ntype GetNearbyRideResponse {\n  ok: Boolean!\n  err: String\n  ride: Ride\n}\n\ntype GetRideResponse {\n  ok: Boolean!\n  err: String\n  ride: Ride\n}\n\ntype RequestRideResponse {\n  ok: Boolean!\n  err: String\n  ride: Ride\n}\n\ntype Ride {\n  id: Int!\n  status: String!\n  pickUpAddress: String!\n  pickUpLat: Float!\n  pickUpLng: Float!\n  dropOffAddress: String!\n  dropOffLat: Float!\n  dropOffLng: Float!\n  price: Float!\n  distance: String!\n  duration: String!\n  driverId: Int\n  driver: User!\n  passengerId: Int!\n  passenger: User!\n  chat: Chat\n  chatId: Int\n  createdAt: String!\n  updatedAt: String\n}\n\ntype UpdateRideStatusResponse {\n  ok: Boolean!\n  err: String\n}\n\nenum StatusOptions {\n  ACCEPTED\n  FINISHED\n  CANCELED\n  REQUESTING\n  ONROUTE\n}\n\ntype CompleteEmailVerificationResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype ValidateEmailResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype CompletePhoneVerificationResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype EmailSignInResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype EmailSignUpResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype FacebookConnectResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype GetMyProfileResponse {\n  ok: Boolean!\n  error: String\n  user: User\n}\n\ntype GetNearbyDriversResponse {\n  ok: Boolean!\n  err: String\n  drivers: [User]\n}\n\ntype MeResponse {\n  ok: Boolean!\n  err: String\n  user: User\n}\n\ntype ReportMovementResponse {\n  ok: Boolean!\n  err: String\n}\n\ntype RequestEmailVerificationResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype User {\n  id: Int!\n  email: String\n  verifiedEmail: Boolean!\n  firstName: String!\n  lastName: String!\n  password: String\n  phoneNumber: String\n  verifiedPhoneNumber: Boolean!\n  profilePhoto: String\n  fullName: String\n  isDriving: Boolean!\n  isRiding: Boolean!\n  isTaken: Boolean!\n  lastLng: Float\n  lastLat: Float\n  lastOrientation: Float\n  fbId: String\n  places: [Place]\n  messages: [Message]\n  ridesAsPassenger: [Ride]\n  ridesAsDriver: [Ride]\n  chatsAsPassenger: [Chat]\n  chatsAsDriver: [Chat]\n  createdAt: String!\n  updatedAt: String\n}\n\ntype StartPhoneVerificationResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype ToggleDrivingModeResponse {\n  ok: Boolean!\n  err: String\n}\n\ntype UpdateMyProfileResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype GetValidationResponse {\n  ok: Boolean!\n  error: String\n  verification: Verification\n}\n\ntype Verification {\n  id: Int!\n  target: String!\n  payload: String!\n  key: String!\n  verified: Boolean!\n  createdAt: String!\n  updatedAt: String\n}\n"];
+export const typeDefs = ["type GetChatByIdResponse {\n  ok: Boolean!\n  err: String\n  chat: Chat\n}\n\ntype Query {\n  GetChatById(chatId: Int!): GetChatByIdResponse!\n  GetMyPlace: GetMyPlaceResponse!\n  GetNearbyRide: GetNearbyRideResponse!\n  GetRide(rideId: Int!): GetRideResponse!\n  GetMyProfile: GetMyProfileResponse!\n  GetNearbyDrivers: GetNearbyDriversResponse!\n  Me: MeResponse!\n  GetValidation(email: String!): GetValidationResponse!\n}\n\ntype Subscription {\n  MessageSubscription: Message\n  NearbyRideSubscription: Ride\n  RideStatusSubscription: Ride\n  DriversSubscription: User\n}\n\ntype SendMessageResponse {\n  ok: Boolean!\n  err: String\n  message: Message\n}\n\ntype Mutation {\n  SendMessage(text: String!, chatId: Int!): SendMessageResponse!\n  AddPlace(name: String!, lat: Float!, lng: Float!, address: String!, isFav: Boolean!): AddPlaceResponse!\n  DeletePlace(placeId: Int!): DeletePlaceResponse!\n  EditPlace(placeId: Int!, name: String, isFav: Boolean): EditPlaceResponse!\n  RequestRide(pickUpAddress: String!, pickUpLat: Float!, pickUpLng: Float!, dropOffAddress: String!, dropOffLat: Float!, dropOffLng: Float!, duration: String!, distance: String!, price: Float!, rideImage: String!): RequestRideResponse!\n  UpdateRideStatus(rideId: Int!, status: StatusOptions!): UpdateRideStatusResponse!\n  CompleteEmailVerification(key: String!): CompleteEmailVerificationResponse!\n  ValidateEmail(key: String!): ValidateEmailResponse!\n  CompletePhoneVerification(phoneNumber: String!, key: String!): CompletePhoneVerificationResponse!\n  EmailSignIn(email: String!, password: String!): EmailSignInResponse!\n  EmailSignUp(firstName: String!, lastName: String!, email: String!, password: String!, phoneNumber: String!, profilePhoto: String): EmailSignUpResponse!\n  FacebookConnect(firstName: String!, lastName: String!, email: String, fbId: String!): FacebookConnectResponse!\n  ReportMovement(lastOrientation: Float, lastLat: Float, lastLng: Float): ReportMovementResponse!\n  RequestEmailVerification: RequestEmailVerificationResponse!\n  StartPhoneVerification(phoneNumber: String!): StartPhoneVerificationResponse!\n  ToggleDrivingMode: ToggleDrivingModeResponse!\n  UpdateMyProfile(firstName: String, password: String, lastName: String, profilePhoto: String, email: String): UpdateMyProfileResponse!\n}\n\ntype Chat {\n  id: Int!\n  messages: [Message]\n  passengerId: Int\n  passenger: User\n  driverId: Int\n  driver: User\n  ride: Ride\n  rideId: Int\n  createdAt: String!\n  updatedAt: String\n}\n\ntype Message {\n  id: Int!\n  text: String!\n  chat: Chat!\n  chatId: Int\n  user: User!\n  createdAt: String!\n  updatedAt: String\n}\n\ntype AddPlaceResponse {\n  ok: Boolean!\n  err: String\n}\n\ntype DeletePlaceResponse {\n  ok: Boolean!\n  err: String\n}\n\ntype EditPlaceResponse {\n  ok: Boolean!\n  err: String\n}\n\ntype GetMyPlaceResponse {\n  ok: Boolean!\n  err: String\n  places: [Place]\n}\n\ntype Place {\n  id: Int!\n  name: String!\n  lat: Float!\n  lng: Float!\n  address: String!\n  isFav: Boolean!\n  userId: Int!\n  user: User!\n  createdAt: String!\n  updatedAt: String\n}\n\ntype GetNearbyRideResponse {\n  ok: Boolean!\n  err: String\n  ride: Ride\n}\n\ntype GetRideResponse {\n  ok: Boolean!\n  err: String\n  ride: Ride\n}\n\ntype RequestRideResponse {\n  ok: Boolean!\n  err: String\n  ride: Ride\n}\n\ntype Ride {\n  id: Int!\n  status: String!\n  pickUpAddress: String!\n  pickUpLat: Float!\n  pickUpLng: Float!\n  dropOffAddress: String!\n  dropOffLat: Float!\n  dropOffLng: Float!\n  price: Float\n  distance: String\n  duration: String\n  driverId: Int\n  driver: User\n  passengerId: Int\n  passenger: User\n  chat: Chat\n  chatId: Int\n  rideImage: String\n  currentUsers: [User]\n  createdAt: String!\n  updatedAt: String\n}\n\ntype UpdateRideStatusResponse {\n  ok: Boolean!\n  err: String\n}\n\nenum StatusOptions {\n  ACCEPTED\n  FINISHED\n  CANCELED\n  REQUESTING\n  ONROUTE\n}\n\ntype CompleteEmailVerificationResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype ValidateEmailResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype CompletePhoneVerificationResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype EmailSignInResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype EmailSignUpResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype FacebookConnectResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype GetMyProfileResponse {\n  ok: Boolean!\n  error: String\n  user: User\n}\n\ntype GetNearbyDriversResponse {\n  ok: Boolean!\n  err: String\n  drivers: [User]\n}\n\ntype MeResponse {\n  ok: Boolean!\n  err: String\n  user: User\n}\n\ntype ReportMovementResponse {\n  ok: Boolean!\n  err: String\n}\n\ntype RequestEmailVerificationResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype User {\n  id: Int!\n  email: String\n  verifiedEmail: Boolean!\n  firstName: String!\n  lastName: String!\n  password: String\n  phoneNumber: String\n  verifiedPhoneNumber: Boolean!\n  profilePhoto: String\n  fullName: String\n  isDriving: Boolean!\n  isRiding: Boolean!\n  isTaken: Boolean!\n  lastLng: Float\n  lastLat: Float\n  lastOrientation: Float\n  fbId: String\n  places: [Place]\n  messages: [Message]\n  ridesAsPassenger: [Ride]\n  ridesAsDriver: [Ride]\n  chatsAsPassenger: [Chat]\n  chatsAsDriver: [Chat]\n  currentRide: Ride\n  currentRideId: Int\n  createdAt: String!\n  updatedAt: String\n}\n\ntype StartPhoneVerificationResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype ToggleDrivingModeResponse {\n  ok: Boolean!\n  err: String\n}\n\ntype UpdateMyProfileResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype GetValidationResponse {\n  ok: Boolean!\n  error: String\n  verification: Verification\n}\n\ntype Verification {\n  id: Int!\n  target: String!\n  payload: String!\n  key: String!\n  verified: Boolean!\n  createdAt: String!\n  updatedAt: String\n}\n"];
 /* tslint:disable */
 
 export interface Query {
-  GetChat: GetChatResponse;
+  GetChatById: GetChatByIdResponse;
   GetMyPlace: GetMyPlaceResponse;
   GetNearbyRide: GetNearbyRideResponse;
   GetRide: GetRideResponse;
@@ -12,7 +12,7 @@ export interface Query {
   GetValidation: GetValidationResponse;
 }
 
-export interface GetChatQueryArgs {
+export interface GetChatByIdQueryArgs {
   chatId: number;
 }
 
@@ -24,7 +24,7 @@ export interface GetValidationQueryArgs {
   email: string;
 }
 
-export interface GetChatResponse {
+export interface GetChatByIdResponse {
   ok: boolean;
   err: string | null;
   chat: Chat | null;
@@ -33,11 +33,11 @@ export interface GetChatResponse {
 export interface Chat {
   id: number;
   messages: Array<Message> | null;
-  passengerId: number;
-  passenger: User;
-  driverId: number;
-  driver: User;
-  ride: Ride;
+  passengerId: number | null;
+  passenger: User | null;
+  driverId: number | null;
+  driver: User | null;
+  ride: Ride | null;
   rideId: number | null;
   createdAt: string;
   updatedAt: string | null;
@@ -77,6 +77,8 @@ export interface User {
   ridesAsDriver: Array<Ride> | null;
   chatsAsPassenger: Array<Chat> | null;
   chatsAsDriver: Array<Chat> | null;
+  currentRide: Ride | null;
+  currentRideId: number | null;
   createdAt: string;
   updatedAt: string | null;
 }
@@ -103,15 +105,17 @@ export interface Ride {
   dropOffAddress: string;
   dropOffLat: number;
   dropOffLng: number;
-  price: number;
-  distance: string;
-  duration: string;
+  price: number | null;
+  distance: string | null;
+  duration: string | null;
   driverId: number | null;
-  driver: User;
-  passengerId: number;
-  passenger: User;
+  driver: User | null;
+  passengerId: number | null;
+  passenger: User | null;
   chat: Chat | null;
   chatId: number | null;
+  rideImage: string | null;
+  currentUsers: Array<User> | null;
   createdAt: string;
   updatedAt: string | null;
 }
@@ -218,9 +222,10 @@ export interface RequestRideMutationArgs {
   dropOffAddress: string;
   dropOffLat: number;
   dropOffLng: number;
-  price: number;
-  distance: string;
   duration: string;
+  distance: string;
+  price: number;
+  rideImage: string;
 }
 
 export interface UpdateRideStatusMutationArgs {

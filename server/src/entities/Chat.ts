@@ -3,6 +3,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
   ManyToOne,
   OneToMany,
   OneToOne,
@@ -25,6 +26,7 @@ class Chat extends BaseEntity {
   rideId: number;
 
   @OneToOne((type) => Ride, (ride) => ride.chat)
+  @JoinColumn()
   ride: Ride;
 
   @Column({ nullable: true })

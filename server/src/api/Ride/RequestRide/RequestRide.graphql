@@ -12,8 +12,9 @@ type Mutation {
     dropOffAddress: String!
     dropOffLat: Float!
     dropOffLng: Float!
-    price: Float!
-    distance: String!
     duration: String!
+    distance: String!
+    price: Float!
+    rideImage: String!
   ): RequestRideResponse!
 }
