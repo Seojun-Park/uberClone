@@ -9,7 +9,7 @@ const resolvers: Resolvers = {
   Query: {
     GetNearbyDrivers: authResolver(
       async (_, __, { req }): Promise<GetNearbyDriversResponse> => {
-        const user: User = req.user;
+        const user: User = req.user
         const { lastLat, lastLng } = user;
         try {
           const drivers: User[] = await getRepository(User).find({
