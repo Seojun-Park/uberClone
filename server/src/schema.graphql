@@ -12,6 +12,7 @@ type Query {
   GetMyProfile: GetMyProfileResponse!
   GetNearbyDrivers: GetNearbyDriversResponse!
   Me: MeResponse!
+  users: [User]
   GetValidation(email: String!): GetValidationResponse!
 }
 
