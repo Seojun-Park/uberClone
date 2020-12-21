@@ -82,7 +82,6 @@ const HomeContainer: FC<IProps> = ({ history }): any => {
 
 
     const toggleMenu = (): any => !isMenuOpen ? setIsMenuOpen(true) : setIsMenuOpen(false)
-    console.log(coords)
 
     if (loading) {
         return (
@@ -104,8 +103,6 @@ const HomeContainer: FC<IProps> = ({ history }): any => {
                     user={user}
                     setMap={setMap}
                 />
-                {/* {coords.lat === 0 && coords.lng === 0 ? "Map loading..." : */}
-                {/* } */}
             </>
         )
     }

@@ -58,7 +58,6 @@ export const Button = styled.button`
 `;
 
 export const SubmitButton = styled.div`
-  width: 100%;
   background-color: black;
   color: white;
   text-transform: uppercase;

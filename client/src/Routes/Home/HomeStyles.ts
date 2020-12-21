@@ -1,11 +1,6 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
-  /* position: absolute;
-  z-index: 2;
-  height: 100vh;
-  width: 100vh; */
-`;
+export const Container = styled.div``;
 
 export const LoadingContainer = styled.div``;
 

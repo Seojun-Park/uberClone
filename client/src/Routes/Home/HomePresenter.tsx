@@ -1,8 +1,10 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import Menu from '../Menu'
 import Sidebar from 'react-sidebar'
 import * as S from './HomeStyles'
 import { ICoords } from '../../Hooks/MapHelper'
+import PassengerHome from '../../Components/PassengerHome'
+import Map from '../../Components/Map'
 
 type HomeProps = {
     map?: google.maps.Map<Element>;
@@ -17,12 +19,12 @@ type HomeProps = {
 const HomePresenter: FC<HomeProps> = ({
     isMenuOpen,
     toggleMenu,
+    coords,
     user,
     map,
     userMarker,
     setMap
 }) => {
-    console.log(user)
     return (
         <>
             {user ?
@@ -43,8 +45,13 @@ const HomePresenter: FC<HomeProps> = ({
                     </Sidebar>
                     {user!.isDriving ? (
                         "drivier"
-                    ) : "passenger"}
-                    
+                    ) : <PassengerHome
+                            map={map}
+                            marker={userMarker}
+                            coords={coords}
+                            user={user}
+                        />}
+                    <Map setMap={setMap} isHome={true} />
                 </S.Container > : "loading..."}
         </>
     )

@@ -10,9 +10,10 @@ import PassengerHomePresenter from './PassengerHomePresenter'
 import { REQUEST_RIDE, GET_NEARBY_DRIVERS, GET_RIDE } from './PassengerHomeQueries';
 
 interface IProps extends RouteComponentProps {
-    map: google.maps.Map<Element>;
+    map?: google.maps.Map<Element>;
     marker?: google.maps.Marker;
-    coords: ICoords
+    coords: ICoords;
+    user: any
 }
 
 export interface IRideVariables {
@@ -22,7 +23,13 @@ export interface IRideVariables {
     rideImage: string;
 }
 
-const PassengerHomeContaier: FC<IProps> = ({ map, marker, coords, history }) => {
+const PassengerHomeContaier: FC<IProps> = ({
+    map,
+    marker,
+    coords,
+    history,
+    user
+}) => {
     const [placeMarker, setPlaceMarker] = useState<google.maps.Marker>();
     const [driverMarker, setDriverMarker] = useState<google.maps.Marker[]>([])
     const [directionRender, setDirectionRender] = useState<google.maps.DirectionsRenderer>()
@@ -37,7 +44,6 @@ const PassengerHomeContaier: FC<IProps> = ({ map, marker, coords, history }) => 
         rideImage: ""
     })
     const [placeCoords, setPlaceCoords] = useState<ICoords>({ lat: 0, lng: 0 });
-    const [addMode, setAddMode] = useState(false);
     const [rideId, setRideId] = useState<number>();
     const [fetchRideStatus, { stopPolling }] = useLazyQuery<GetRide, GetRideVariables>(GET_RIDE, {
         fetchPolicy: "cache-and-network",
@@ -45,12 +51,12 @@ const PassengerHomeContaier: FC<IProps> = ({ map, marker, coords, history }) => 
             const { ok, err, ride } = GetRide
             if (ok && ride) {
                 if (ride.status === "ACCEPTED") {
-                    stopPolling();
+                    // stopPolling();
                     history.push(`/ride/${rideId}`)
                 }
             } else {
                 if (err === "Ride doesn't exist") {
-                    stopPolling();
+                    // stopPolling();
                 } else {
                     toast.error(err)
                 }
@@ -195,12 +201,6 @@ const PassengerHomeContaier: FC<IProps> = ({ map, marker, coords, history }) => 
 
     const onClickHandlerByAddMode = async () => {
         setReqButton(false);
-        if (addMode) {
-            await findAddressByGeoCode();
-            setAddMode(false);
-        } else {
-            setAddMode(true)
-        }
     }
 
 
@@ -211,7 +211,6 @@ const PassengerHomeContaier: FC<IProps> = ({ map, marker, coords, history }) => 
             onInputChange={onChangeAddress}
             onClickHandlerByAddMode={onClickHandlerByAddMode}
             findAddressByInput={findAddressByInput}
-            addMode={addMode}
             reqButton={reqButton}
             requestRideMutation={requestRideMutation}
             rideRequest={rideRequest}
@@ -221,6 +220,7 @@ const PassengerHomeContaier: FC<IProps> = ({ map, marker, coords, history }) => 
             stopPolling={stopPolling}
             cancelRideMutation={cancelRideMutation}
             setRideVariables={setRideVariables}
+            user={user}
         />
     )
 }
