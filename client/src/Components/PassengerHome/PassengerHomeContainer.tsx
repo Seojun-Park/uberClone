@@ -5,7 +5,15 @@ import { toast } from 'react-toastify';
 import { generateMarker, getAddress, getGeoCode, ICoords, renderPath } from '../../Hooks/MapHelper';
 import useInput from '../../Hooks/useInput';
 import { UPDATE_RIDE_STATUS } from '../../sharedQueries';
-import { GetNearbyDrivers, GetRide, GetRideVariables, RequestRide, RequestRideVariables, UpdateRideStatus, UpdateRideStatusVariables } from '../../types/api';
+import {
+    GetNearbyDrivers,
+    GetRide,
+    GetRideVariables,
+    RequestRide,
+    RequestRideVariables,
+    UpdateRideStatus,
+    UpdateRideStatusVariables
+} from '../../types/api';
 import PassengerHomePresenter from './PassengerHomePresenter'
 import { REQUEST_RIDE, GET_NEARBY_DRIVERS, GET_RIDE } from './PassengerHomeQueries';
 
@@ -36,6 +44,7 @@ const PassengerHomeContaier: FC<IProps> = ({
     const [url, setUrl] = useState<string>()
     const [ride, setRide] = useState<any>()
     const [reqButton, setReqButton] = useState(false)
+    const [addMode, setAddMode] = useState(false);
     const [rideRequest, setRideRequest] = useState(false)
     const [pickUpAddress, setPickupAddress] = useState("")
     const [address, onChangeAddress, setAddressInput] = useInput("")
@@ -114,10 +123,12 @@ const PassengerHomeContaier: FC<IProps> = ({
 
     const [requestRideMutation] = useMutation<RequestRide, RequestRideVariables>(REQUEST_RIDE, {
         onCompleted: ({ RequestRide }) => {
+            console.log(RequestRide)
             const { ride } = RequestRide;
             if (ride) {
                 setRideId(ride.id);
                 fetchRideStatus();
+                toast.success("Requested")
             }
             setReqButton(false);
             setRideRequest(true);
@@ -133,7 +144,8 @@ const PassengerHomeContaier: FC<IProps> = ({
         }
     })
 
-    const [cancelRideMutation] = useMutation<UpdateRideStatus, UpdateRideStatusVariables>(UPDATE_RIDE_STATUS, {
+    const [cancelRideMutation] = useMutation<UpdateRideStatus, UpdateRideStatusVariables>(
+        UPDATE_RIDE_STATUS, {
         onCompleted: () => {
             setRideId(undefined);
             setReqButton(false);
@@ -204,6 +216,12 @@ const PassengerHomeContaier: FC<IProps> = ({
 
     const onClickHandlerByAddMode = async () => {
         setReqButton(false);
+        if (addMode) {
+            await findAddressByGeoCode();
+            setAddMode(false)
+        } else {
+            setAddMode(true)
+        }
     }
 
 
@@ -220,6 +238,7 @@ const PassengerHomeContaier: FC<IProps> = ({
             rideVariables={rideVariables}
             pickupAddress={pickUpAddress}
             rideId={rideId}
+            addMode={addMode}
             stopPolling={stopPolling}
             cancelRideMutation={cancelRideMutation}
             setRideVariables={setRideVariables}

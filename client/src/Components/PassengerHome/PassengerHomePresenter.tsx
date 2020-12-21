@@ -1,8 +1,10 @@
 import html2canvas from 'html2canvas'
-import React, { FC, useEffect, useState } from 'react'
-import { toast } from 'react-toastify'
+import React, { FC } from 'react'
 import { storage } from '../../Firebase'
 import { b64toBlob } from '../../Hooks/URItoBlob'
+import { StatusOptions } from '../../types/enums'
+import AddressBar from '../AddressBar'
+import PopUp from '../PopUp'
 import { IRideVariables } from './PassengerHomeContainer'
 import * as S from './PassengerHomeStyles'
 
@@ -23,6 +25,7 @@ interface IProps {
     user: any
     ride: any
     setUrl: any
+    addMode: boolean
 }
 
 const PassengerHomePresenter: FC<IProps> = ({
@@ -41,10 +44,9 @@ const PassengerHomePresenter: FC<IProps> = ({
     setRideVariables,
     user,
     ride,
-    setUrl
+    setUrl,
+    addMode
 }) => {
-    const [blob, setBlob] = useState<any>()
-    const [flag, setFlag] = useState<boolean>(false)
     const onRequestRide = async () => {
         const map = document.getElementById("googleMap");
         if (map) {
@@ -60,15 +62,9 @@ const PassengerHomePresenter: FC<IProps> = ({
             const mimeType = block[0].split(":")[1];// In this case "image/png"
             const realData = block[1].split(",")[1];// For example:  iVBORw0KGgouqw23....
             const canvasBlob = b64toBlob(realData, mimeType);
-            setBlob(canvasBlob);
-        }
-    }
-
-    useEffect(() => {
-        if (blob) {
             let uploadTask = storage
                 .ref(`/${user!.email}/ride/passenger/${rideId}`)
-                .put(blob);
+                .put(canvasBlob);
             uploadTask.on(
                 "state_changed",
                 (snapshot) => { },
@@ -80,28 +76,82 @@ const PassengerHomePresenter: FC<IProps> = ({
                         .getDownloadURL()
                         .then((url) => {
                             setUrl(url)
-                            setFlag(true)
                         })
                 }
             )
         }
-    }, [blob, user, rideId, setUrl])
+        await requestRideMutation();
+    }
 
-    useEffect(() => {
-        if (flag === true) {
-            const data = requestRideMutation();
-            if (data) {
-                toast.success("Ride requested")
-                setFlag(false)
-            }
-        }
-    }, [flag, setFlag, requestRideMutation])
+    // useEffect(() => {
+    //     if (blob) {
+    //         let uploadTask = storage
+    //             .ref(`/${user!.email}/ride/passenger/${rideId}`)
+    //             .put(blob);
+    //         uploadTask.on(
+    //             "state_changed",
+    //             (snapshot) => { },
+    //             (error) => console.log(error),
+    //             () => {
+    //                 storage
+    //                     .ref(`/${user.email}/ride/passenger/`)
+    //                     .child(`${rideId}`)
+    //                     .getDownloadURL()
+    //                     .then((url) => {
+    //                         setUrl(url)
+    //                         setFlag(true)
+    //                     })
+    //             }
+    //         )
+    //     }
+    // }, [blob, user, rideId, setUrl])
+
+    // useEffect(() => {
+    //     if (flag === true) {
+    //         const { data } = requestRideMutation();
+    //         if (data) {
+    //             console.log(data)
+    //             toast.success("Ride requested")
+    //             setFlag(false)
+    //         }
+    //     }
+    // }, [flag, setFlag, requestRideMutation])
 
 
     return (
         <S.Contaier>
+            <S.Form onSubmit={() => findAddressByInput()}>
+                <AddressBar value={address} onChange={onInputChange} />
+            </S.Form>
+            {addMode && (
+                <S.Center>
+                    <span role="img" aria-label="pin">
+                        📍
+                        </span>
+                </S.Center>
+            )}
             {reqButton && <S.RequestButton onClick={onRequestRide}>Request a Ride</S.RequestButton>}
-            <S.RequestButton onClick={onRequestRide}>Request a Ride</S.RequestButton>
+            {rideRequest && rideId && (
+                <PopUp
+                    price={price}
+                    duration={duration}
+                    distance={distance}
+                    dropOffAddress={address}
+                    pickUpAddress={pickupAddress}
+                    onCancelHandler={() => {
+                        stopPolling();
+                        cancelRideMutation({
+                            variables: {
+                                rideId,
+                                status: StatusOptions.CANCELED
+                            }
+                        })
+                    }}
+                    isDriver={false}
+                    id={rideId}
+                />
+            )}
+            {/* <S.RequestButton onClick={onRequestRide}>Request a Ride</S.RequestButton> */}
         </S.Contaier>
     )
 }
