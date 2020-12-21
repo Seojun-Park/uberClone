@@ -27,6 +27,10 @@ const HomeContainer: FC<IProps> = ({ history }): any => {
         lat: 0,
         lng: 0
     })
+    const [current, setCurrent] = useState<ICoords>({
+        lat: 0,
+        lng: 0
+    })
 
     const loadMap = useCallback((lat: number, lng: number) => {
         const mapNode = ReactDOM.findDOMNode(mapRef.current);
@@ -86,6 +90,7 @@ const HomeContainer: FC<IProps> = ({ history }): any => {
             navigator.geolocation.getCurrentPosition(pos => {
                 const { coords: { latitude, longitude } } = pos;
                 setCoords({ lat: latitude, lng: longitude })
+                setCurrent({ lat: latitude, lng: longitude })
                 loadMap(latitude, longitude);
                 if (map !== undefined) {
                     map.panTo({ lat: latitude + 0.001, lng: longitude + 0.001 })
@@ -122,12 +127,16 @@ const HomeContainer: FC<IProps> = ({ history }): any => {
         )
     } else {
         return (
-            <HomePresenter
-                mapRef={mapRef}
-                isMenuOpen={isMenuOpen}
-                toggleMenu={toggleMenu}
-                user={user}
-            />
+            <>
+                {coords.lat === 0 && coords.lng === 0 ? "Map loading..." :
+                    <HomePresenter
+                        mapRef={mapRef}
+                        isMenuOpen={isMenuOpen}
+                        toggleMenu={toggleMenu}
+                        user={user}
+                    />
+                }
+            </>
         )
     }
 }
