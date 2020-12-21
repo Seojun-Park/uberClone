@@ -33,6 +33,7 @@ const PassengerHomeContaier: FC<IProps> = ({
     const [placeMarker, setPlaceMarker] = useState<google.maps.Marker>();
     const [driverMarker, setDriverMarker] = useState<google.maps.Marker[]>([])
     const [directionRender, setDirectionRender] = useState<google.maps.DirectionsRenderer>()
+    const [url, setUrl] = useState<string>()
     const [ride, setRide] = useState<any>()
     const [reqButton, setReqButton] = useState(false)
     const [rideRequest, setRideRequest] = useState(false)
@@ -42,7 +43,7 @@ const PassengerHomeContaier: FC<IProps> = ({
         distance: "",
         duration: "",
         price: 0,
-        rideImage: ""
+        rideImage: url || ""
     })
     const [placeCoords, setPlaceCoords] = useState<ICoords>({ lat: 0, lng: 0 });
     const [rideId, setRideId] = useState<number>();
@@ -128,7 +129,7 @@ const PassengerHomeContaier: FC<IProps> = ({
             dropOffLng: placeCoords.lng,
             pickUpAddress,
             pickUpLat: coords.lat,
-            pickUpLng: coords.lng
+            pickUpLng: coords.lng,
         }
     })
 
@@ -224,6 +225,7 @@ const PassengerHomeContaier: FC<IProps> = ({
             setRideVariables={setRideVariables}
             user={user}
             ride={ride}
+            setUrl={setUrl}
         />
     )
 }

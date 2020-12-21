@@ -19,7 +19,7 @@ const resolvers: Resolvers = {
         if (user.currentRideId) {
           return {
             ok: false,
-            err: `You are "already on route now`,
+            err: `You are already on route now`,
             ride: null
           };
         }

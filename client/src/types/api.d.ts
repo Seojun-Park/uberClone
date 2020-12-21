@@ -46,6 +46,7 @@ export interface RequestRideVariables {
   price: number;
   distance: string;
   duration: string;
+  rideImage: string;
 }
 
 /* tslint:disable */

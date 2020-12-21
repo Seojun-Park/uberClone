@@ -1,7 +1,7 @@
 import html2canvas from 'html2canvas'
 import React, { FC, useEffect, useState } from 'react'
+import { toast } from 'react-toastify'
 import { storage } from '../../Firebase'
-import { getDate } from '../../Hooks/GetDate'
 import { b64toBlob } from '../../Hooks/URItoBlob'
 import { IRideVariables } from './PassengerHomeContainer'
 import * as S from './PassengerHomeStyles'
@@ -22,6 +22,7 @@ interface IProps {
     setRideVariables: any
     user: any
     ride: any
+    setUrl: any
 }
 
 const PassengerHomePresenter: FC<IProps> = ({
@@ -39,10 +40,11 @@ const PassengerHomePresenter: FC<IProps> = ({
     cancelRideMutation,
     setRideVariables,
     user,
-    ride
+    ride,
+    setUrl
 }) => {
-    const [url, setUrl] = useState<string>()
     const [blob, setBlob] = useState<any>()
+    const [flag, setFlag] = useState<boolean>(false)
     const onRequestRide = async () => {
         const map = document.getElementById("googleMap");
         if (map) {
@@ -76,11 +78,24 @@ const PassengerHomePresenter: FC<IProps> = ({
                         .ref(`/${user.email}/ride/passenger/`)
                         .child(`${rideId}`)
                         .getDownloadURL()
-                        .then((url) => setUrl(url))
+                        .then((url) => {
+                            setUrl(url)
+                            setFlag(true)
+                        })
                 }
             )
         }
-    }, [blob, user, rideId])
+    }, [blob, user, rideId, setUrl])
+
+    useEffect(() => {
+        if (flag === true) {
+            const data = requestRideMutation();
+            if (data) {
+                toast.success("Ride requested")
+                setFlag(false)
+            }
+        }
+    }, [flag, setFlag, requestRideMutation])
 
 
     return (

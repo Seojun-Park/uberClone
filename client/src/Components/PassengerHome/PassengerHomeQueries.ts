@@ -11,6 +11,7 @@ export const REQUEST_RIDE = gql`
     $price: Float!
     $distance: String!
     $duration: String!
+    $rideImage: String!
   ) {
     RequestRide(
       pickUpAddress: $pickUpAddress
@@ -22,6 +23,7 @@ export const REQUEST_RIDE = gql`
       price: $price
       distance: $distance
       duration: $duration
+      rideImage: $rideImage
     ) {
       ok
       err
