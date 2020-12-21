@@ -61,7 +61,7 @@ const PopUpPresenter: FC<IProps> = ({
                 ) :
                     <Button value={`Finding a Drivier${dots}`} />
                 }
-                <S.ButtonOnCancel onClick={onCancelHandler} value={isDriver ? "Dismiss" : "Cancel"} />
+                <S.ButtonOnCancel onClick={() => onCancelHandler()} value={isDriver ? "Dismiss" : "Cancel"} />
             </S.ButtonContainer>
         </S.PopUpContainer>
     )
