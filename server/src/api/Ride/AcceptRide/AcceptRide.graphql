@@ -1,0 +1,8 @@
+type AcceptRideResponse {
+  ok: Boolean!
+  err: String
+}
+
+type Mutation {
+  AcceptRide(rideId: Int!): AcceptRideResponse!
+}
