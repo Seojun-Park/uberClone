@@ -1,6 +1,7 @@
 import html2canvas from 'html2canvas'
 import React, { FC, useEffect, useState } from 'react'
 import { storage } from '../../Firebase'
+import { getDate } from '../../Hooks/GetDate'
 import { b64toBlob } from '../../Hooks/URItoBlob'
 import { IRideVariables } from './PassengerHomeContainer'
 import * as S from './PassengerHomeStyles'
@@ -20,6 +21,7 @@ interface IProps {
     cancelRideMutation: any
     setRideVariables: any
     user: any
+    ride: any
 }
 
 const PassengerHomePresenter: FC<IProps> = ({
@@ -36,7 +38,8 @@ const PassengerHomePresenter: FC<IProps> = ({
     stopPolling,
     cancelRideMutation,
     setRideVariables,
-    user
+    user,
+    ride
 }) => {
     const [url, setUrl] = useState<string>()
     const [blob, setBlob] = useState<any>()
@@ -62,7 +65,7 @@ const PassengerHomePresenter: FC<IProps> = ({
     useEffect(() => {
         if (blob) {
             let uploadTask = storage
-                .ref(`/${user!.email}/ride/number`)
+                .ref(`/${user!.email}/ride/passenger/${rideId}`)
                 .put(blob);
             uploadTask.on(
                 "state_changed",
@@ -70,14 +73,14 @@ const PassengerHomePresenter: FC<IProps> = ({
                 (error) => console.log(error),
                 () => {
                     storage
-                        .ref(`/${user.email}/`)
-                        .child('ride')
+                        .ref(`/${user.email}/ride/passenger/`)
+                        .child(`${rideId}`)
                         .getDownloadURL()
                         .then((url) => setUrl(url))
                 }
             )
         }
-    }, [blob, user])
+    }, [blob, user, rideId])
 
 
     return (

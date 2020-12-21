@@ -33,6 +33,7 @@ const PassengerHomeContaier: FC<IProps> = ({
     const [placeMarker, setPlaceMarker] = useState<google.maps.Marker>();
     const [driverMarker, setDriverMarker] = useState<google.maps.Marker[]>([])
     const [directionRender, setDirectionRender] = useState<google.maps.DirectionsRenderer>()
+    const [ride, setRide] = useState<any>()
     const [reqButton, setReqButton] = useState(false)
     const [rideRequest, setRideRequest] = useState(false)
     const [pickUpAddress, setPickupAddress] = useState("")
@@ -50,6 +51,7 @@ const PassengerHomeContaier: FC<IProps> = ({
         onCompleted: ({ GetRide }) => {
             const { ok, err, ride } = GetRide
             if (ok && ride) {
+                setRide(ride);
                 if (ride.status === "ACCEPTED") {
                     // stopPolling();
                     history.push(`/ride/${rideId}`)
@@ -221,6 +223,7 @@ const PassengerHomeContaier: FC<IProps> = ({
             cancelRideMutation={cancelRideMutation}
             setRideVariables={setRideVariables}
             user={user}
+            ride={ride}
         />
     )
 }

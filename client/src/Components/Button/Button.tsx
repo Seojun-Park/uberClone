@@ -22,13 +22,13 @@ const Container = styled.input`
 `;
 
 interface IProps {
-    value: string;
-    onClick: any;
-    disabled?: boolean;
+  value: string;
+  onClick?: any;
+  disabled?: boolean;
 }
 
 const Button: React.FC<IProps> = ({ value, onClick, disabled = false }) => (
-    <Container value={value} disabled={false} onClick={onClick} type="submit" />
+  <Container value={value} disabled={false} onClick={onClick} type="submit" />
 );
 
 export default Button;
