@@ -1,4 +1,5 @@
-import { Between, getRepository } from "typeorm";
+// import { Between, getRepository } from "typeorm";
+import { Between } from "typeorm";
 import User from "../../../entities/User";
 import { GetNearbyDriversResponse } from "../../../types/graph";
 import { Resolvers } from "../../../types/resolvers";
@@ -35,14 +36,17 @@ const resolvers: Resolvers = {
   Query: {
     GetNearbyDrivers: authResolver(
       async (_, __, { req }): Promise<GetNearbyDriversResponse> => {
+        console.log("came?");
         const user: User = req.user;
         const { lastLng, lastLat } = user;
+        console.log(lastLng, lastLat, user);
         try {
           const drivers: User[] = await User.find({
             isDriving: true,
             lastLng: Between(lastLng - 0.05, lastLng + 0.05),
             lastLat: Between(lastLat - 0.05, lastLat + 0.05)
           });
+          console.log("drivers:", drivers);
           return {
             ok: true,
             err: null,

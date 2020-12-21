@@ -91,10 +91,10 @@ class User extends BaseEntity {
   @OneToMany((type) => Place, (place) => place.user)
   places: Place[];
 
-  @ManyToOne((type) => Ride, ride=>ride.currentUsers)
-  currentRide:Ride
+  @ManyToOne((type) => Ride, (ride) => ride.currentUsers)
+  currentRide: Ride;
 
-  @Column({nullable: true})
+  @Column({ nullable: true })
   currentRideId: number;
 
   @CreateDateColumn() createdAt: string;
