@@ -83,40 +83,6 @@ const PassengerHomePresenter: FC<IProps> = ({
         await requestRideMutation();
     }
 
-    // useEffect(() => {
-    //     if (blob) {
-    //         let uploadTask = storage
-    //             .ref(`/${user!.email}/ride/passenger/${rideId}`)
-    //             .put(blob);
-    //         uploadTask.on(
-    //             "state_changed",
-    //             (snapshot) => { },
-    //             (error) => console.log(error),
-    //             () => {
-    //                 storage
-    //                     .ref(`/${user.email}/ride/passenger/`)
-    //                     .child(`${rideId}`)
-    //                     .getDownloadURL()
-    //                     .then((url) => {
-    //                         setUrl(url)
-    //                         setFlag(true)
-    //                     })
-    //             }
-    //         )
-    //     }
-    // }, [blob, user, rideId, setUrl])
-
-    // useEffect(() => {
-    //     if (flag === true) {
-    //         const { data } = requestRideMutation();
-    //         if (data) {
-    //             console.log(data)
-    //             toast.success("Ride requested")
-    //             setFlag(false)
-    //         }
-    //     }
-    // }, [flag, setFlag, requestRideMutation])
-
 
     return (
         <S.Contaier>

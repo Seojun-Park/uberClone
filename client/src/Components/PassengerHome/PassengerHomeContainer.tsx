@@ -15,7 +15,11 @@ import {
     UpdateRideStatusVariables
 } from '../../types/api';
 import PassengerHomePresenter from './PassengerHomePresenter'
-import { REQUEST_RIDE, GET_NEARBY_DRIVERS, GET_RIDE } from './PassengerHomeQueries';
+import {
+    REQUEST_RIDE,
+    GET_NEARBY_DRIVERS,
+    GET_RIDE
+} from './PassengerHomeQueries';
 
 interface IProps extends RouteComponentProps {
     map?: google.maps.Map<Element>;
@@ -63,6 +67,7 @@ const PassengerHomeContaier: FC<IProps> = ({
             if (ok && ride) {
                 setRideId(ride.id)
                 setRide(ride);
+                console.log(ride)
                 if (ride.status === "ACCEPTED") {
                     // stopPolling();
                     history.push(`/ride/${rideId}`)
