@@ -61,6 +61,7 @@ const PassengerHomeContaier: FC<IProps> = ({
         onCompleted: ({ GetRide }) => {
             const { ok, err, ride } = GetRide
             if (ok && ride) {
+                setRideId(ride.id)
                 setRide(ride);
                 if (ride.status === "ACCEPTED") {
                     // stopPolling();
