@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom'
 import { RouteComponentProps } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -24,6 +24,16 @@ const FindAddressContainer: React.FC<IProps> = ({ history }) => {
     });
     const [address, onChangeAddress, setAddress] = useInput("")
     const [map, setMap] = useState<google.maps.Map>()
+    const loadMap = useCallback((lat: number, lng: number) => {
+        const mapNode = ReactDOM.findDOMNode(mapRef.current);
+        const mapConfig: google.maps.MapOptions = {
+            center: { lat, lng },
+            disableDefaultUI: true,
+            minZoom: 8,
+            zoom: 15
+        };
+        setMap(new google.maps.Map(mapNode as Element, mapConfig))
+    }, [setMap])
 
     useEffect(() => {
         const getCurrentLocation = () => {
@@ -35,11 +45,11 @@ const FindAddressContainer: React.FC<IProps> = ({ history }) => {
                 })
                 setCoords({
                     lat: latitude,
-                    lng: longitude 
+                    lng: longitude
                 })
                 loadMap(latitude, longitude);
                 if (map !== undefined) {
-                    map.panTo({ lat: latitude + 0.001, lng: longitude + 0.001 })
+                    map.panTo({ lat: latitude + 0.00001, lng: longitude + 0.00001 })
                 }
             },
                 () => toast.error("Cannot find your location"),
@@ -68,16 +78,7 @@ const FindAddressContainer: React.FC<IProps> = ({ history }) => {
         }
     }, [map])
 
-    const loadMap = (lat: number, lng: number) => {
-        const mapNode = ReactDOM.findDOMNode(mapRef.current);
-        const mapConfig: google.maps.MapOptions = {
-            center: { lat, lng },
-            disableDefaultUI: true,
-            minZoom: 8,
-            zoom: 15
-        };
-        setMap(new google.maps.Map(mapNode as Element, mapConfig))
-    }
+
 
     const onPickHandler = async () => {
         let result;
