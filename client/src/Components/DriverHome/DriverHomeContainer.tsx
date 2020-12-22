@@ -5,14 +5,14 @@ import { toast } from 'react-toastify'
 import {
     RideStatusSubscription,
     RideStatusSubscription_RideStatusSubscription,
-    GetNearbyRide,
+    GetNearbyRides,
     AcceptRide,
     AcceptRideVariables
 } from '../../types/api'
 import DriverHomePresenter from './DriverHomePresenter'
 import { ACCEPT_RIDE, GET_NEARBY_RIDES, RIDE_SUBSCRIPTION } from './DriverHomeQueries'
 
-interface IProps extends RouteComponentProps {}
+interface IProps extends RouteComponentProps { }
 
 export interface IRequest extends RideStatusSubscription_RideStatusSubscription { }
 
@@ -20,9 +20,9 @@ const DriverHomeContainer: FC<IProps> = ({ history }) => {
     const [rideQueue] = useState<IRequest[]>([]);
     const [currentRide, setCurrentRide] = useState<IRequest>();
 
-    useQuery<GetNearbyRide>(GET_NEARBY_RIDES, {
-        onCompleted: ({ GetNearbyRide }) => {
-            const { ok, err, ride } = GetNearbyRide;
+    useQuery<GetNearbyRides>(GET_NEARBY_RIDES, {
+        onCompleted: ({ GetNearbyRides }) => {
+            const { ok, err, ride } = GetNearbyRides;
             if (ok && ride) {
                 if (ride) {
                     rideQueue.push(ride);

@@ -17,10 +17,10 @@ export interface isLoggedIn {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: GetNearbyRide
+// GraphQL query operation: GetNearbyRides
 // ====================================================
 
-export interface GetNearbyRide_GetNearbyRide_ride {
+export interface GetNearbyRides_GetNearbyRides_ride {
   __typename: "Ride";
   id: number;
   pickUpAddress: string;
@@ -34,15 +34,15 @@ export interface GetNearbyRide_GetNearbyRide_ride {
   duration: string | null;
 }
 
-export interface GetNearbyRide_GetNearbyRide {
-  __typename: "GetNearbyRideResponse";
+export interface GetNearbyRides_GetNearbyRides {
+  __typename: "GetNearbyRidesResponse";
   ok: boolean;
   err: string | null;
-  ride: GetNearbyRide_GetNearbyRide_ride | null;
+  ride: GetNearbyRides_GetNearbyRides_ride | null;
 }
 
-export interface GetNearbyRide {
-  GetNearbyRide: GetNearbyRide_GetNearbyRide;
+export interface GetNearbyRides {
+  GetNearbyRides: GetNearbyRides_GetNearbyRides;
 }
 
 /* tslint:disable */

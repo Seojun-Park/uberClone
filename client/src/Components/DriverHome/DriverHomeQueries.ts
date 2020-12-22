@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
 export const GET_NEARBY_RIDES = gql`
-  query GetNearbyRide {
-    GetNearbyRide {
+  query GetNearbyRides {
+    GetNearbyRides {
       ok
       err
       ride {
