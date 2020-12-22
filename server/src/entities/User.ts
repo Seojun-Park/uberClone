@@ -73,10 +73,10 @@ class User extends BaseEntity {
   @Column({ type: "text", nullable: true })
   fbId: string;
 
-  @OneToMany((type) => Chat, (chat) => chat.passenger)
+  @OneToMany((type) => Chat, (chat) => chat.passenger, { onDelete: "CASCADE" })
   chatsAsPassenger: Chat[];
 
-  @OneToMany((type) => Chat, (chat) => chat.driver)
+  @OneToMany((type) => Chat, (chat) => chat.driver, { onDelete: "CASCADE" })
   chatsAsDriver: Chat[];
 
   @OneToMany((type) => Message, (message) => message.user)
@@ -91,7 +91,9 @@ class User extends BaseEntity {
   @OneToMany((type) => Place, (place) => place.user)
   places: Place[];
 
-  @ManyToOne((type) => Ride, (ride) => ride.currentUsers)
+  @ManyToOne((type) => Ride, (ride) => ride.currentUsers, {
+    onDelete: "CASCADE"
+  })
   currentRide: Ride;
 
   @Column({ nullable: true })

@@ -11,7 +11,6 @@ import {
     GetRideVariables,
     RequestRide,
     RequestRideVariables,
-    StatusOptions,
     UpdateRideStatus,
     UpdateRideStatusVariables
 } from '../../types/api';
@@ -62,7 +61,7 @@ const PassengerHomeContainer: FC<IProps> = ({
     const [placeCoords, setPlaceCoords] = useState<ICoords>({ lat: 0, lng: 0 });
     const [rideId, setRideId] = useState<number>();
     const [fetchRideStatus, { stopPolling }] = useLazyQuery<GetRide, GetRideVariables>(GET_RIDE, {
-        fetchPolicy: "cache-and-network",
+        fetchPolicy: "network-only",
         onCompleted: ({ GetRide }) => {
             const { ok, err, ride } = GetRide
             if (ok && ride) {
@@ -128,6 +127,8 @@ const PassengerHomeContainer: FC<IProps> = ({
         pollInterval: 1000
     })
 
+    // console.log(rideId)
+
     const [requestRideMutation] = useMutation<RequestRide, RequestRideVariables>(REQUEST_RIDE, {
         onCompleted: ({ RequestRide }) => {
             console.log(RequestRide)
@@ -153,10 +154,6 @@ const PassengerHomeContainer: FC<IProps> = ({
 
     const [cancelRideMutation] = useMutation<UpdateRideStatus, UpdateRideStatusVariables>(
         UPDATE_RIDE_STATUS, {
-        variables: {
-            rideId: ride.id,
-            status: StatusOptions.CANCELED
-        },
         onCompleted: () => {
             setRideId(undefined);
             setReqButton(false);

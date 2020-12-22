@@ -73,7 +73,10 @@ class Ride extends BaseEntity {
   @OneToMany((type) => User, (user) => user.currentRide)
   currentUsers: User[];
 
-  @OneToOne((type) => Chat, (chat) => chat.ride, { nullable: true })
+  @OneToOne((type) => Chat, (chat) => chat.ride, {
+    nullable: true,
+    onDelete: "CASCADE"
+  })
   @JoinColumn()
   chat: Chat;
 

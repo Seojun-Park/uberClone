@@ -57,8 +57,6 @@ const DriverHomeContainer: FC<IProps> = ({ history }) => {
         }
     })
 
-    console.log(currentRide);
-
     const [acceptRideMutation] = useMutation<AcceptRide, AcceptRideVariables>(ACCEPT_RIDE)
 
     const onCancelHandler = () => {
