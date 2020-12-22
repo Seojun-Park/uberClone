@@ -44,7 +44,7 @@ const HomePresenter: FC<HomeProps> = ({
                         <S.Button onClick={() => toggleMenu()}>|||</S.Button>
                     </Sidebar>
                     {user!.isDriving ? (
-                        "drivier"
+                        "driver"
                     ) : <PassengerHome
                             map={map}
                             marker={userMarker}

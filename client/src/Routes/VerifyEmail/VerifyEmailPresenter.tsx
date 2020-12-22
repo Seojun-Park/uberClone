@@ -4,7 +4,9 @@ import { RouteComponentProps } from 'react-router-dom';
 import { VERIFY_EMAIL, GET_VALIDATION } from './VerifyEmailQueris'
 import { ME } from '../../sharedQueries'
 
-const VerifyEmailPresenter: FC<RouteComponentProps> = ({ history }) => {
+interface IProps extends RouteComponentProps { }
+
+const VerifyEmailPresenter: FC<IProps> = ({ history }) => {
     const [email, setEmail] = useState(null)
     const [key, setKey] = useState(null)
     const [flag, setFlag] = useState(false)
@@ -12,12 +14,14 @@ const VerifyEmailPresenter: FC<RouteComponentProps> = ({ history }) => {
         variables: { key }
     })
     const { loading } = useQuery(ME, {
+        fetchPolicy: "cache-and-network",
         onCompleted: v => {
             if (v.Me.ok) {
                 setEmail(v.Me.user.email)
             }
         }
     })
+
     useQuery(GET_VALIDATION, {
         variables: { email },
         skip: email === null,
