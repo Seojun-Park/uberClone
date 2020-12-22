@@ -41,10 +41,10 @@ const DriverHomeContainer: FC<IProps> = ({ history }) => {
 
     useEffect(() => {
         if (data) {
-            setStatus(data);
+            setStatus(data.GetNearbyRides.ride?.status);
         }
     }, [data])
-    console.log(status)
+
     useSubscription<RideStatusSubscription>(RIDE_SUBSCRIPTION, {
         fetchPolicy: "network-only",
         onSubscriptionComplete: () => {
@@ -82,14 +82,15 @@ const DriverHomeContainer: FC<IProps> = ({ history }) => {
             variables: { rideId },
             refetchQueries: [{ query: GET_RIDE, variables: { rideId } }]
         })
-        history.push(`/ride/${rideId}`)
+        // history.push(`/ride/${rideId}`)
+        window.location.replace(`/ride/${rideId}`)
     }
 
 
     return (
         <DriverHomePresenter
             ride={currentRide}
-            flag={status}
+            status={status}
             onCancelHandler={onCancelHandler}
             onAcceptHandler={onAcceptHandler}
         />
