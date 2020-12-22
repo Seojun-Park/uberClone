@@ -30,6 +30,7 @@ export interface GetNearbyRides_GetNearbyRides_ride_passenger {
 export interface GetNearbyRides_GetNearbyRides_ride {
   __typename: "Ride";
   id: number;
+  status: string;
   pickUpAddress: string;
   pickUpLat: number;
   pickUpLng: number;

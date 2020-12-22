@@ -1,4 +1,5 @@
 import { useLazyQuery, useMutation, useQuery } from '@apollo/client';
+import { getRoles } from '@testing-library/react';
 import React, { FC, useEffect, useState } from 'react';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -62,49 +63,66 @@ const PassengerHomeContainer: FC<IProps> = ({
     })
     const [placeCoords, setPlaceCoords] = useState<ICoords>({ lat: 0, lng: 0 });
     const [rideId, setRideId] = useState<number>();
-    const [fetchRideStatus, { stopPolling }] = useLazyQuery<GetRide, GetRideVariables>(GET_RIDE, {
+    // const [fetchRideStatus, { stopPolling }] = useLazyQuery<GetRide, GetRideVariables>(GET_RIDE, {
+    //     fetchPolicy: "network-only",
+    //     onCompleted: ({ GetRide }) => {
+    //         const { ok, err, ride } = GetRide
+    //         if (ok && ride) {
+    //             setRideId(ride.id)
+    //             setRide(ride);
+    //             if (ride.status === "ACCEPTED") {
+    //                 // stopPolling();
+    //                 history.push(`/ride/${rideId}`)
+    //             }
+    //         } else {
+    //             if (err === "Ride doesn't exist") {
+    //                 // stopPolling();
+    //             } else {
+    //                 toast.error(err)
+    //             }
+    //         }
+    //     },
+    //     pollInterval: 500,
+    //     variables: {
+    //         rideId: rideId || -1
+    //     }
+    // })
+    const { refetch } = useQuery<GetRide, GetRideVariables>(GET_RIDE, {
         fetchPolicy: "network-only",
-        onCompleted: ({ GetRide }) => {
-            const { ok, err, ride } = GetRide
-            if (ok && ride) {
-                setRideId(ride.id)
-                setRide(ride);
-                console.log(ride)
-                if (ride.status === "ACCEPTED") {
-                    // stopPolling();
-                    history.push(`/ride/${rideId}`)
-                }
-            } else {
-                if (err === "Ride doesn't exist") {
-                    // stopPolling();
-                } else {
-                    toast.error(err)
+        variables: {
+            rideId: rideId || -1
+        }, onCompleted: ({ GetRide }) => {
+            if (GetRide && GetRide.ok && GetRide.ride) {
+                setRide(GetRide.ride)
+                setRideId(GetRide.ride.id)
+                console.log(GetRide.ride.status)
+                if (GetRide.ride.status === "ACCEPTED") {
+                    history.push(`/ride/${GetRide.ride.id}`)
                 }
             }
         },
-        pollInterval: 500,
-        variables: {
-            rideId: rideId || -1
-        }
+        pollInterval: 1000
     })
+
+
     useQuery(ME, {
+        fetchPolicy: "network-only",
         onCompleted: ({ Me }) => {
-            console.log(Me)
             if (Me.ok && Me.user) {
                 setCurrentRideId(Me.user.currentRideId)
             }
         }
     })
-    useEffect(() => {
-        if (currentRideId !== 0 && currentRideId !== null) {
-            history.push(`/ride/${currentRideId}`)
-            console.log("I'm riding")
-        } else {
-            console.log("this should be")
-        }
-    }, [currentRideId, history])
+    // useEffect(() => {
+    //     if (currentRideId !== 0 && currentRideId !== null) {
+    //         history.push(`/ride/${currentRideId}`)
+    //         console.log("I'm riding")
+    //     } else {
+    //         console.log("this should be")
+    //     }
+    // }, [currentRideId, history])
 
-    useQuery<GetNearbyDrivers>(GET_NEARBY_DRIVERS, {
+    const { data } = useQuery<GetNearbyDrivers>(GET_NEARBY_DRIVERS, {
         fetchPolicy: "cache-and-network",
         onCompleted: ({ GetNearbyDrivers: { drivers = [] } }) => {
             if (drivers && drivers.length > 0 && map) {
@@ -144,17 +162,19 @@ const PassengerHomeContainer: FC<IProps> = ({
         },
         pollInterval: 1000
     })
-
-    // console.log(rideId)
+    useEffect(() => {
+        if (data) {
+            toast.info("Found drivers near you")
+        }
+    }, [data])
 
     const [requestRideMutation] = useMutation<RequestRide, RequestRideVariables>(REQUEST_RIDE, {
         onCompleted: ({ RequestRide }) => {
-            console.log(RequestRide)
             const { ride } = RequestRide;
             if (ride) {
                 setRideId(ride.id);
-                fetchRideStatus();
-                history.push(`/ride/${ride.id}`)
+                // fetchRideStatus();
+                refetch()
                 toast.success("Requested")
             }
             setReqButton(false);
@@ -251,8 +271,6 @@ const PassengerHomeContainer: FC<IProps> = ({
         }
     }
 
-
-
     return (
         <PassengerHomePresenter
             address={address}
@@ -266,7 +284,7 @@ const PassengerHomeContainer: FC<IProps> = ({
             pickupAddress={pickUpAddress}
             rideId={rideId}
             addMode={addMode}
-            stopPolling={stopPolling}
+            // stopPolling={stopPolling}
             cancelRideMutation={cancelRideMutation}
             setRideVariables={setRideVariables}
             user={user}

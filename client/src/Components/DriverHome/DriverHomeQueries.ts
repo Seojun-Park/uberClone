@@ -7,6 +7,7 @@ export const GET_NEARBY_RIDES = gql`
       err
       ride {
         id
+        status
         pickUpAddress
         pickUpLat
         pickUpLng

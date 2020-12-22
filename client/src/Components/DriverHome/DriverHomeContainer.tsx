@@ -9,6 +9,7 @@ import {
     AcceptRide,
     AcceptRideVariables
 } from '../../types/api'
+import { GET_RIDE } from '../PassengerHome/PassengerHomeQueries'
 import DriverHomePresenter from './DriverHomePresenter'
 import { ACCEPT_RIDE, GET_NEARBY_RIDES, RIDE_SUBSCRIPTION } from './DriverHomeQueries'
 
@@ -17,11 +18,11 @@ interface IProps extends RouteComponentProps { }
 export interface IRequest extends RideStatusSubscription_RideStatusSubscription { }
 
 const DriverHomeContainer: FC<IProps> = ({ history }) => {
-    const [flag, setFlag] = useState(false);
+    const [status, setStatus] = useState<any>();
     const [rideQueue] = useState<IRequest[]>([]);
     const [currentRide, setCurrentRide] = useState<IRequest>();
 
-    useQuery<GetNearbyRides>(GET_NEARBY_RIDES, {
+    const { data } = useQuery<GetNearbyRides>(GET_NEARBY_RIDES, {
         onCompleted: ({ GetNearbyRides }) => {
             const { ok, err, ride } = GetNearbyRides;
             if (ok && ride) {
@@ -34,10 +35,18 @@ const DriverHomeContainer: FC<IProps> = ({ history }) => {
             } else {
                 toast.error(err)
             }
-        }
+        },
+        pollInterval: 1000
     })
 
+    useEffect(() => {
+        if (data) {
+            setStatus(data);
+        }
+    }, [data])
+    console.log(status)
     useSubscription<RideStatusSubscription>(RIDE_SUBSCRIPTION, {
+        fetchPolicy: "network-only",
         onSubscriptionComplete: () => {
             console.log("Waiting for new ride request")
         },
@@ -55,14 +64,9 @@ const DriverHomeContainer: FC<IProps> = ({ history }) => {
             } else {
                 toast.error(error)
             }
-        }
-    })
+        },
 
-    useEffect(() => {
-        if (currentRide) {
-            setFlag(true);
-        }
-    }, [currentRide, setFlag])
+    })
 
     const [acceptRideMutation] = useMutation<AcceptRide, AcceptRideVariables>(ACCEPT_RIDE)
 
@@ -74,7 +78,10 @@ const DriverHomeContainer: FC<IProps> = ({ history }) => {
     }
 
     const onAcceptHandler = (rideId: number) => {
-        acceptRideMutation({ variables: { rideId } })
+        acceptRideMutation({
+            variables: { rideId },
+            refetchQueries: [{ query: GET_RIDE, variables: { rideId } }]
+        })
         history.push(`/ride/${rideId}`)
     }
 
@@ -82,7 +89,7 @@ const DriverHomeContainer: FC<IProps> = ({ history }) => {
     return (
         <DriverHomePresenter
             ride={currentRide}
-            flag={flag}
+            flag={status}
             onCancelHandler={onCancelHandler}
             onAcceptHandler={onAcceptHandler}
         />

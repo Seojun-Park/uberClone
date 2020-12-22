@@ -19,7 +19,7 @@ interface IProps {
     rideVariables: IRideVariables
     pickupAddress: string
     rideId?: number
-    stopPolling: any
+    stopPolling?: any
     cancelRideMutation: any
     setRideVariables: any
     user: any
@@ -39,7 +39,7 @@ const PassengerHomePresenter: FC<IProps> = ({
     rideVariables: { price, duration, distance },
     pickupAddress,
     rideId,
-    stopPolling,
+    // stopPolling,
     cancelRideMutation,
     setRideVariables,
     user,
@@ -105,7 +105,7 @@ const PassengerHomePresenter: FC<IProps> = ({
                     dropOffAddress={address}
                     pickUpAddress={pickupAddress}
                     onCancelHandler={() => {
-                        stopPolling();
+                        // stopPolling();
                         cancelRideMutation({
                             variables: {
                                 rideId,
