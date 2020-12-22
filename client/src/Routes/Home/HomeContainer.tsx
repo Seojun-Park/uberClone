@@ -7,7 +7,7 @@ import * as S from './HomeStyles'
 import { toast } from 'react-toastify'
 import { generateMarker } from '../../Hooks/MapHelper'
 
-interface IProps extends RouteComponentProps<any> {
+interface IProps extends RouteComponentProps {
 }
 
 interface ICoords {
@@ -109,99 +109,3 @@ const HomeContainer: FC<IProps> = ({ history }): any => {
 }
 
 export default HomeContainer
-
- // const mapRef = useRef()
-    // const [user, setUser] = useState(null)
-    // const [isMenuOpen, setIsMenuOpen] = useState(false)
-    // const [map, setMap] = useState<google.maps.Map>()
-    // const [marker, setMarker] = useState<google.maps.Marker>()
-    // const [coords, setCoords] = useState<ICoords>({
-    //     lat: 0,
-    //     lng: 0
-    // })
-    // const [current, setCurrent] = useState<ICoords>({
-    //     lat: 0,
-    //     lng: 0
-    // })
-
-    // const loadMap = useCallback((lat: number, lng: number) => {
-    //     const mapNode = ReactDOM.findDOMNode(mapRef.current);
-    //     const mapConfig: google.maps.MapOptions = {
-    //         center: { lat, lng },
-    //         disableDefaultUI: true,
-    //         minZoom: 8,
-    //         zoom: 15,
-    //     };
-    //     setMap(new google.maps.Map(mapNode as Element, mapConfig))
-    //     const userMarkerOptions: google.maps.MarkerOptions = {
-    //         icon: {
-    //             path: google.maps.SymbolPath.CIRCLE,
-    //             scale: 7
-    //         },
-    //         position: {
-    //             lat,
-    //             lng
-    //         }
-    //     }
-    //     setMarker(new google.maps.Marker(userMarkerOptions))
-    //     marker?.setMap(map || null)
-    //     const watchOption: PositionOptions = {
-    //         enableHighAccuracy: true
-    //     }
-    //     navigator.geolocation.watchPosition(
-    //         handleGeoWatchSuccess,
-    //         handleGeoWatchError,
-    //         watchOption
-    //     );
-    // }, [setMap, setMarker, map, marker]);
-
-    // const handleGeoWatchSuccess = () => { return; }
-    // const handleGeoWatchError = () => { console.log("Error Watching you") }
-    // const handleGeoSuccess = useCallback((pos: any) => {
-    //     if (pos.coords.latitude !== 0 && pos.coords.longitude !== 0) {
-    //         loadMap(pos.coords.latitude, pos.coords.longitude)
-    //     }
-    // }, [loadMap])
-    // const handleGeoError = useCallback((err) => console.log(err), [])
-
-    // const { loading } = useQuery(ME, {
-    //     fetchPolicy: "cache-and-network",
-    //     onCompleted: v => {
-    //         if (v.Me.ok) {
-    //             setUser(v.Me.user)
-    //             if (v.Me.user.verifiedEmail === false) {
-    //                 history.push("/verifyEmail")
-    //             }
-    //         }
-    //     }
-    // })
-
-
-    // useEffect(() => {
-    //     const getCurrentLocation = () => {
-    //         navigator.geolocation.getCurrentPosition(pos => {
-    //             const { coords: { latitude, longitude } } = pos;
-    //             setCoords({ lat: latitude, lng: longitude })
-    //             setCurrent({ lat: latitude, lng: longitude })
-    //             loadMap(latitude, longitude);
-    //             if (map !== undefined) {
-    //                 map.panTo({ lat: latitude + 0.001, lng: longitude + 0.001 })
-    //             }
-    //         },
-    //             () => toast.error("Cannot find your location"),
-    //             { enableHighAccuracy: true }
-    //         );
-    //     };
-    //     if (!window.google) {
-    //         loadGoogleMapApi(getCurrentLocation);
-    //     } else {
-    //         getCurrentLocation();
-    //     }
-    // }, [loadMap, map])
-
-    // useEffect(() => {
-    //     navigator.geolocation.watchPosition(
-    //         pos => handleGeoSuccess(pos),
-    //         err => handleGeoError(err)
-    //     )
-    // }, [handleGeoSuccess, handleGeoError])

@@ -18,7 +18,7 @@ export const Button = styled.button`
   cursor: pointer;
   font-size: 20px;
   transform: rotate(90deg);
-  z-index: 2;
+  z-index: 9;
   background-color: transparent;
 `;
 

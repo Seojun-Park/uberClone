@@ -1,12 +1,13 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC } from 'react'
 import Menu from '../Menu'
 import Sidebar from 'react-sidebar'
 import * as S from './HomeStyles'
 import { ICoords } from '../../Hooks/MapHelper'
+import DriverHome from '../../Components/DriverHome'
 import PassengerHome from '../../Components/PassengerHome'
 import Map from '../../Components/Map'
 
-type HomeProps = {
+interface IProps {
     map?: google.maps.Map<Element>;
     userMarker?: google.maps.Marker
     coords: ICoords;
@@ -16,7 +17,7 @@ type HomeProps = {
     setMap: React.Dispatch<React.SetStateAction<google.maps.Map<Element> | undefined>>
 }
 
-const HomePresenter: FC<HomeProps> = ({
+const HomePresenter: FC<IProps> = ({
     isMenuOpen,
     toggleMenu,
     coords,
@@ -44,7 +45,7 @@ const HomePresenter: FC<HomeProps> = ({
                         <S.Button onClick={() => toggleMenu()}>|||</S.Button>
                     </Sidebar>
                     {user!.isDriving ? (
-                        "driver"
+                        <DriverHome />
                     ) : <PassengerHome
                             map={map}
                             marker={userMarker}

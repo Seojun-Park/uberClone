@@ -35,7 +35,7 @@ export interface IRideVariables {
     rideImage: string;
 }
 
-const PassengerHomeContaier: FC<IProps> = ({
+const PassengerHomeContainer: FC<IProps> = ({
     map,
     marker,
     coords,
@@ -255,4 +255,4 @@ const PassengerHomeContaier: FC<IProps> = ({
     )
 }
 
-export default withRouter(PassengerHomeContaier)
+export default withRouter(PassengerHomeContainer)

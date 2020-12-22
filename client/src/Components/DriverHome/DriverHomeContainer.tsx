@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useSubscription } from '@apollo/client'
 import React, { FC, useState } from 'react'
-import { RouteComponentProps } from 'react-router-dom'
+import { RouteComponentProps, withRouter } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import {
     RideStatusSubscription,
@@ -12,7 +12,7 @@ import {
 import DriverHomePresenter from './DriverHomePresenter'
 import { ACCEPT_RIDE, GET_NEARBY_RIDES, RIDE_SUBSCRIPTION } from './DriverHomeQueries'
 
-interface IProps extends RouteComponentProps { }
+interface IProps extends RouteComponentProps {}
 
 export interface IRequest extends RideStatusSubscription_RideStatusSubscription { }
 
@@ -78,4 +78,4 @@ const DriverHomeContainer: FC<IProps> = ({ history }) => {
         />
     )
 }
-export default DriverHomeContainer
+export default withRouter(DriverHomeContainer)

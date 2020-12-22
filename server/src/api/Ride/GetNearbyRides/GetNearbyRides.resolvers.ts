@@ -1,14 +1,14 @@
 import { Between, getRepository } from "typeorm";
 import Ride from "../../../entities/Ride";
 import User from "../../../entities/User";
-import { GetNearbyRideResponse } from "../../../types/graph";
 import { Resolvers } from "../../../types/resolvers";
+import { GetNearbyRidesResponse } from "../../../types/graph";
 import authResolver from "../../../utils/authResolver";
 
 const resolvers: Resolvers = {
   Query: {
-    GetNearbyRide: authResolver(
-      async (_, __, { req }): Promise<GetNearbyRideResponse> => {
+    GetNearbyRides: authResolver(
+      async (_, __, { req }): Promise<GetNearbyRidesResponse> => {
         const user: User = req.user;
         if (user.isDriving) {
           const { lastLat, lastLng } = user;
