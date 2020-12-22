@@ -154,6 +154,7 @@ const PassengerHomeContainer: FC<IProps> = ({
             if (ride) {
                 setRideId(ride.id);
                 fetchRideStatus();
+                history.push(`/ride/${ride.id}`)
                 toast.success("Requested")
             }
             setReqButton(false);

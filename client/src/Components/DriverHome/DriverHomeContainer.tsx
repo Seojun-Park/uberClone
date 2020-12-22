@@ -78,7 +78,6 @@ const DriverHomeContainer: FC<IProps> = ({ history }) => {
         history.push(`/ride/${rideId}`)
     }
 
-    console.log(flag)
 
     return (
         <DriverHomePresenter
