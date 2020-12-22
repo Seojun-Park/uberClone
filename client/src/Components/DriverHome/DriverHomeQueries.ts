@@ -39,10 +39,10 @@ export const RIDE_SUBSCRIPTION = gql`
 `;
 
 export const ACCEPT_RIDE = gql`
-mutation AcceptRide($rideId: Int!){
-  AcceptRide(rideId: $rideId){
-    ok
-    err
+  mutation AcceptRide($rideId: Int!) {
+    AcceptRide(rideId: $rideId) {
+      ok
+      err
+    }
   }
-} 
 `;

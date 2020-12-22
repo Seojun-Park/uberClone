@@ -12,6 +12,7 @@ interface IProps {
     onCancelHandler: () => void;
     onAcceptHandler?: () => void;
     id: number;
+    passengerId?: number;
 }
 
 const PopUpPresenter: FC<IProps> = ({
@@ -23,7 +24,8 @@ const PopUpPresenter: FC<IProps> = ({
     duration,
     onCancelHandler,
     onAcceptHandler,
-    id
+    id,
+    passengerId
 }) => {
     const [dots, setDots] = useState(".");
     useEffect(() => {

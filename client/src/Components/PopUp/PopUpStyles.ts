@@ -26,7 +26,7 @@ export const Title = styled.h4`
 
 export const Data = styled.span`
   margin-left: 5px;
-  color: ${(props) => props.theme.greyColor};
+  color: ${(props) => props.theme.blueColor};
 `;
 
 export const Img = styled.img`
