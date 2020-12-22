@@ -46,7 +46,6 @@ const resolvers: Resolvers = {
                 passenger: requestedRide?.passenger,
                 ride: requestedRide
               }).save();
-              // if (requestedRide) {
               await Ride.update(
                 {
                   id: requestedRide.id
@@ -57,7 +56,6 @@ const resolvers: Resolvers = {
                   status: "ACCEPTED"
                 }
               );
-              // }
               return {
                 ok: true,
                 err: null

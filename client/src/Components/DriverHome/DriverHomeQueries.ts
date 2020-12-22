@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
 export const GET_NEARBY_RIDES = gql`
-  query GetNearbyRides {
-    GetNearbyRides {
+  query GetNearbyRide {
+    GetNearbyRide {
       ok
       err
       ride {
@@ -22,8 +22,8 @@ export const GET_NEARBY_RIDES = gql`
 `;
 
 export const RIDE_SUBSCRIPTION = gql`
-  subscription RideSubscription {
-    RideSubscription {
+  subscription RideStatusSubscription {
+    RideStatusSubscription {
       id
       pickUpAddress
       pickUpLat
@@ -36,4 +36,13 @@ export const RIDE_SUBSCRIPTION = gql`
       duration
     }
   }
+`;
+
+export const ACCEPT_RIDE = gql`
+mutation AcceptRide($rideId: Int!){
+  AcceptRide(rideId: $rideId){
+    ok
+    err
+  }
+} 
 `;

@@ -17,6 +17,90 @@ export interface isLoggedIn {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: GetNearbyRide
+// ====================================================
+
+export interface GetNearbyRide_GetNearbyRide_ride {
+  __typename: "Ride";
+  id: number;
+  pickUpAddress: string;
+  pickUpLat: number;
+  pickUpLng: number;
+  dropOffAddress: string;
+  dropOffLat: number;
+  dropOffLng: number;
+  price: number | null;
+  distance: string | null;
+  duration: string | null;
+}
+
+export interface GetNearbyRide_GetNearbyRide {
+  __typename: "GetNearbyRideResponse";
+  ok: boolean;
+  err: string | null;
+  ride: GetNearbyRide_GetNearbyRide_ride | null;
+}
+
+export interface GetNearbyRide {
+  GetNearbyRide: GetNearbyRide_GetNearbyRide;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL subscription operation: RideStatusSubscription
+// ====================================================
+
+export interface RideStatusSubscription_RideStatusSubscription {
+  __typename: "Ride";
+  id: number;
+  pickUpAddress: string;
+  pickUpLat: number;
+  pickUpLng: number;
+  dropOffAddress: string;
+  dropOffLat: number;
+  dropOffLng: number;
+  price: number | null;
+  distance: string | null;
+  duration: string | null;
+}
+
+export interface RideStatusSubscription {
+  RideStatusSubscription: RideStatusSubscription_RideStatusSubscription | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: AcceptRide
+// ====================================================
+
+export interface AcceptRide_AcceptRide {
+  __typename: "AcceptRideResponse";
+  ok: boolean;
+  err: string | null;
+}
+
+export interface AcceptRide {
+  AcceptRide: AcceptRide_AcceptRide;
+}
+
+export interface AcceptRideVariables {
+  rideId: number;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: RequestRide
 // ====================================================
 
