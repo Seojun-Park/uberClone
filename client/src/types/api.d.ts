@@ -20,6 +20,13 @@ export interface isLoggedIn {
 // GraphQL query operation: GetNearbyRides
 // ====================================================
 
+export interface GetNearbyRides_GetNearbyRides_ride_passenger {
+  __typename: "User";
+  id: number;
+  fullName: string | null;
+  profilePhoto: string | null;
+}
+
 export interface GetNearbyRides_GetNearbyRides_ride {
   __typename: "Ride";
   id: number;
@@ -32,6 +39,7 @@ export interface GetNearbyRides_GetNearbyRides_ride {
   price: number | null;
   distance: string | null;
   duration: string | null;
+  passenger: GetNearbyRides_GetNearbyRides_ride_passenger | null;
 }
 
 export interface GetNearbyRides_GetNearbyRides {

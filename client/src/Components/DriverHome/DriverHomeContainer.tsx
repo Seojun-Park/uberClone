@@ -72,7 +72,6 @@ const DriverHomeContainer: FC<IProps> = ({ history }) => {
     }
 
     return (
-
         <DriverHomePresenter
             ride={currentRide}
             onCancelHandler={onCancelHandler}

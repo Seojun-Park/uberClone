@@ -16,6 +16,11 @@ export const GET_NEARBY_RIDES = gql`
         price
         distance
         duration
+        passenger {
+          id
+          fullName
+          profilePhoto
+        }
       }
     }
   }
