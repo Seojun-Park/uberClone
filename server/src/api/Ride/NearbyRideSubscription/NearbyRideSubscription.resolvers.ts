@@ -6,11 +6,12 @@ const resolvers = {
   Subscription: {
     NearbyRideSubscription: {
       subscribe: withFilter(
-        (_, __, { pubSub }) => pubSub.asyncIterator("rideRequest"),
+        (_, __, { pubSub }) => {
+          return pubSub.asyncIterator("rideRequest");
+        },
         (payload, _, { context }) => {
           const user: User = context.currentUser;
           const ride: Ride = payload.NearbyRideSubscription;
-          console.log(user, "ride:", ride);
           if (!user.isDriving) {
             return false;
           }
