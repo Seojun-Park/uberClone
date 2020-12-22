@@ -7,12 +7,13 @@ interface IProps {
     ride?: IRequest
     onCancelHandler: () => void;
     onAcceptHandler: (riderId: number) => void
+    flag: boolean
 }
 
-const DriverHomePresenter: FC<IProps> = ({ ride, onCancelHandler, onAcceptHandler }) => {
+const DriverHomePresenter: FC<IProps> = ({ ride, onCancelHandler, onAcceptHandler, flag }) => {
     return (
         <S.Container>
-            {ride && ride.price && ride.distance && ride.duration &&
+            {flag && ride && ride.price && ride.distance && ride.duration &&
                 <PopUp
                     isDriver={true}
                     pickUpAddress={ride.pickUpAddress}

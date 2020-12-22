@@ -9,7 +9,10 @@ const resolvers: Resolvers = {
       async (_, __, { req }): Promise<MeResponse> => {
         const user: User = req.user;
         if (user) {
-          const me = await User.findOne({ id: user.id });
+          const me = await User.findOne(
+            { id: user.id },
+            { relations: ["currentRide"] }
+          );
           if (me) {
             return {
               ok: true,

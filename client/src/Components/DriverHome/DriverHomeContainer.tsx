@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useSubscription } from '@apollo/client'
-import React, { FC, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { RouteComponentProps, withRouter } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import {
@@ -17,6 +17,7 @@ interface IProps extends RouteComponentProps { }
 export interface IRequest extends RideStatusSubscription_RideStatusSubscription { }
 
 const DriverHomeContainer: FC<IProps> = ({ history }) => {
+    const [flag, setFlag] = useState(false);
     const [rideQueue] = useState<IRequest[]>([]);
     const [currentRide, setCurrentRide] = useState<IRequest>();
 
@@ -57,6 +58,12 @@ const DriverHomeContainer: FC<IProps> = ({ history }) => {
         }
     })
 
+    useEffect(() => {
+        if (currentRide) {
+            setFlag(true);
+        }
+    }, [currentRide, setFlag])
+
     const [acceptRideMutation] = useMutation<AcceptRide, AcceptRideVariables>(ACCEPT_RIDE)
 
     const onCancelHandler = () => {
@@ -71,9 +78,12 @@ const DriverHomeContainer: FC<IProps> = ({ history }) => {
         history.push(`/ride/${rideId}`)
     }
 
+    console.log(flag)
+
     return (
         <DriverHomePresenter
             ride={currentRide}
+            flag={flag}
             onCancelHandler={onCancelHandler}
             onAcceptHandler={onAcceptHandler}
         />

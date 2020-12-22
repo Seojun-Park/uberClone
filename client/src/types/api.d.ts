@@ -530,6 +530,11 @@ export interface verifyPhoneVariables {
 // GraphQL query operation: me
 // ====================================================
 
+export interface me_Me_user_currentRide {
+  __typename: "Ride";
+  id: number;
+}
+
 export interface me_Me_user {
   __typename: "User";
   id: number;
@@ -547,6 +552,8 @@ export interface me_Me_user {
   lastLat: number | null;
   lastOrientation: number | null;
   fbId: string | null;
+  currentRideId: number | null;
+  currentRide: me_Me_user_currentRide | null;
 }
 
 export interface me_Me {

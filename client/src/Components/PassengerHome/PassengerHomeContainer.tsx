@@ -1,18 +1,19 @@
 import { useLazyQuery, useMutation, useQuery } from '@apollo/client';
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { generateMarker, getAddress, getGeoCode, ICoords, renderPath } from '../../Hooks/MapHelper';
 import useInput from '../../Hooks/useInput';
-import { UPDATE_RIDE_STATUS } from '../../sharedQueries';
+import { ME, UPDATE_RIDE_STATUS } from '../../sharedQueries';
 import {
+    me,
     GetNearbyDrivers,
     GetRide,
     GetRideVariables,
     RequestRide,
     RequestRideVariables,
     UpdateRideStatus,
-    UpdateRideStatusVariables
+    UpdateRideStatusVariables,
 } from '../../types/api';
 import PassengerHomePresenter from './PassengerHomePresenter'
 import {
@@ -42,6 +43,7 @@ const PassengerHomeContainer: FC<IProps> = ({
     history,
     user
 }) => {
+    const [currentRideId, setCurrentRideId] = useState<number>(0)
     const [placeMarker, setPlaceMarker] = useState<google.maps.Marker>();
     const [driverMarker, setDriverMarker] = useState<google.maps.Marker[]>([])
     const [directionRender, setDirectionRender] = useState<google.maps.DirectionsRenderer>()
@@ -85,6 +87,22 @@ const PassengerHomeContainer: FC<IProps> = ({
             rideId: rideId || -1
         }
     })
+    useQuery(ME, {
+        onCompleted: ({ Me }) => {
+            console.log(Me)
+            if (Me.ok && Me.user) {
+                setCurrentRideId(Me.user.currentRideId)
+            }
+        }
+    })
+    useEffect(() => {
+        if (currentRideId !== 0 && currentRideId !== null) {
+            history.push(`/ride/${currentRideId}`)
+            console.log("I'm riding")
+        } else {
+            console.log("this should be")
+        }
+    }, [currentRideId, history])
 
     useQuery<GetNearbyDrivers>(GET_NEARBY_DRIVERS, {
         fetchPolicy: "cache-and-network",

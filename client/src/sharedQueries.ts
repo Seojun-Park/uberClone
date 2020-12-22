@@ -20,6 +20,10 @@ export const ME = gql`
         lastLat
         lastOrientation
         fbId
+        currentRideId
+        currentRide {
+          id
+        }
       }
     }
   }

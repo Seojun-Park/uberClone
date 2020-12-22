@@ -25,7 +25,7 @@ class Chat extends BaseEntity {
   @Column({ nullable: true })
   rideId: number;
 
-  @OneToOne((type) => Ride, (ride) => ride.chat)
+  @OneToOne((type) => Ride, (ride) => ride.chat, { onDelete: "CASCADE" })
   @JoinColumn()
   ride: Ride;
 
