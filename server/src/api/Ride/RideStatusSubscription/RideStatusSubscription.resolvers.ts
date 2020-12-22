@@ -10,7 +10,6 @@ const resolvers = {
         },
         (payload, _, { context }) => {
           const user: User = context.currentUser;
-
           const {
             RideStatusSubscription: { driverId, passengerId }
           } = payload;
