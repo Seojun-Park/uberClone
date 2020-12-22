@@ -11,6 +11,7 @@ import {
     GetRideVariables,
     RequestRide,
     RequestRideVariables,
+    StatusOptions,
     UpdateRideStatus,
     UpdateRideStatusVariables
 } from '../../types/api';
@@ -152,6 +153,10 @@ const PassengerHomeContainer: FC<IProps> = ({
 
     const [cancelRideMutation] = useMutation<UpdateRideStatus, UpdateRideStatusVariables>(
         UPDATE_RIDE_STATUS, {
+        variables: {
+            rideId: ride.id,
+            status: StatusOptions.CANCELED
+        },
         onCompleted: () => {
             setRideId(undefined);
             setReqButton(false);

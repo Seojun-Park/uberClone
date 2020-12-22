@@ -42,6 +42,7 @@ const DriverHomeContainer: FC<IProps> = ({ history }) => {
         },
         onSubscriptionData: ({ subscriptionData }) => {
             const { data, error } = subscriptionData;
+            console.log(data)
             if (data) {
                 const ride = data.RideStatusSubscription;
                 if (ride) {
@@ -56,6 +57,8 @@ const DriverHomeContainer: FC<IProps> = ({ history }) => {
         }
     })
 
+    console.log(currentRide);
+
     const [acceptRideMutation] = useMutation<AcceptRide, AcceptRideVariables>(ACCEPT_RIDE)
 
     const onCancelHandler = () => {
@@ -69,6 +72,7 @@ const DriverHomeContainer: FC<IProps> = ({ history }) => {
         acceptRideMutation({ variables: { rideId } })
         history.push(`/ride/${rideId}`)
     }
+
     return (
 
         <DriverHomePresenter

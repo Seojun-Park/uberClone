@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/client'
+import { useMutation, useQuery } from '@apollo/client'
 import React, { FC, useEffect, useState } from 'react'
 import { RouteComponentProps } from 'react-router-dom'
 import HomePresenter from './HomePresenter'
@@ -6,6 +6,8 @@ import { ME } from '../../sharedQueries'
 import * as S from './HomeStyles'
 import { toast } from 'react-toastify'
 import { generateMarker } from '../../Hooks/MapHelper'
+import { ReportMovement, ReportMovementVariables } from '../../types/api'
+import { REPORT_MOVEMENT } from './HomeQueries'
 
 interface IProps extends RouteComponentProps {
 }
@@ -32,6 +34,18 @@ const HomeContainer: FC<IProps> = ({ history }): any => {
             }
         }
     })
+    const [reportMovementMutation] = useMutation<ReportMovement, ReportMovementVariables>(
+        REPORT_MOVEMENT, {
+        variables: {
+            lastLat: coords.lat,
+            lastLng: coords.lng
+        }, onCompleted: ({ ReportMovement: { ok, err } }) => {
+            if (!ok) {
+                toast.error(err);
+            }
+        }
+    }
+    )
 
     useEffect(() => {
         if (map) {
@@ -57,7 +71,7 @@ const HomeContainer: FC<IProps> = ({ history }): any => {
                     const { coords: { latitude: lat, longitude: lng } } = pos
                     userMarker.setPosition({ lat, lng })
                     setCoords({ lat, lng })
-                    // mutation
+                    reportMovementMutation();
                 },
                 () => {
                     toast.error("Can not find where you are at")
@@ -68,16 +82,16 @@ const HomeContainer: FC<IProps> = ({ history }): any => {
                 navigator.geolocation.clearWatch(watchId)
             }
         }
-    }, [map, userMarker, setCoords])
+    }, [map, userMarker, setCoords, reportMovementMutation])
 
-    const minsAfterSignUp = (createAt: string): number => {
-        const current = new Date();
-        const createdAt = new Date(parseInt(createAt, 10));
-        const diff = current.getTime() - createdAt.getTime();
-        const secDiff = diff / 1000;
-        const minDiff = secDiff / 60;
-        return minDiff
-    }
+    // const minsAfterSignUp = (createAt: string): number => {
+    //     const current = new Date();
+    //     const createdAt = new Date(parseInt(createAt, 10));
+    //     const diff = current.getTime() - createdAt.getTime();
+    //     const secDiff = diff / 1000;
+    //     const minDiff = secDiff / 60;
+    //     return minDiff
+    // }
 
 
 

@@ -298,6 +298,31 @@ export interface updateProfileVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: ReportMovement
+// ====================================================
+
+export interface ReportMovement_ReportMovement {
+  __typename: "ReportMovementResponse";
+  ok: boolean;
+  err: string | null;
+}
+
+export interface ReportMovement {
+  ReportMovement: ReportMovement_ReportMovement;
+}
+
+export interface ReportMovementVariables {
+  lastOrientation?: number | null;
+  lastLng?: number | null;
+  lastLat?: number | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: toggleDrivingMode
 // ====================================================
 
