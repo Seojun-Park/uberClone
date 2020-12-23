@@ -120,7 +120,7 @@ const PassengerHomeContainer: FC<IProps> = ({
     useEffect(() => {
         if (data) {
             toast.info("Found drivers near you")
-            window.location.reload();
+            // window.location.reload();
         }
     }, [data])
 
