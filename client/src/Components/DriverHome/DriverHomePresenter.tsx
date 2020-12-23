@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC, useEffect } from 'react'
 import { IRequest } from './DriverHomeContainer'
 import * as S from './DriverHomeStyle'
 import PopUp from '../PopUp'
