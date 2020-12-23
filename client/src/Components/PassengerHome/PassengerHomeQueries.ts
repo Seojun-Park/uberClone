@@ -49,16 +49,3 @@ export const GET_NEARBY_DRIVERS = gql`
     }
   }
 `;
-
-export const GET_RIDE = gql`
-  query GetRide($rideId: Int!) {
-    GetRide(rideId: $rideId) {
-      ok
-      err
-      ride {
-        id
-        status
-      }
-    }
-  }
-`;

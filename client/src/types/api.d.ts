@@ -177,36 +177,6 @@ export interface GetNearbyDrivers {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: GetRide
-// ====================================================
-
-export interface GetRide_GetRide_ride {
-  __typename: "Ride";
-  id: number;
-  status: string;
-}
-
-export interface GetRide_GetRide {
-  __typename: "GetRideResponse";
-  ok: boolean;
-  err: string | null;
-  ride: GetRide_GetRide_ride | null;
-}
-
-export interface GetRide {
-  GetRide: GetRide_GetRide;
-}
-
-export interface GetRideVariables {
-  rideId: number;
-}
-
-/* tslint:disable */
-/* eslint-disable */
-// @generated
-// This file was automatically generated and should not be edited.
-
-// ====================================================
 // GraphQL mutation operation: toggleFav
 // ====================================================
 
@@ -622,6 +592,61 @@ export interface UpdateRideStatus {
 export interface UpdateRideStatusVariables {
   rideId: number;
   status: StatusOptions;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: GetRide
+// ====================================================
+
+export interface GetRide_GetRide_ride_driver {
+  __typename: "User";
+  id: number;
+  fullName: string | null;
+  profilePhoto: string | null;
+}
+
+export interface GetRide_GetRide_ride_passenger {
+  __typename: "User";
+  id: number;
+  fullName: string | null;
+  profilePhoto: string | null;
+}
+
+export interface GetRide_GetRide_ride {
+  __typename: "Ride";
+  id: number;
+  status: string;
+  pickUpAddress: string;
+  dropOffAddress: string;
+  price: number | null;
+  distance: string | null;
+  duration: string | null;
+  driver: GetRide_GetRide_ride_driver | null;
+  passenger: GetRide_GetRide_ride_passenger | null;
+  chatId: number | null;
+  rideImage: string | null;
+  createdAt: string;
+  updatedAt: string | null;
+}
+
+export interface GetRide_GetRide {
+  __typename: "GetRideResponse";
+  ok: boolean;
+  err: string | null;
+  ride: GetRide_GetRide_ride | null;
+}
+
+export interface GetRide {
+  GetRide: GetRide_GetRide;
+}
+
+export interface GetRideVariables {
+  rideId: number;
 }
 
 /* tslint:disable */

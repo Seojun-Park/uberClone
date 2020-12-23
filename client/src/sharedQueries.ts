@@ -56,3 +56,35 @@ export const UPDATE_RIDE_STATUS = gql`
     }
   }
 `;
+
+export const GET_RIDE = gql`
+  query GetRide($rideId: Int!) {
+    GetRide(rideId: $rideId) {
+      ok
+      err
+      ride {
+        id
+        status
+        pickUpAddress
+        dropOffAddress
+        price
+        distance
+        duration
+        driver {
+          id
+          fullName
+          profilePhoto
+        }
+        passenger {
+          id
+          fullName
+          profilePhoto
+        }
+        chatId
+        rideImage
+        createdAt
+        updatedAt
+      }
+    }
+  }
+`;

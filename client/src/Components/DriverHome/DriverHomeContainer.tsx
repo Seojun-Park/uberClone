@@ -2,6 +2,7 @@ import { useMutation, useQuery, useSubscription } from '@apollo/client'
 import React, { FC, useEffect, useState } from 'react'
 import { RouteComponentProps, withRouter } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import { GET_RIDE } from '../../sharedQueries'
 import {
     RideStatusSubscription,
     RideStatusSubscription_RideStatusSubscription,
@@ -9,7 +10,6 @@ import {
     AcceptRide,
     AcceptRideVariables
 } from '../../types/api'
-import { GET_RIDE } from '../PassengerHome/PassengerHomeQueries'
 import DriverHomePresenter from './DriverHomePresenter'
 import { ACCEPT_RIDE, GET_NEARBY_RIDES, RIDE_SUBSCRIPTION } from './DriverHomeQueries'
 

@@ -4,7 +4,7 @@ import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { generateMarker, getAddress, getGeoCode, ICoords, renderPath } from '../../Hooks/MapHelper';
 import useInput from '../../Hooks/useInput';
-import { UPDATE_RIDE_STATUS } from '../../sharedQueries';
+import { GET_RIDE, UPDATE_RIDE_STATUS } from '../../sharedQueries';
 import {
     GetNearbyDrivers,
     GetRide,
@@ -18,7 +18,6 @@ import PassengerHomePresenter from './PassengerHomePresenter'
 import {
     REQUEST_RIDE,
     GET_NEARBY_DRIVERS,
-    GET_RIDE
 } from './PassengerHomeQueries';
 
 interface IProps extends RouteComponentProps {
