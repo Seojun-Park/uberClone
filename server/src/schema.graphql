@@ -157,6 +157,7 @@ type Ride {
 type UpdateRideStatusResponse {
   ok: Boolean!
   err: String
+  rideId: Int
 }
 
 enum StatusOptions {

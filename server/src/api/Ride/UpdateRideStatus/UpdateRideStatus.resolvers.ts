@@ -41,24 +41,28 @@ const resolvers: Resolvers = {
               });
               return {
                 ok: true,
-                err: null
+                err: null,
+                rideId: ride.id
               };
             } else {
               return {
                 ok: false,
-                err: "Not authrorized person to update ride"
+                err: "Not authrorized person to update ride",
+                rideId: null
               };
             }
           } else {
             return {
               ok: false,
-              err: "no ride has been found"
+              err: "no ride has been found",
+              rideId: null
             };
           }
         } catch (error) {
           return {
             ok: false,
-            err: error.message
+            err: error.message,
+            rideId: null
           };
         }
       }
