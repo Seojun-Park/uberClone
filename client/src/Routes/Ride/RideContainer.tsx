@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from "@apollo/client";
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { toast } from "react-toastify";
 import { forceHistory } from "../../Hooks/forceHistory";
@@ -19,8 +19,10 @@ import RidePresenter from "./RidePresenter";
 
 interface IProps extends RouteComponentProps<any> { }
 
-const RideContainer: FC<IProps> = ({ match }) => {
+const RideContainer: FC<IProps> = ({ match, history }) => {
   const [ride, setRide] = useState<GetRide_GetRide_ride>();
+  const [isDriver, setIsDriver] = useState<boolean>(false)
+  const [profile, setProfile] = useState<GetRide_GetRide_ride_driver | GetRide_GetRide_ride_passenger>();
   const [user, setUser] = useState<any>();
   useQuery<me>(ME, {
     fetchPolicy: "network-only",
@@ -43,6 +45,7 @@ const RideContainer: FC<IProps> = ({ match }) => {
     }
   })
 
+
   const [updateRideMutation] = useMutation<UpdateRideStatus, UpdateRideStatusVariables>(UPDATE_RIDE_STATUS)
   const onDriverButton = (status: StatusOptions) => {
     updateRideMutation({
@@ -52,7 +55,6 @@ const RideContainer: FC<IProps> = ({ match }) => {
       }
     })
   }
-  console.log(ride);
 
   const buttonHandler = (
     isDriver: boolean,
@@ -79,6 +81,18 @@ const RideContainer: FC<IProps> = ({ match }) => {
       }
     }
   }
+
+  useEffect(() => {
+    if (user && ride && ride.driver && ride.passenger) {
+      if (user.isDriving && (ride.driver === user.id)) {
+        setProfile(ride.driver)
+        setIsDriver(true);
+      } else {
+        setProfile(ride.passenger);
+      }
+    }
+  }, [user, ride])
+
   if (loading) {
     return (
       <>
@@ -87,7 +101,15 @@ const RideContainer: FC<IProps> = ({ match }) => {
     )
   } else {
     return (
-      <RidePresenter ride={ride} user={user} />
+      <RidePresenter
+        ride={ride}
+        user={user}
+        profile={profile}
+        onDriverButton={onDriverButton}
+        history={history}
+        buttonHandler={buttonHandler}
+        isDriver={isDriver}
+      />
     )
   }
 }

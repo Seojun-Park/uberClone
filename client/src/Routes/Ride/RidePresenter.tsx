@@ -1,20 +1,41 @@
 import React, { FC } from "react";
+import { GetRide_GetRide_ride, GetRide_GetRide_ride_driver, GetRide_GetRide_ride_passenger } from "../../types/api";
+import { StatusOptions } from "../../types/enums";
 import * as S from './RideStyles'
 
 interface IProps {
   user: any
-  ride?: any
+  ride: any
+  profile?: GetRide_GetRide_ride_driver | GetRide_GetRide_ride_passenger
+  onDriverButton: (status: StatusOptions) => void
+  history: any
+  buttonHandler: (
+    isDriver: boolean,
+    ride?: GetRide_GetRide_ride | undefined
+  ) => {
+    value: string,
+    onClick?: any | undefined
+  }
+  isDriver: boolean
 }
 
-const RidePresenter: FC<IProps> = ({ ride, user }) => {
+const RidePresenter: FC<IProps> = ({
+  ride,
+  user,
+  profile,
+  onDriverButton,
+  history,
+  buttonHandler,
+  isDriver
+}) => {
   return (
     <S.Container>
       {ride && user && (
         <>
           <S.Title>Passenger</S.Title>
           <S.Passenger>
-            <S.Img src={ride.passenger.profilePhoto!} />
-            <S.Data>{ride.passenger.fullName!}</S.Data>
+            <S.Img src={ride.passenger.profilePhoto} />
+            <S.Data>{ride.passenger.fullName}</S.Data>
           </S.Passenger>
           {ride.driver && (
             <>
