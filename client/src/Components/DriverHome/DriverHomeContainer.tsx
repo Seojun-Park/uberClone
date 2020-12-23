@@ -82,7 +82,6 @@ const DriverHomeContainer: FC<IProps> = ({ history }) => {
             variables: { rideId },
             refetchQueries: [{ query: GET_RIDE, variables: { rideId } }]
         })
-        // history.push(`/ride/${rideId}`)
         window.location.replace(`/ride/${rideId}`)
     }
 
