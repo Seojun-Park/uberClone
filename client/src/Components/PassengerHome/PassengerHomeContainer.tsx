@@ -62,7 +62,7 @@ const PassengerHomeContainer: FC<IProps> = ({
     const { refetch } = useQuery<GetRide, GetRideVariables>(GET_RIDE, {
         fetchPolicy: "network-only",
         variables: {
-            rideId: rideId || -1
+            rideId: rideId || user.currentRideId || -1
         }, onCompleted: ({ GetRide }) => {
             if (GetRide && GetRide.ok && GetRide.ride) {
                 setRide(GetRide.ride)
@@ -116,9 +116,11 @@ const PassengerHomeContainer: FC<IProps> = ({
         },
         pollInterval: 1000
     })
+
     useEffect(() => {
         if (data) {
             toast.info("Found drivers near you")
+            window.location.reload();
         }
     }, [data])
 

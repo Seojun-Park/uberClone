@@ -1,7 +1,10 @@
-import React from "react";
+import React, { FC } from "react";
+import { RouteComponentProps } from "react-router-dom";
 import RidePresenter from "./RidePresenter";
 
-const RideContainer = () => {
+interface IProps extends RouteComponentProps<any> { }
+
+const RideContainer: FC<IProps> = () => {
   return (
     <RidePresenter />
   )
