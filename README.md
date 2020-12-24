@@ -46,7 +46,7 @@
 
 ### LoggedOut:
 
-    - [ ] Home
+    - [x] Home
     - [x] Phone Login
     - [x] Verify Phone Login
     - [x] Social Login
@@ -54,7 +54,8 @@
 ### LoggedIn :
 
     - [x] Home
-    - [ ] Ride
+    - [x] Ride
+    - [x] Ride
     - [x] Edit Account
     - [x] Settings
     - [ ] Saved Places
