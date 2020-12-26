@@ -255,9 +255,15 @@ export interface addPlaceVariables {
 // GraphQL query operation: GetChatById
 // ====================================================
 
+export interface GetChatById_GetChatById_chat_messages_user {
+  __typename: "User";
+  id: number;
+}
+
 export interface GetChatById_GetChatById_chat_messages {
   __typename: "Message";
   id: number;
+  user: GetChatById_GetChatById_chat_messages_user;
   text: string;
   createdAt: string;
 }
@@ -265,6 +271,7 @@ export interface GetChatById_GetChatById_chat_messages {
 export interface GetChatById_GetChatById_chat {
   __typename: "Chat";
   id: number;
+  rideId: number | null;
   messages: (GetChatById_GetChatById_chat_messages | null)[] | null;
   passengerId: number | null;
   driverId: number | null;
