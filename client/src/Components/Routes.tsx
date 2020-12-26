@@ -12,6 +12,7 @@ import SignUp from '../Routes/SignUp'
 import SocialLogin from "../Routes/SocialLogin";
 import FindAddress from '../Routes/FindAddress'
 import VerifyEmail from '../Routes/VerifyEmail'
+import Chat from '../Routes/Chat'
 
 const LoggedInRoutes = () => (
   <Switch>
@@ -23,6 +24,7 @@ const LoggedInRoutes = () => (
     <Route path="/settings" component={Settings} />
     <Route path="/editAccount/:email" component={EditAccount} />
     <Route path="/FindAddress" component={FindAddress} />
+    <Route path="/chat/:chatId" component={Chat} />
     <Redirect from="*" to="/" />
   </Switch>
 );
