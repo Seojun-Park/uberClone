@@ -33,6 +33,8 @@ const RidePresenter: FC<IProps> = ({
     <S.Container>
       {ride && user && (
         <>
+          <S.StatusTitle>Driving Status</S.StatusTitle>
+          <Button {...buttonHandler(isDriver, ride)} />
           <S.Title>Passenger</S.Title>
           <S.Passenger>
             <S.Img src={ride.passenger.profilePhoto} />
@@ -60,9 +62,8 @@ const RidePresenter: FC<IProps> = ({
           <S.Title>Status</S.Title>
           <S.Data>{ride.status}</S.Data>
           <S.Buttons>
-            <Button {...buttonHandler(isDriver, ride)} />
             {ride.status !== StatusOptions.ONROUTE && (
-              <S.Button type="button" onClick={() => onDriverButton(StatusOptions.CANCELED)} value="Cancel" />
+              <S.CancelButton type="button" onClick={() => onDriverButton(StatusOptions.CANCELED)} value="Cancel" />
             )}
           </S.Buttons>
         </>

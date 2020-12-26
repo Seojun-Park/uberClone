@@ -13,6 +13,15 @@ export const Title = styled.h4`
   }
 `;
 
+export const StatusTitle = styled.h3`
+  font-weight: 800;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  &:first-child {
+    margin-top: 0;
+  }
+`;
+
 export const Data = styled.span`
   color: ${(props) => props.theme.blueColor};
 `;
@@ -39,6 +48,28 @@ export const Buttons = styled.div`
 
 export const Button = styled.input`
   background-color: black;
+  color: white;
+  text-transform: uppercase;
+  padding: 15px 0;
+  font-size: 16px;
+  border: 0;
+  cursor: pointer;
+  font-weight: 500;
+  text-align: center;
+  &:active,
+  &:focus {
+    outline: none;
+  }
+  &:disabled {
+    opacity: 0.8;
+  }
+  margin: 15px auto;
+  height: auto;
+  width: 100%;
+`;
+
+export const CancelButton = styled.input`
+  background-color: red;
   color: white;
   text-transform: uppercase;
   padding: 15px 0;
