@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import Button from "../../Components/Button";
 import { GetRide_GetRide_ride, GetRide_GetRide_ride_driver, GetRide_GetRide_ride_passenger } from "../../types/api";
 import { StatusOptions } from "../../types/enums";
 import * as S from './RideStyles'
@@ -59,6 +60,10 @@ const RidePresenter: FC<IProps> = ({
           <S.Title>Status</S.Title>
           <S.Data>{ride.status}</S.Data>
           <S.Buttons>
+            <Button {...buttonHandler(isDriver, ride)} />
+            {ride.status !== StatusOptions.ONROUTE && (
+              <S.Button type="button" onClick={() => onDriverButton(StatusOptions.CANCELED)} value="Cancel" />
+            )}
           </S.Buttons>
         </>
       )}

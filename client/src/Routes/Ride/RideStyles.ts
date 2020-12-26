@@ -32,9 +32,12 @@ export const Passenger = styled.div`
 
 export const Buttons = styled.div`
   margin: 30px 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `;
 
-export const Button = styled.button`
+export const Button = styled.input`
   background-color: black;
   color: white;
   text-transform: uppercase;
@@ -51,12 +54,11 @@ export const Button = styled.button`
   &:disabled {
     opacity: 0.8;
   }
-  position: absolute;
-  bottom: 50px;
+  /* position: absolute;
+  bottom: 20px;
   left: 0;
-  right: 0;
-  margin: auto;
-  z-index: 1;
+  right: 0; */
+  margin: 15px auto;
   height: auto;
-  width: 80%;
+  width: 100%;
 `;

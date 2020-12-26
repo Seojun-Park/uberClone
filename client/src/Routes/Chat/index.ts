@@ -1,2 +1,2 @@
 import ChatContainer from "./ChatContainer";
-export default ChatContainerChat;
+export default ChatContainer;
