@@ -30,21 +30,24 @@ const ChatContainer: FC<IProps> = ({ match }) => {
     })
     console.log(user)
 
-    // useQuery<GetChatById, GetChatByIdVariables>(GET_CHAT_BY_ID, {
-    //     onCompleted: ({ GetChatById }) => {
-    //         const { ok, err, chat } = GetChatById
-    //         if (ok && chat && chat.rideId && chat.messages && user) {
-    //             setRideId(chat.rideId)
-    //             const messages = chat.messages.map(msg => {
-    //                 if (msg) {
-    //                     return {
-    //                         ...msg,
-    //                     }
-    //                 }
-    //             })
-    //         }
-    //     }
-    // })
+    useQuery<GetChatById, GetChatByIdVariables>(GET_CHAT_BY_ID, {
+        variables: {
+            chatId: parseInt(chatId)
+        },
+        onCompleted: ({ GetChatById }) => {
+            const { ok, err, chat } = GetChatById
+            if (ok && chat && chat.rideId && chat.messages && user) {
+                setRideId(chat.rideId)
+                const messages = chat.messages.map(msg => {
+                    if (msg) {
+                        return {
+                            ...msg,
+                        }
+                    }
+                })
+            }
+        }
+    })
 
     return (
         <ChatPrenster />
