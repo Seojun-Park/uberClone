@@ -25,7 +25,9 @@ export const MESSAGE_SUBSCRIPTION = gql`
     MessageSubscription {
       id
       text
-      userid
+      user {
+        id
+      }
     }
   }
 `;

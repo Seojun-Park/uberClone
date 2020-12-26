@@ -252,6 +252,103 @@ export interface addPlaceVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: GetChatById
+// ====================================================
+
+export interface GetChatById_GetChatById_chat_messages {
+  __typename: "Message";
+  id: number;
+  text: string;
+  createdAt: string;
+}
+
+export interface GetChatById_GetChatById_chat {
+  __typename: "Chat";
+  id: number;
+  messages: (GetChatById_GetChatById_chat_messages | null)[] | null;
+  passengerId: number | null;
+  driverId: number | null;
+  createdAt: string;
+}
+
+export interface GetChatById_GetChatById {
+  __typename: "GetChatByIdResponse";
+  ok: boolean;
+  err: string | null;
+  chat: GetChatById_GetChatById_chat | null;
+}
+
+export interface GetChatById {
+  GetChatById: GetChatById_GetChatById;
+}
+
+export interface GetChatByIdVariables {
+  chatId: number;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL subscription operation: MessageSubscription
+// ====================================================
+
+export interface MessageSubscription_MessageSubscription_user {
+  __typename: "User";
+  id: number;
+}
+
+export interface MessageSubscription_MessageSubscription {
+  __typename: "Message";
+  id: number;
+  text: string;
+  user: MessageSubscription_MessageSubscription_user;
+}
+
+export interface MessageSubscription {
+  MessageSubscription: MessageSubscription_MessageSubscription | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: SendMessage
+// ====================================================
+
+export interface SendMessage_SendMessage_message {
+  __typename: "Message";
+  id: number;
+  text: string;
+  createdAt: string;
+}
+
+export interface SendMessage_SendMessage {
+  __typename: "SendMessageResponse";
+  ok: boolean;
+  err: string | null;
+  message: SendMessage_SendMessage_message | null;
+}
+
+export interface SendMessage {
+  SendMessage: SendMessage_SendMessage;
+}
+
+export interface SendMessageVariables {
+  text: string;
+  chatId: number;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: updateProfile
 // ====================================================
 
