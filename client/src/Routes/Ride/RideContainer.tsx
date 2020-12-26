@@ -87,7 +87,6 @@ const RideContainer: FC<IProps> = ({ match, history }) => {
       if (ride && ride.driver && ride.passenger) {
         if (user.isDriving && (ride.driver === user.id)) {
           setProfile(ride.driver)
-          setIsDriver(true);
         } else {
           setProfile(ride.passenger);
         }
@@ -95,6 +94,11 @@ const RideContainer: FC<IProps> = ({ match, history }) => {
     }
   }, [user, ride, setProfile, setIsDriver])
 
+  useEffect(() => {
+    if (user && user.isDriving) {
+      setIsDriver(true)
+    }
+  }, [user, setIsDriver])
   console.log(user, ride, isDriver)
 
   if (loading) {
