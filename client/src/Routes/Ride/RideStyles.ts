@@ -13,6 +13,11 @@ export const Title = styled.h4`
   }
 `;
 
+export const RideHeader = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
 export const StatusTitle = styled.h3`
   font-weight: 800;
   margin-top: 30px;

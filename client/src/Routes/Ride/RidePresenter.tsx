@@ -33,8 +33,11 @@ const RidePresenter: FC<IProps> = ({
     <S.Container>
       {ride && user && (
         <>
-          <S.StatusTitle>Driving Status</S.StatusTitle>
-          <Button {...buttonHandler(isDriver, ride)} />
+          <S.RideHeader>
+            <S.StatusTitle>Driving Status</S.StatusTitle>
+            <S.Button value="Send Message" onClick={() => history.push(`/chat/${ride.chatId}`)} />
+            <Button {...buttonHandler(isDriver, ride)} />
+          </S.RideHeader>
           <S.Title>Passenger</S.Title>
           <S.Passenger>
             <S.Img src={ride.passenger.profilePhoto} />
