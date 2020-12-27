@@ -17,12 +17,14 @@ const resolvers: Resolvers = {
         { req, pubSub }
       ): Promise<SendMessageResponse> => {
         const user: User = req.user;
+        console.log(user);
+        const { text, chatId } = args;
         try {
-          const chat = await Chat.findOne({ id: args.chatId });
+          const chat = await Chat.findOne({ id: chatId });
           if (chat) {
             if (chat.passengerId === user.id || chat.driverId === user.id) {
               const message = await Message.create({
-                text: args.text,
+                text,
                 chat,
                 user
               }).save();
