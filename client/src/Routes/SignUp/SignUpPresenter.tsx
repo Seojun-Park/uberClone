@@ -1,4 +1,4 @@
-import React, { FC, ReactElement } from 'react'
+import React, { FC } from 'react'
 import Helmet from 'react-helmet'
 import Button from '../../Components/Button'
 import Header from '../../Components/Header'
@@ -31,6 +31,7 @@ const renderInputs = (inputArr: IInputHandler[]) => {
                     type={input.type || "text"}
                     value={input.value}
                     onChange={input.onChange}
+                    placeholder={input.label}
                 />
             </div>
         );
@@ -44,7 +45,8 @@ const SignUpPresenter: FC<SignUpProps> = ({
     password,
     phoneNumber,
     loading,
-    onSubmit }): ReactElement => {
+    onSubmit
+}) => {
     return (
         <S.Container>
             <Helmet><title>Sign Up</title></Helmet>

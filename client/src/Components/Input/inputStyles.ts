@@ -8,6 +8,7 @@ export const Container = styled.input`
   padding-bottom: 10px;
   font-weight: 500;
   transition: border-bottom 0.1s linear;
+  margin-bottom: 25px;
   &:-webkit-autofill {
     box-shadow: 0 0 0px 1000px white inset !important;
   }
