@@ -8,14 +8,17 @@ import { emailSignUp, emailSignUpVariables, requestEmailVerification } from '../
 import { toast } from 'react-toastify';
 import { userLogIn } from '../../apollo/authResolvers';
 
+interface IProps extends RouteComponentProps<{}, {}, any> { }
 
-const SignUpContainer: React.FC<RouteComponentProps> = ({ history: { location } }) => {
-    const { phoneNumber }: any = location.state
-    const [firstName, fNameChange] = useInput("")
-    const [lastName, lNameChange] = useInput("")
-    const [email, emailChange] = useInput("")
-    const [password, passwordChange] = useInput("")
-    const [profilePhoto, profilePhotoChange] = useInput("")
+const SignUpContainer: React.FC<IProps> = ({ history, location }) => {
+    if (!location.state && !location.state.phoneNumber) {
+        history.push("/");
+    }
+    const { state: { phoneNumber } }: any = location
+    const [firstName, setFirstName] = useInput("")
+    const [lastName, setLastName] = useInput("")
+    const [email, setEmail] = useInput("")
+    const [password, setPassword] = useInput("")
     const [requestEmailVerification] = useMutation<requestEmailVerification>(REQUEST_EMAIL_VERYFICATION);
     const [emailSignUpMutation, { loading }] = useMutation<emailSignUp, emailSignUpVariables>(EMAIL_SIGNUP, {
         variables: {
@@ -23,8 +26,7 @@ const SignUpContainer: React.FC<RouteComponentProps> = ({ history: { location } 
             lastName,
             email,
             password,
-            phoneNumber,
-            profilePhoto,
+            phoneNumber
         },
         onCompleted: async ({ EmailSignUp: result }) => {
             const { ok, error, token } = result
@@ -50,16 +52,27 @@ const SignUpContainer: React.FC<RouteComponentProps> = ({ history: { location } 
 
     return (
         <SignUpPresenter
-            firstName={firstName}
-            lastName={lastName}
-            email={email}
-            password={password}
-            profilePhoto={profilePhoto}
-            fNameChange={fNameChange}
-            lNameChange={lNameChange}
-            emailChange={emailChange}
-            passwordChange={passwordChange}
-            profilePhotoChange={profilePhotoChange}
+            firstName={{
+                label: "First Name",
+                onChange: setFirstName,
+                value: firstName
+            }}
+            lastName={{
+                label: "Last Name",
+                onChange: setLastName,
+                value: lastName
+            }}
+            email={{
+                label: "Email",
+                onChange: setEmail,
+                value: email
+            }}
+            password={{
+                label: "Password",
+                onChange: setPassword,
+                type: "password",
+                value: password
+            }}
             phoneNumber={phoneNumber}
             loading={loading}
             onSubmit={onSubmit} />

@@ -4,20 +4,37 @@ import Button from '../../Components/Button'
 import Header from '../../Components/Header'
 import * as S from './SignUpStyles'
 
+interface IInputHandler {
+    label: string;
+    onChange: (event: React.ChangeEvent<Element>) => any;
+    type?: string;
+    value: string;
+}
+
+
 type SignUpProps = {
     firstName: any
     lastName: any,
     email: any,
     password: any,
-    profilePhoto: any,
     phoneNumber: any,
-    fNameChange: any,
-    lNameChange: any,
-    emailChange: any,
-    passwordChange: any,
-    profilePhotoChange: any,
     loading: boolean,
     onSubmit: any
+}
+
+const renderInputs = (inputArr: IInputHandler[]) => {
+    return inputArr.map(input => {
+        return (
+            <div key={input.label}>
+                <S.Label label={input.label} />
+                <S.ExtendedInput
+                    type={input.type || "text"}
+                    value={input.value}
+                    onChange={input.onChange}
+                />
+            </div>
+        );
+    });
 }
 
 const SignUpPresenter: FC<SignUpProps> = ({
@@ -25,53 +42,21 @@ const SignUpPresenter: FC<SignUpProps> = ({
     lastName,
     email,
     password,
-    profilePhoto,
     phoneNumber,
-    fNameChange,
-    lNameChange,
-    emailChange,
-    passwordChange,
-    profilePhotoChange,
     loading,
     onSubmit }): ReactElement => {
     return (
         <S.Container>
-            <Helmet>Sign Up</Helmet>
+            <Helmet><title>Sign Up</title></Helmet>
             <Header title="Sign Up" />
-            <S.ExtendedForm>
-                <S.ExtendedInput
-                    value={firstName}
-                    placeholder={"First Name"}
-                    onChange={fNameChange}
-                    name="firstName"
-                />
-                <S.ExtendedInput
-                    value={lastName}
-                    placeholder={"Last Name"}
-                    onChange={lNameChange}
-                    name="lastName"
-                />
-                <S.ExtendedInput
-                    value={email}
-                    placeholder={"Email Address"}
-                    onChange={emailChange}
-                    type="email"
-                    name="email"
-                />
-                <S.ExtendedInput
-                    value={password}
-                    placeholder={"Password"}
-                    onChange={passwordChange}
-                    type="password"
-                    name="password"
-                />
-                <S.ExtendedInput
-                    value={phoneNumber}
-                    placeholder={"Phone Number"}
-                    onChange={null}
-                    name="phonNumber"
-                />
-                <Button value={loading ? "Signing Up..." : "Submit"} onClick={onSubmit} disabled={loading} />
+            <S.ExtendedForm submitFn={onSubmit}>
+                {renderInputs([
+                    firstName,
+                    lastName,
+                    email,
+                    password
+                ])}
+                <Button value={loading ? "Signing Up..." : "Submit"} disabled={loading} />
             </S.ExtendedForm>
         </S.Container>
     )

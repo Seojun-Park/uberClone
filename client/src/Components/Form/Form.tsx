@@ -1,20 +1,21 @@
 import { FC } from 'react';
-
-type FormProp = {
+interface IProps {
     submitFn?: any;
     className?: string
 }
 
-const Form: FC<FormProp> = ({ submitFn, className, children }) => (
-    <form
-        className={className}
-        onSubmit={e => {
-            e.preventDefault();
-            submitFn();
-        }}
-    >
-        {children}
-    </form>
-)
+const Form: FC<IProps> = ({ submitFn, className, children }) => {
+    return (
+        <form
+            className={className}
+            onSubmit={event => {
+                event.preventDefault()
+                submitFn();
+            }}
+        >
+            {children}
+        </form>
+    )
+}
 
 export default Form

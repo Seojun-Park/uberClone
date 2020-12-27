@@ -3,7 +3,6 @@ import BackArrow from '../../Hooks/BackArrow'
 
 export const Container = styled.div`
 height: 100vh;
-padding: 50px 20px;
 `
 
 export const BackArrowExtended = styled(BackArrow)`
@@ -15,6 +14,7 @@ export const BackArrowExtended = styled(BackArrow)`
 export const Title = styled.h2`
   font-size: 25px;
   margin-bottom: 40px;
+  margin-left: 30px;
 `;
 
 export const CountrySelect = styled.select`
@@ -31,8 +31,6 @@ export const CountrySelect = styled.select`
 `;
 
 export const CountryOption = styled.option``;
-
-export const Form = styled.form``;
 
 export const Button = styled.button`
   box-shadow: 0 18px 35px rgba(50, 50, 93, 0.1), 0 8px 15px rgba(0, 0, 0, 0.07);

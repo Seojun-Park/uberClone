@@ -26,27 +26,24 @@ const PhoneLoginContainer: React.FC<RouteComponentProps> = ({ history }) => {
                     history.push({
                         pathname: "/verifyPhone",
                         state: {
-                            phone
+                            phoneNumber: phone
                         }
                     })
                 }, 2000)
             } else {
                 toast.error(error)
+                history.push("/phoneLogin")
             }
         }
     }
     )
 
-    const onSubmit: React.FormEventHandler = async (event) => {
-        event.preventDefault();
-        await StartPhoneVerificationMutation();
-    }
     return <PhoneLoginPresenter
         phoneNumber={phoneNumber}
         countryCode={countryCode}
         inputchange={inputChange}
         selectChange={selectChange}
-        onSubmit={onSubmit}
+        onSubmit={StartPhoneVerificationMutation}
     />
 }
 

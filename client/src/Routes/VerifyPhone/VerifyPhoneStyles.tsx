@@ -1,9 +1,10 @@
 import styled from 'styled-components'
+import Form from '../../Components/Form';
 import Input from '../../Components/Input'
 
 export const Container = styled.div``;
 
-export const Form = styled.form`
+export const ExtendedForm = styled(Form)`
   padding: 0px 40px;
 `;
 

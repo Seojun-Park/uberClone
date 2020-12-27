@@ -3,7 +3,7 @@ import Helmet from 'react-helmet'
 import { Link } from 'react-router-dom'
 import * as S from './AuthHomeStyles'
 
-const AuthHomePresenter = ({ match }: any) => {
+const AuthHomePresenter = () => {
     return (
         <S.Container>
             <Helmet>
