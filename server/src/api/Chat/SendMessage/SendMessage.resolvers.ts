@@ -19,7 +19,6 @@ const resolvers: Resolvers = {
         const user: User = req.user;
         try {
           const chat = await Chat.findOne({ id: args.chatId });
-          console.log(chat);
           if (chat) {
             if (chat.passengerId === user.id || chat.driverId === user.id) {
               const message = await Message.create({

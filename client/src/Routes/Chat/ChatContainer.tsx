@@ -29,9 +29,11 @@ const ChatContainer: FC<IProps> = ({ match }) => {
         },
         onCompleted: ({ GetChatById }) => {
             const { ok, err, chat } = GetChatById
+            console.log(chat)
             if (ok && chat && chat.rideId && chat.messages && user) {
                 setRideId(chat.rideId)
                 const messages = chat.messages.map(msg => {
+                    console.log(msg)
                     if (msg) {
                         return {
                             ...msg,
