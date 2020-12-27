@@ -99,7 +99,6 @@ const RideContainer: FC<IProps> = ({ match, history }) => {
       setIsDriver(true)
     }
   }, [user, setIsDriver])
-  console.log(user, ride, isDriver)
 
   if (loading) {
     return (

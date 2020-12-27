@@ -17,7 +17,6 @@ const resolvers: Resolvers = {
         { req, pubSub }
       ): Promise<SendMessageResponse> => {
         const user: User = req.user;
-        console.log(user);
         try {
           const chat = await Chat.findOne({ id: args.chatId });
           console.log(chat);
@@ -31,7 +30,6 @@ const resolvers: Resolvers = {
               pubSub.publish("newChatMessage", {
                 MessageSubscription: message
               });
-              console.log(message);
               return {
                 ok: true,
                 err: null,
