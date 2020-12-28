@@ -51,7 +51,7 @@ const SignUpPresenter: FC<SignUpProps> = ({
         <S.Container>
             <Helmet><title>Sign Up</title></Helmet>
             <Header title="Sign Up" />
-            <S.ExtendedForm submitFn={onSubmit}>
+            <S.ExtendedForm submitFn={onSubmit} >
                 {renderInputs([
                     firstName,
                     lastName,

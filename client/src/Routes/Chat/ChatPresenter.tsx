@@ -34,7 +34,7 @@ const ChatPresenter: FC<IProps> = ({
         <S.Container>
             <Header title="Chat" backTo={`/ride/${rideId}`} />
             <S.Chat ref={ref}>{messages && renderMessage(messages)}</S.Chat>
-            <S.FormExtend onSubmit={() => sendMessageMutation}>
+            <S.FormExtend submitFn={sendMessageMutation}>
                 <S.Input
                     value={message}
                     onChange={onChangeMessage}

@@ -44,10 +44,13 @@ const SignUpContainer: React.FC<IProps> = ({ history, location }) => {
     })
 
 
-    const onSubmit: React.FormEventHandler = async (event) => {
-        event.preventDefault()
-        await requestEmailVerification();
-        await emailSignUpMutation()
+    const onSubmit: React.FormEventHandler = () => {
+        if (!password){
+            toast.error("you have to type password")
+            return ;
+        }
+        requestEmailVerification();
+        emailSignUpMutation()
     }
 
     return (

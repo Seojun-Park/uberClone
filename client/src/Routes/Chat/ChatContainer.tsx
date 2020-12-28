@@ -30,43 +30,36 @@ const ChatContainer: FC<IProps> = ({ match }) => {
     const [rideId, setRideId] = useState<number>(-1);
     const [message, onChangeMessage, setMessage] = useInput("")
     const [messages, setMessages] = useState<any[]>();
-    const { data } = useQuery<GetChatById, GetChatByIdVariables>(GET_CHAT_BY_ID, {
-        variables: {
-            chatId: parseInt(chatId)
-        }
-    })
     const { data: user } = useQuery<me>(ME, {
         fetchPolicy: "cache-and-network"
     })
 
-    console.log(data, chatId, user)
-
-    // useQuery<GetChatById, GetChatByIdVariables>(GET_CHAT_BY_ID, {
-    //     variables: {
-    //         chatId: parseInt(chatId)
-    //     },
-    //     onCompleted: ({ GetChatById }) => {
-    //         const { ok, err, chat } = GetChatById
-    //         console.log(chat)
-    //         if (ok && chat && chat.rideId && chat.messages && user) {
-    //             setRideId(chat.rideId)
-    //             const messages = chat.messages.map(msg => {
-    //                 console.log(msg)
-    //                 if (msg) {
-    //                     return {
-    //                         ...msg,
-    //                         mine: user.Me.user?.id === msg.user.id
-    //                     }
-    //                 } else {
-    //                     return null;
-    //                 }
-    //             })
-    //             setMessages(messages);
-    //         } else {
-    //             toast.error(err);
-    //         }
-    //     }
-    // })
+    useQuery<GetChatById, GetChatByIdVariables>(GET_CHAT_BY_ID, {
+        variables: {
+            chatId: parseInt(chatId)
+        },
+        onCompleted: ({ GetChatById }) => {
+            const { ok, err, chat } = GetChatById
+            console.log(chat)
+            if (ok && chat && chat.rideId && chat.messages && user) {
+                setRideId(chat.rideId)
+                const messages = chat.messages.map(msg => {
+                    console.log(msg)
+                    if (msg) {
+                        return {
+                            ...msg,
+                            mine: user.Me.user?.id === msg.user.id
+                        }
+                    } else {
+                        return null;
+                    }
+                })
+                setMessages(messages);
+            } else {
+                toast.error(err);
+            }
+        }
+    })
 
     useSubscription<MessageSubscription>(MESSAGE_SUBSCRIPTION, {
         onSubscriptionComplete: () => {

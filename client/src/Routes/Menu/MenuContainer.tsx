@@ -14,6 +14,7 @@ const MenuContainer: FC<MenuProps> = ({ user }) => {
     const [toggleDrivingModeMutation] = useMutation<toggleDrivingMode>(TOGGLE_DRIVING, {
         refetchQueries: [{ query: ME }],
     })
+    console.log(isDriving);
 
     const toggleDriving = () => {
         toggleDrivingModeMutation()
