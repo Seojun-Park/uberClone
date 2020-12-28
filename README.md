@@ -4,7 +4,7 @@
 
 ---
 
-<img src="./markdown/preview.gif" width="400">
+<img src="./markdown/preview.gif" width="700">
 
 ---
 
@@ -19,3 +19,5 @@
 > ### FrontEnd
 >
 > > <img src="./markdown/react.png" width="70px" alt="react">: ReactJS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <img src="./markdown/typescript.png" width="40px" alt="typescript"> : TypeScript&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="./markdown/apollo.png" width="120px" alt="apollo"> : Apollo
+
+
