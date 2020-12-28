@@ -66,10 +66,10 @@ const RidePresenter: FC<IProps> = ({
           <S.Data>{ride.status}</S.Data>
           <S.Buttons>
             {ride.status !== StatusOptions.ONROUTE && isDriver && (
-              <S.CancelButton type="button" onClick={() => onDriverButton(StatusOptions.FINISHED)} value="Finish" />
+              <S.CancelButton type="button" onClick={() => onDriverButton(StatusOptions.FINISHED)} value="Finish" bgColor="green" />
             )}
             {ride.status !== StatusOptions.ONROUTE && !isDriver && (
-              <S.CancelButton type="button" onClick={() => onDriverButton(StatusOptions.CANCELED)} value="Cancel" />
+              <S.CancelButton type="button" onClick={() => onDriverButton(StatusOptions.CANCELED)} value="Cancel" bgColor="red" />
             )}
           </S.Buttons>
         </>

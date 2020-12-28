@@ -45,15 +45,16 @@ const RideContainer: FC<IProps> = ({ match, history }) => {
     }
   })
 
-
   const [updateRideMutation] = useMutation<UpdateRideStatus, UpdateRideStatusVariables>(UPDATE_RIDE_STATUS)
   const onDriverButton = (status: StatusOptions) => {
     updateRideMutation({
       variables: {
         rideId: parseInt(match.params.number),
         status
-      }
+      },
+      refetchQueries: [{ query: GET_RIDE }]
     })
+    forceHistory.push("/")
   }
 
   const buttonHandler = (
@@ -99,6 +100,14 @@ const RideContainer: FC<IProps> = ({ match, history }) => {
       setIsDriver(true)
     }
   }, [user, setIsDriver])
+
+  useEffect(() => {
+    if (ride) {
+      if (ride.status === "FINISHED") {
+        forceHistory.push("/");
+      }
+    }
+  }, [ride])
 
   if (loading) {
     return (

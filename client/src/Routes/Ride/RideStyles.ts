@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+interface IButton {
+  bgColor: string;
+}
+
 export const Container = styled.div`
   padding: 40px;
 `;
@@ -73,8 +77,9 @@ export const Button = styled.input`
   width: 100%;
 `;
 
-export const CancelButton = styled.input`
-  background-color: red;
+export const CancelButton = styled.input<IButton>`
+  background-color: ${(props) =>
+    props.bgColor === "green" ? (props) => props.theme.greenColor : "red"};
   color: white;
   text-transform: uppercase;
   padding: 15px 0;
