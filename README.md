@@ -4,7 +4,7 @@
 
 ---
 
-<img src="./markdown/preview1.gif" width="700">
+<img src="./markdown/preview.gif" width="700">
 
 ---
 
