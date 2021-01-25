@@ -2,7 +2,8 @@
 
 ## Overview
 
-    TBU
+    Uberclone is my first project using typescript / ReactJS.
+    
 
 ## Preview
 
