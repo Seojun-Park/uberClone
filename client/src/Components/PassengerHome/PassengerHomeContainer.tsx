@@ -14,11 +14,11 @@ import {
     UpdateRideStatus,
     UpdateRideStatusVariables,
 } from '../../types/api';
+import { RIDE_SUBSCRIPTION } from '../DriverHome/DriverHomeQueries';
 import PassengerHomePresenter from './PassengerHomePresenter'
 import {
     REQUEST_RIDE,
     GET_NEARBY_DRIVERS,
-    DRIVER_SUBSCRIPTION,
 } from './PassengerHomeQueries';
 
 interface IProps extends RouteComponentProps {
@@ -136,8 +136,9 @@ const PassengerHomeContainer: FC<IProps> = ({
     useEffect(() => {
         if (data && subscribeToMore !== undefined) {
             subscribeToMore({
-                document: DRIVER_SUBSCRIPTION,
+                document: RIDE_SUBSCRIPTION,
                 updateQuery: (prev, { subscriptionData }) => {
+                    console.log(prev, subscriptionData)
                     if (!subscriptionData.data) return prev;
                     return { ...prev }
                 }
