@@ -3,7 +3,7 @@ import React, { FC, useState } from 'react'
 import MenuPresenter from './MenuPresenter'
 import { TOGGLE_DRIVING } from './MenuQueries';
 import { toggleDrivingMode } from '../../types/api'
-import { ME } from '../../sharedQueries';
+// import { ME } from '../../sharedQueries';
 
 type MenuProps = {
     user: any
@@ -11,10 +11,20 @@ type MenuProps = {
 
 const MenuContainer: FC<MenuProps> = ({ user }) => {
     const [isDriving, setIsDriving] = useState(user.isDriving);
-    const [toggleDrivingModeMutation] = useMutation<toggleDrivingMode>(TOGGLE_DRIVING, {
-        refetchQueries: [{ query: ME }],
-    })
-    console.log(isDriving);
+    // const { refetch } = useQuery(ME)
+    const [toggleDrivingModeMutation] = useMutation<toggleDrivingMode>(TOGGLE_DRIVING
+        // {
+        //     onCompleted: ({ ToggleDrivingMode }) => {
+        //         const { ok, err } = ToggleDrivingMode
+        //         if (ok) {
+        //             refetch()
+        //         } else {
+        //             console.log(err)
+        //         }
+        //     }
+        // }
+    )
+    // console.log(isDriving);
 
     const toggleDriving = () => {
         toggleDrivingModeMutation()

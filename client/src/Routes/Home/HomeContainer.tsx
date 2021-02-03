@@ -84,17 +84,6 @@ const HomeContainer: FC<IProps> = ({ history }): any => {
         }
     }, [map, userMarker, setCoords, reportMovementMutation])
 
-    // const minsAfterSignUp = (createAt: string): number => {
-    //     const current = new Date();
-    //     const createdAt = new Date(parseInt(createAt, 10));
-    //     const diff = current.getTime() - createdAt.getTime();
-    //     const secDiff = diff / 1000;
-    //     const minDiff = secDiff / 60;
-    //     return minDiff
-    // }
-
-
-
     const toggleMenu = (): any => !isMenuOpen ? setIsMenuOpen(true) : setIsMenuOpen(false)
 
     if (loading) {

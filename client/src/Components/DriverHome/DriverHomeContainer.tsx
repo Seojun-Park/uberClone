@@ -22,7 +22,7 @@ const DriverHomeContainer: FC<IProps> = ({ history }) => {
     const [rideQueue] = useState<IRequest[]>([]);
     const [currentRide, setCurrentRide] = useState<IRequest>();
 
-    const { data } = useQuery<GetNearbyRides>(GET_NEARBY_RIDES, {
+    const { data, subscribeToMore } = useQuery<GetNearbyRides>(GET_NEARBY_RIDES, {
         onCompleted: ({ GetNearbyRides }) => {
             const { ok, err, ride } = GetNearbyRides;
             if (ok && ride) {
@@ -36,7 +36,7 @@ const DriverHomeContainer: FC<IProps> = ({ history }) => {
                 toast.error(err)
             }
         },
-        pollInterval: 1000
+        pollInterval: 200
     })
 
     useEffect(() => {
@@ -45,8 +45,17 @@ const DriverHomeContainer: FC<IProps> = ({ history }) => {
         }
     }, [data])
 
+    useEffect(() => {
+        subscribeToMore({
+            document: RIDE_SUBSCRIPTION,
+            updateQuery: (prev, { subscriptionData }) => {
+                if (!subscriptionData.data) return prev;
+                return { ...prev }
+            }
+        })
+    }, [subscribeToMore])
+
     useSubscription<RideStatusSubscription>(RIDE_SUBSCRIPTION, {
-        fetchPolicy: "network-only",
         onSubscriptionComplete: () => {
             console.log("Waiting for new ride request")
         },
@@ -68,7 +77,9 @@ const DriverHomeContainer: FC<IProps> = ({ history }) => {
 
     })
 
-    const [acceptRideMutation] = useMutation<AcceptRide, AcceptRideVariables>(ACCEPT_RIDE)
+    const [acceptRideMutation] = useMutation<AcceptRide, AcceptRideVariables>(ACCEPT_RIDE, {
+        refetchQueries: [{ query: GET_RIDE }]
+    })
 
     const onCancelHandler = () => {
         if (rideQueue) {

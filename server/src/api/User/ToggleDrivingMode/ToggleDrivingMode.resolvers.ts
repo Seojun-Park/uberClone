@@ -8,7 +8,11 @@ const resolvers: Resolvers = {
     ToggleDrivingMode: authResolver(
       async (_, __, { req }): Promise<ToggleDrivingModeResponse> => {
         const user: User = req.user;
-        user.isDriving = !user.isDriving;
+        if (user.isDriving) {
+          user.isDriving = false;
+        } else {
+          user.isDriving = true;
+        }
         user.save();
         return {
           ok: true,

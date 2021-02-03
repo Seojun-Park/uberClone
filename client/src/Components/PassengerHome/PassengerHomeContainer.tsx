@@ -59,7 +59,7 @@ const PassengerHomeContainer: FC<IProps> = ({
     })
     const [placeCoords, setPlaceCoords] = useState<ICoords>({ lat: 0, lng: 0 });
     const [rideId, setRideId] = useState<number>();
-    const { refetch } = useQuery<GetRide, GetRideVariables>(GET_RIDE, {
+    useQuery<GetRide, GetRideVariables>(GET_RIDE, {
         fetchPolicy: "network-only",
         variables: {
             rideId: rideId || user.currentRideId || -1
@@ -73,7 +73,7 @@ const PassengerHomeContainer: FC<IProps> = ({
                 }
             }
         },
-        pollInterval: 1000
+        pollInterval: 200
     })
 
     const { data } = useQuery<GetNearbyDrivers>(GET_NEARBY_DRIVERS, {
@@ -130,7 +130,6 @@ const PassengerHomeContainer: FC<IProps> = ({
             if (ride) {
                 setRideId(ride.id);
                 // fetchRideStatus();
-                refetch()
                 toast.success("Requested")
             }
             setReqButton(false);
