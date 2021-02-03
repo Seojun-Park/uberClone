@@ -49,3 +49,12 @@ export const GET_NEARBY_DRIVERS = gql`
     }
   }
 `;
+
+export const DRIVER_SUBSCRIPTION = gql`
+  subscription DriversSubscription {
+    DriversSubscription {
+      lastLat
+      lastLng
+    }
+  }
+`;

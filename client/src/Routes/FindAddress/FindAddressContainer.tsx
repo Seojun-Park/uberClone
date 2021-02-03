@@ -70,10 +70,6 @@ const FindAddressContainer: React.FC<IProps> = ({ history }) => {
                 lng: map.getCenter().lng()
             })
             );
-            // map.addListener("drag", () => setCoords({
-            //     lat: map.getCenter().lat(),
-            //     lng: map.getCenter().lng()
-            // }))
             map.addListener("rightclick", () => console.log("clicked"))
         }
     }, [map])

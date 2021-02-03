@@ -177,6 +177,25 @@ export interface GetNearbyDrivers {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL subscription operation: DriversSubscription
+// ====================================================
+
+export interface DriversSubscription_DriversSubscription {
+  __typename: "User";
+  lastLat: number | null;
+  lastLng: number | null;
+}
+
+export interface DriversSubscription {
+  DriversSubscription: DriversSubscription_DriversSubscription | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: toggleFav
 // ====================================================
 

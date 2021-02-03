@@ -27,7 +27,7 @@ const FindAddressPresenter: React.FC<IProps> = ({ mapRef,
             <S.Form onSubmit={() => submitFn()}>
                 <AddressBar
                     onBlur={submitFn}
-                    onChange={onInputChange}
+                    onInputChange={onInputChange}
                     name="address"
                     value={address}
                 />

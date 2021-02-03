@@ -21,21 +21,21 @@ const Input = styled.input`
 `;
 
 interface IProps {
-    value: string;
-    onBlur?: any;
-    name?: string;
-    onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+	value: string;
+	onBlur?: any;
+	name?: string;
+	onInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void
 }
 
-const AddressBar: React.FC<IProps> = ({ value, onBlur, name, onChange }) => (
-    <Input
-        value={value}
-        onBlur={onBlur}
-        onSubmit={onBlur}
-        onChange={onChange}
-        placeholder={"Find address"}
-        name={name}
-    />
+const AddressBar: React.FC<IProps> = ({ value, onBlur, name, onInputChange }) => (
+	<Input
+		value={value}
+		onBlur={onBlur}
+		onSubmit={onBlur}
+		onChange={onInputChange}
+		placeholder={"Find address"}
+		name={name}
+	/>
 )
 
 export default AddressBar

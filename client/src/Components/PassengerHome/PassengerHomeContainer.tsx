@@ -18,6 +18,7 @@ import PassengerHomePresenter from './PassengerHomePresenter'
 import {
     REQUEST_RIDE,
     GET_NEARBY_DRIVERS,
+    DRIVER_SUBSCRIPTION,
 } from './PassengerHomeQueries';
 
 interface IProps extends RouteComponentProps {
@@ -59,7 +60,7 @@ const PassengerHomeContainer: FC<IProps> = ({
     })
     const [placeCoords, setPlaceCoords] = useState<ICoords>({ lat: 0, lng: 0 });
     const [rideId, setRideId] = useState<number>();
-    useQuery<GetRide, GetRideVariables>(GET_RIDE, {
+    const { refetch } = useQuery<GetRide, GetRideVariables>(GET_RIDE, {
         fetchPolicy: "network-only",
         variables: {
             rideId: rideId || user.currentRideId || -1
@@ -76,7 +77,7 @@ const PassengerHomeContainer: FC<IProps> = ({
         pollInterval: 200
     })
 
-    const { data } = useQuery<GetNearbyDrivers>(GET_NEARBY_DRIVERS, {
+    const { data, subscribeToMore, refetch: driverRefetch } = useQuery<GetNearbyDrivers>(GET_NEARBY_DRIVERS, {
         fetchPolicy: "cache-and-network",
         onCompleted: ({ GetNearbyDrivers: { drivers = [] } }) => {
             if (drivers && drivers.length > 0 && map) {
@@ -118,11 +119,32 @@ const PassengerHomeContainer: FC<IProps> = ({
     })
 
     useEffect(() => {
-        if (data) {
-            toast.info("Found drivers near you")
-            // window.location.reload();
+        if (ride && ride?.status === "REQUESTING") {
+            // need to find stop reloading
+            const timer = setTimeout(() => window.location.reload(), 5000)
+            return () => clearTimeout(timer)
         }
-    }, [data])
+    }, [ride])
+
+    useEffect(() => {
+        if (driverMarker) {
+            driverRefetch();
+            console.log('one')
+        }
+    }, [])
+
+    useEffect(() => {
+        if (data && subscribeToMore !== undefined) {
+            subscribeToMore({
+                document: DRIVER_SUBSCRIPTION,
+                updateQuery: (prev, { subscriptionData }) => {
+                    if (!subscriptionData.data) return prev;
+                    return { ...prev }
+                }
+            })
+            toast.info("Found drivers near you")
+        }
+    }, [data, subscribeToMore])
 
     const [requestRideMutation] = useMutation<RequestRide, RequestRideVariables>(REQUEST_RIDE, {
         onCompleted: ({ RequestRide }) => {
@@ -130,6 +152,7 @@ const PassengerHomeContainer: FC<IProps> = ({
             if (ride) {
                 setRideId(ride.id);
                 // fetchRideStatus();
+                refetch();
                 toast.success("Requested")
             }
             setReqButton(false);
@@ -151,6 +174,7 @@ const PassengerHomeContainer: FC<IProps> = ({
         onCompleted: () => {
             setRideId(undefined);
             setReqButton(false);
+            window.location.reload();
         }
     })
 

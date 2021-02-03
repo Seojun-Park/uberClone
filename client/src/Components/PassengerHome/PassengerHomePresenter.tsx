@@ -86,8 +86,8 @@ const PassengerHomePresenter: FC<IProps> = ({
 
     return (
         <S.Contaier>
-            <S.Form onSubmit={() => findAddressByInput()}>
-                <AddressBar value={address} onChange={onInputChange} />
+            <S.Form onSubmit={findAddressByInput}>
+                <AddressBar value={address} onInputChange={onInputChange} />
             </S.Form>
             {addMode && (
                 <S.Center>

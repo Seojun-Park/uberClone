@@ -16,11 +16,9 @@ const DriverHomePresenter: FC<IProps> = ({
     onAcceptHandler,
     status,
 }) => {
-
-
     useEffect(() => {
         if (status === "REQUESTING") {
-            const timer = setTimeout(() => window.location.reload(), 20000)
+            const timer = setTimeout(() => window.location.reload(), 5000)
             return () => clearTimeout(timer)
         }
     }, [status])
