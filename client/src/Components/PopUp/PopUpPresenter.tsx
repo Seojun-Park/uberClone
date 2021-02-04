@@ -54,7 +54,7 @@ const PopUpPresenter: FC<IProps> = ({
             <S.Title>To</S.Title>
             <S.Data>{dropOffAddress}</S.Data>
             <S.Title>Price</S.Title>
-            <S.Data>€{price}</S.Data>
+            <S.Data>&euro;{" "}{price}</S.Data>
             <S.Title>Distance</S.Title>
             <S.Data>{distance}</S.Data>
             <S.Title>Duration</S.Title>

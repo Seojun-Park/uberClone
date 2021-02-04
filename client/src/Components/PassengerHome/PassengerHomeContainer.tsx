@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from '@apollo/client';
+import { useLazyQuery, useMutation, useQuery } from '@apollo/client';
 import React, { FC, useEffect, useState } from 'react';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -14,7 +14,7 @@ import {
     UpdateRideStatus,
     UpdateRideStatusVariables,
 } from '../../types/api';
-import { RIDE_SUBSCRIPTION } from '../DriverHome/DriverHomeQueries';
+
 import PassengerHomePresenter from './PassengerHomePresenter'
 import {
     REQUEST_RIDE,
@@ -60,7 +60,7 @@ const PassengerHomeContainer: FC<IProps> = ({
     })
     const [placeCoords, setPlaceCoords] = useState<ICoords>({ lat: 0, lng: 0 });
     const [rideId, setRideId] = useState<number>();
-    const { refetch } = useQuery<GetRide, GetRideVariables>(GET_RIDE, {
+    const { refetch, data } = useQuery<GetRide, GetRideVariables>(GET_RIDE, {
         fetchPolicy: "network-only",
         variables: {
             rideId: rideId || user.currentRideId || -1
@@ -70,82 +70,69 @@ const PassengerHomeContainer: FC<IProps> = ({
                 setRideId(GetRide.ride.id)
                 console.log(GetRide.ride.status)
                 if (GetRide.ride.status === "ACCEPTED") {
+                    // window.location.replace(`/ride/${GetRide.ride.id}`)
                     history.push(`/ride/${GetRide.ride.id}`)
+                }
+                if (GetRide.ride.id) {
+                    window.location.replace(`/ride/${GetRide.ride.id}`)
                 }
             }
         },
         pollInterval: 200
     })
 
-    const { data, subscribeToMore, refetch: driverRefetch } = useQuery<GetNearbyDrivers>(GET_NEARBY_DRIVERS, {
+    console.log(data)
+
+
+    const [GetDriver, { loading }] = useLazyQuery<GetNearbyDrivers>(GET_NEARBY_DRIVERS, {
         fetchPolicy: "cache-and-network",
-        onCompleted: ({ GetNearbyDrivers: { drivers = [] } }) => {
-            if (drivers && drivers.length > 0 && map) {
-                if (driverMarker.length > drivers.length) {
-                    while (driverMarker.length > 0) {
-                        const marker = driverMarker.pop();
-                        if (marker) {
-                            marker.setMap(null)
-                        }
-                    }
-                    setDriverMarker(driverMarker)
-                }
-                for (const driver of drivers) {
-                    if (driver) {
-                        const existedDriver = driverMarker.find(driverMarker => driver.id === driverMarker.get("ID"))
-                        const driverLocation: ICoords = {
-                            lat: driver.lastLat || 0,
-                            lng: driver.lastLng || 0
-                        };
-                        if (existedDriver) {
-                            existedDriver.setPosition(driverLocation);
-                            existedDriver.setMap(map);
-                        } else {
-                            const marker = generateMarker(map, driverLocation, {
-                                path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
-                                scale: 5
-                            });
+        onCompleted: ({ GetNearbyDrivers: { drivers = [], ok } }) => {
+            if (ok) {
+                if (drivers && drivers.length > 0 && map) {
+                    if (driverMarker.length > drivers.length) {
+                        while (driverMarker.length > 0) {
+                            const marker = driverMarker.pop();
                             if (marker) {
-                                marker.set('ID', driver.id)
-                                driverMarker.push(marker);
-                                setDriverMarker(driverMarker)
+                                marker.setMap(null)
+                            }
+                        }
+                        setDriverMarker(driverMarker)
+                    }
+                    for (const driver of drivers) {
+                        if (driver) {
+                            const existedDriver = driverMarker.find(driverMarker => driver.id === driverMarker.get("ID"))
+                            const driverLocation: ICoords = {
+                                lat: driver.lastLat || 0,
+                                lng: driver.lastLng || 0
+                            };
+                            if (existedDriver) {
+                                existedDriver.setPosition(driverLocation);
+                                existedDriver.setMap(map);
+                            } else {
+                                const marker = generateMarker(map, driverLocation, {
+                                    path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+                                    scale: 5
+                                });
+                                if (marker) {
+                                    marker.set('ID', driver.id)
+                                    driverMarker.push(marker);
+                                    setDriverMarker(driverMarker)
+                                }
                             }
                         }
                     }
                 }
             }
         },
-        pollInterval: 1000
+        // pollInterval: 100
     })
 
-    useEffect(() => {
-        if (ride && ride?.status === "REQUESTING") {
-            // need to find stop reloading
-            const timer = setTimeout(() => window.location.reload(), 5000)
-            return () => clearTimeout(timer)
-        }
-    }, [ride])
 
     useEffect(() => {
-        if (driverMarker) {
-            driverRefetch();
-            console.log('one')
+        if (map) {
+            GetDriver()
         }
-    }, [])
-
-    useEffect(() => {
-        if (data && subscribeToMore !== undefined) {
-            subscribeToMore({
-                document: RIDE_SUBSCRIPTION,
-                updateQuery: (prev, { subscriptionData }) => {
-                    console.log(prev, subscriptionData)
-                    if (!subscriptionData.data) return prev;
-                    return { ...prev }
-                }
-            })
-            toast.info("Found drivers near you")
-        }
-    }, [data, subscribeToMore])
+    }, [GetDriver, map])
 
     const [requestRideMutation] = useMutation<RequestRide, RequestRideVariables>(REQUEST_RIDE, {
         onCompleted: ({ RequestRide }) => {
@@ -249,6 +236,10 @@ const PassengerHomeContainer: FC<IProps> = ({
         } else {
             setAddMode(true)
         }
+    }
+
+    if (loading) {
+        return <h2>Loading...</h2>
     }
 
     return (

@@ -36,7 +36,7 @@ const DriverHomeContainer: FC<IProps> = ({ history }) => {
                 toast.error(err)
             }
         },
-        pollInterval: 200
+        pollInterval: 500
     })
 
     useEffect(() => {
