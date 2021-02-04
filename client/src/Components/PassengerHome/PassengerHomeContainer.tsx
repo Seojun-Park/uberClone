@@ -14,7 +14,6 @@ import {
     UpdateRideStatus,
     UpdateRideStatusVariables,
 } from '../../types/api';
-
 import PassengerHomePresenter from './PassengerHomePresenter'
 import {
     REQUEST_RIDE,
@@ -60,7 +59,7 @@ const PassengerHomeContainer: FC<IProps> = ({
     })
     const [placeCoords, setPlaceCoords] = useState<ICoords>({ lat: 0, lng: 0 });
     const [rideId, setRideId] = useState<number>();
-    const { refetch, data } = useQuery<GetRide, GetRideVariables>(GET_RIDE, {
+    const { refetch } = useQuery<GetRide, GetRideVariables>(GET_RIDE, {
         fetchPolicy: "network-only",
         variables: {
             rideId: rideId || user.currentRideId || -1
@@ -73,7 +72,7 @@ const PassengerHomeContainer: FC<IProps> = ({
                     // window.location.replace(`/ride/${GetRide.ride.id}`)
                     history.push(`/ride/${GetRide.ride.id}`)
                 }
-                if (GetRide.ride.id) {
+                if (GetRide.ride.id && GetRide.ride.status === "ACCEPTED") {
                     window.location.replace(`/ride/${GetRide.ride.id}`)
                 }
             }
@@ -81,8 +80,13 @@ const PassengerHomeContainer: FC<IProps> = ({
         pollInterval: 200
     })
 
-    console.log(data)
-
+    useEffect(() => {
+        if (ride && ride.status === 'REQUESTING') {
+            const timer = setTimeout(() =>
+                window.location.reload(), 5000)
+            return () => clearTimeout(timer)
+        }
+    }, [ride])
 
     const [GetDriver, { loading }] = useLazyQuery<GetNearbyDrivers>(GET_NEARBY_DRIVERS, {
         fetchPolicy: "cache-and-network",
@@ -126,7 +130,6 @@ const PassengerHomeContainer: FC<IProps> = ({
         },
         // pollInterval: 100
     })
-
 
     useEffect(() => {
         if (map) {

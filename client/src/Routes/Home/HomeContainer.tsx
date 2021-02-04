@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from '@apollo/client'
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC, useEffect, useMemo, useState } from 'react'
 import { RouteComponentProps } from 'react-router-dom'
 import HomePresenter from './HomePresenter'
 import { ME } from '../../sharedQueries'
@@ -20,7 +20,8 @@ interface ICoords {
 const HomeContainer: FC<IProps> = ({ history }): any => {
     const [user, setUser] = useState(null)
     const [map, setMap] = useState<google.maps.Map>();
-    const [isMenuOpen, setIsMenuOpen] = useState(false)
+    const mapMemo = useMemo(() => map, [map])
+    const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
     const [userMarker, setUserMarker] = useState<google.maps.Marker>()
     const [coords, setCoords] = useState<ICoords>({ lat: 0, lng: 0 })
     const { loading } = useQuery(ME, {
@@ -98,7 +99,8 @@ const HomeContainer: FC<IProps> = ({ history }): any => {
         return (
             <>
                 <HomePresenter
-                    map={map}
+                    // map={map}
+                    map={mapMemo}
                     isMenuOpen={isMenuOpen}
                     toggleMenu={toggleMenu}
                     userMarker={userMarker}

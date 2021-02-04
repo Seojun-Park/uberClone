@@ -1,0 +1,3 @@
+type Subscription {
+  StatusSubscription(rideId: Int!): Ride
+}

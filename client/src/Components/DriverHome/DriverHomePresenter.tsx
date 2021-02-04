@@ -5,7 +5,7 @@ import PopUp from '../PopUp'
 
 interface IProps {
     ride?: IRequest
-    onCancelHandler: () => void;
+    onCancelHandler: (rideId: number) => void;
     onAcceptHandler: (riderId: number) => void
     status: string
 }
@@ -37,7 +37,7 @@ const DriverHomePresenter: FC<IProps> = ({
                         distance={ride.distance}
                         duration={ride.duration}
                         id={ride.id}
-                        onCancelHandler={onCancelHandler}
+                        onCancelHandler={() => onCancelHandler(ride.id)}
                         onAcceptHandler={() => onAcceptHandler(ride.id)}
                     />)
 

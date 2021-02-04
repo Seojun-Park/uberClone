@@ -2,14 +2,17 @@ import { useMutation, useQuery, useSubscription } from '@apollo/client'
 import React, { FC, useEffect, useState } from 'react'
 import { RouteComponentProps, withRouter } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import { GET_RIDE } from '../../sharedQueries'
+import { GET_RIDE, UPDATE_RIDE_STATUS } from '../../sharedQueries'
 import {
     RideStatusSubscription,
     RideStatusSubscription_RideStatusSubscription,
     GetNearbyRides,
     AcceptRide,
-    AcceptRideVariables
+    AcceptRideVariables,
+    UpdateRideStatus,
+    UpdateRideStatusVariables
 } from '../../types/api'
+import { StatusOptions } from '../../types/enums'
 import DriverHomePresenter from './DriverHomePresenter'
 import { ACCEPT_RIDE, GET_NEARBY_RIDES, RIDE_SUBSCRIPTION } from './DriverHomeQueries'
 
@@ -39,6 +42,13 @@ const DriverHomeContainer: FC<IProps> = ({ history }) => {
         pollInterval: 500
     })
 
+    const [cancelRideMutation] = useMutation<UpdateRideStatus, UpdateRideStatusVariables>(
+        UPDATE_RIDE_STATUS, {
+        onCompleted: () => setStatus("CANCELED"),
+        refetchQueries: [{ query: GET_RIDE }]
+    }
+    )
+
     useEffect(() => {
         if (data) {
             setStatus(data.GetNearbyRides.ride?.status);
@@ -61,7 +71,6 @@ const DriverHomeContainer: FC<IProps> = ({ history }) => {
         },
         onSubscriptionData: ({ subscriptionData }) => {
             const { data, error } = subscriptionData;
-            console.log(data)
             if (data) {
                 const ride = data.RideStatusSubscription;
                 if (ride) {
@@ -81,11 +90,10 @@ const DriverHomeContainer: FC<IProps> = ({ history }) => {
         refetchQueries: [{ query: GET_RIDE }]
     })
 
-    const onCancelHandler = () => {
-        if (rideQueue) {
-            rideQueue.shift();
-            setCurrentRide(rideQueue[0]);
-        }
+    const onCancelHander = (rideId: number) => {
+        cancelRideMutation({
+            variables: { rideId, status: StatusOptions.CANCELED }
+        })
     }
 
     const onAcceptHandler = (rideId: number) => {
@@ -101,7 +109,7 @@ const DriverHomeContainer: FC<IProps> = ({ history }) => {
         <DriverHomePresenter
             ride={currentRide}
             status={status}
-            onCancelHandler={onCancelHandler}
+            onCancelHandler={onCancelHander}
             onAcceptHandler={onAcceptHandler}
         />
     )

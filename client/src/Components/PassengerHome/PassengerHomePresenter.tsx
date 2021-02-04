@@ -82,8 +82,6 @@ const PassengerHomePresenter: FC<IProps> = ({
         }
         await requestRideMutation();
     }
-
-
     return (
         <S.Contaier>
             <S.Form onSubmit={findAddressByInput}>
@@ -97,26 +95,28 @@ const PassengerHomePresenter: FC<IProps> = ({
                 </S.Center>
             )}
             {reqButton && <S.RequestButton onClick={onRequestRide}>Request a Ride</S.RequestButton>}
-            {rideRequest && rideId && (
-                <PopUp
-                    price={price}
-                    duration={duration}
-                    distance={distance}
-                    dropOffAddress={address}
-                    pickUpAddress={pickupAddress}
-                    onCancelHandler={() => {
-                        // stopPolling();
-                        cancelRideMutation({
-                            variables: {
-                                rideId,
-                                status: StatusOptions.CANCELED
-                            }
-                        })
-                    }}
-                    isDriver={false}
-                    id={rideId}
-                />
-            )}
+            {rideRequest && rideId &&
+                (
+                    <PopUp
+                        price={price}
+                        duration={duration}
+                        distance={distance}
+                        dropOffAddress={address}
+                        pickUpAddress={pickupAddress}
+                        onCancelHandler={() => {
+                            // stopPolling();
+                            cancelRideMutation({
+                                variables: {
+                                    rideId,
+                                    status: StatusOptions.CANCELED
+                                }
+                            })
+                        }}
+                        isDriver={false}
+                        id={rideId}
+                    />
+                )
+            }
             {/* <S.RequestButton onClick={onRequestRide}>Request a Ride</S.RequestButton> */}
         </S.Contaier>
     )

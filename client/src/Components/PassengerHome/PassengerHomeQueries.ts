@@ -58,3 +58,12 @@ export const DRIVER_SUBSCRIPTION = gql`
     }
   }
 `;
+
+export const STATUS_SUBSCRIPTION = gql`
+  subscription StatusSubscription($rideId: Int!) {
+    StatusSubscription(rideId: $rideId){
+      id
+      status
+    }
+  }
+`;

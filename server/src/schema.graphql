@@ -20,6 +20,7 @@ type Subscription {
   MessageSubscription: Message
   NearbyRideSubscription: Ride
   RideStatusSubscription: Ride
+  StatusSubscription(rideId: Int!): Ride
   DriversSubscription: User
 }
 

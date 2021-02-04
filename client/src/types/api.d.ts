@@ -196,6 +196,29 @@ export interface DriversSubscription {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL subscription operation: StatusSubscription
+// ====================================================
+
+export interface StatusSubscription_StatusSubscription {
+  __typename: "Ride";
+  id: number;
+  status: string;
+}
+
+export interface StatusSubscription {
+  StatusSubscription: StatusSubscription_StatusSubscription | null;
+}
+
+export interface StatusSubscriptionVariables {
+  rideId: number;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: toggleFav
 // ====================================================
 
