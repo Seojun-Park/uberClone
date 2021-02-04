@@ -83,6 +83,7 @@ const FindAddressContainer: React.FC<IProps> = ({ history }) => {
         } else {
             result = await getAddress(coords)
         }
+        console.log(result)
         if (result) {
             setAddress(result)
         }

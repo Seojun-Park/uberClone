@@ -47,9 +47,6 @@ const AddPlaceContainer: FC<IProps> = ({ history }) => {
         }
     }, [state])
 
-    console.log(state)
-    console.log("picked", addAddress)
-    console.log(lat, lng)
 
     return (
         <AddPlacePresenter

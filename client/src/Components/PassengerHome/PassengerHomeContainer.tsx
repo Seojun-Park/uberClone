@@ -80,13 +80,13 @@ const PassengerHomeContainer: FC<IProps> = ({
         pollInterval: 200
     })
 
-    useEffect(() => {
-        if (ride && ride.status === 'REQUESTING') {
-            const timer = setTimeout(() =>
-                window.location.reload(), 5000)
-            return () => clearTimeout(timer)
-        }
-    }, [ride])
+    // useEffect(() => {
+    //     if (ride && ride.status === 'REQUESTING') {
+    //         const timer = setTimeout(() =>
+    //             window.location.reload(), 5000)
+    //         return () => clearTimeout(timer)
+    //     }
+    // }, [ride])
 
     const [GetDriver, { loading }] = useLazyQuery<GetNearbyDrivers>(GET_NEARBY_DRIVERS, {
         fetchPolicy: "cache-and-network",
